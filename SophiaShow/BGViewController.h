@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BGPageSwitcherDelegate.h"
 
-@interface BGViewController : UIViewController
+@interface BGViewController : UIViewController{
+    id<BGPageSwitcherDelegate> delegate;
+    
+    UIButton *gotoAbout;
+}
+
+@property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
+
+@property (nonatomic, retain) UIButton *gotoAbout;
 
 @end

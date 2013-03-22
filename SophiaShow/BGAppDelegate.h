@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class BGViewController;
+@class BGSwitchViewController;
 
 @interface BGAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) BGViewController *viewController;
+@property (strong, nonatomic) BGSwitchViewController *viewController;
 
 @end
