@@ -18,6 +18,15 @@
 		6D153A0616FB42A2001C0FAC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D153A0516FB42A2001C0FAC /* Default-568h@2x.png */; };
 		6D153A0916FB42A2001C0FAC /* BGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D153A0816FB42A2001C0FAC /* BGViewController.m */; };
 		6D153A0C16FB42A2001C0FAC /* BGViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D153A0A16FB42A2001C0FAC /* BGViewController.xib */; };
+		6D3BB80C16FC83530045546F /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB80B16FC83530045546F /* Icon-72.png */; };
+		6D3BB80E16FC836C0045546F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB80D16FC836C0045546F /* Icon@2x.png */; };
+		6D3BB81316FC83EF0045546F /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB81016FC83EF0045546F /* Icon-Small-50.png */; };
+		6D3BB81416FC83EF0045546F /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB81116FC83EF0045546F /* Icon-Small.png */; };
+		6D3BB81516FC83EF0045546F /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB81216FC83EF0045546F /* Icon-Small@2x.png */; };
+		6D3BB81C16FC91D20045546F /* BGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BB81A16FC91D20045546F /* BGAboutViewController.m */; };
+		6D3BB81D16FC91D20045546F /* BGAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */; };
+		6D3BB82016FC97C70045546F /* about_title.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB81F16FC97C70045546F /* about_title.jpg */; };
+		6D48B67416FC4CF0008B2371 /* BGSwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D48B67316FC4CF0008B2371 /* BGSwitchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +46,18 @@
 		6D153A0716FB42A2001C0FAC /* BGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGViewController.h; sourceTree = "<group>"; };
 		6D153A0816FB42A2001C0FAC /* BGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGViewController.m; sourceTree = "<group>"; };
 		6D153A0B16FB42A2001C0FAC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BGViewController.xib; sourceTree = "<group>"; };
+		6D3BB80B16FC83530045546F /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		6D3BB80D16FC836C0045546F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6D3BB81016FC83EF0045546F /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		6D3BB81116FC83EF0045546F /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		6D3BB81216FC83EF0045546F /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		6D3BB81916FC91D20045546F /* BGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGAboutViewController.h; sourceTree = "<group>"; };
+		6D3BB81A16FC91D20045546F /* BGAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGAboutViewController.m; sourceTree = "<group>"; };
+		6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGAboutViewController.xib; sourceTree = "<group>"; };
+		6D3BB81F16FC97C70045546F /* about_title.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = about_title.jpg; sourceTree = "<group>"; };
+		6D48B67216FC4CF0008B2371 /* BGSwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGSwitchViewController.h; sourceTree = "<group>"; };
+		6D48B67316FC4CF0008B2371 /* BGSwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGSwitchViewController.m; sourceTree = "<group>"; };
+		6D48B67516FC4E46008B2371 /* BGPageSwitcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGPageSwitcherDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +77,7 @@
 		6D1539E316FB42A2001C0FAC = {
 			isa = PBXGroup;
 			children = (
+				6D3BB80F16FC83B50045546F /* Resources */,
 				6D1539F516FB42A2001C0FAC /* SophiaShow */,
 				6D1539EE16FB42A2001C0FAC /* Frameworks */,
 				6D1539ED16FB42A2001C0FAC /* Products */,
@@ -85,9 +107,15 @@
 			children = (
 				6D1539FE16FB42A2001C0FAC /* BGAppDelegate.h */,
 				6D1539FF16FB42A2001C0FAC /* BGAppDelegate.m */,
+				6D48B67516FC4E46008B2371 /* BGPageSwitcherDelegate.h */,
+				6D48B67216FC4CF0008B2371 /* BGSwitchViewController.h */,
+				6D48B67316FC4CF0008B2371 /* BGSwitchViewController.m */,
 				6D153A0716FB42A2001C0FAC /* BGViewController.h */,
 				6D153A0816FB42A2001C0FAC /* BGViewController.m */,
 				6D153A0A16FB42A2001C0FAC /* BGViewController.xib */,
+				6D3BB81916FC91D20045546F /* BGAboutViewController.h */,
+				6D3BB81A16FC91D20045546F /* BGAboutViewController.m */,
+				6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */,
 				6D1539F616FB42A2001C0FAC /* Supporting Files */,
 			);
 			path = SophiaShow;
@@ -105,6 +133,27 @@
 				6D153A0516FB42A2001C0FAC /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D3BB80F16FC83B50045546F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D3BB81E16FC97B20045546F /* images */,
+				6D3BB81016FC83EF0045546F /* Icon-Small-50.png */,
+				6D3BB81116FC83EF0045546F /* Icon-Small.png */,
+				6D3BB81216FC83EF0045546F /* Icon-Small@2x.png */,
+				6D3BB80D16FC836C0045546F /* Icon@2x.png */,
+				6D3BB80B16FC83530045546F /* Icon-72.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6D3BB81E16FC97B20045546F /* images */ = {
+			isa = PBXGroup;
+			children = (
+				6D3BB81F16FC97C70045546F /* about_title.jpg */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +213,13 @@
 				6D153A0416FB42A2001C0FAC /* Default@2x.png in Resources */,
 				6D153A0616FB42A2001C0FAC /* Default-568h@2x.png in Resources */,
 				6D153A0C16FB42A2001C0FAC /* BGViewController.xib in Resources */,
+				6D3BB80C16FC83530045546F /* Icon-72.png in Resources */,
+				6D3BB80E16FC836C0045546F /* Icon@2x.png in Resources */,
+				6D3BB81316FC83EF0045546F /* Icon-Small-50.png in Resources */,
+				6D3BB81416FC83EF0045546F /* Icon-Small.png in Resources */,
+				6D3BB81516FC83EF0045546F /* Icon-Small@2x.png in Resources */,
+				6D3BB81D16FC91D20045546F /* BGAboutViewController.xib in Resources */,
+				6D3BB82016FC97C70045546F /* about_title.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +233,8 @@
 				6D1539FC16FB42A2001C0FAC /* main.m in Sources */,
 				6D153A0016FB42A2001C0FAC /* BGAppDelegate.m in Sources */,
 				6D153A0916FB42A2001C0FAC /* BGViewController.m in Sources */,
+				6D48B67416FC4CF0008B2371 /* BGSwitchViewController.m in Sources */,
+				6D3BB81C16FC91D20045546F /* BGAboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,7 +284,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -250,7 +308,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -264,6 +322,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
 				INFOPLIST_FILE = "SophiaShow/SophiaShow-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -275,6 +334,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
 				INFOPLIST_FILE = "SophiaShow/SophiaShow-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -299,6 +359,7 @@
 				6D153A1116FB42A2001C0FAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
