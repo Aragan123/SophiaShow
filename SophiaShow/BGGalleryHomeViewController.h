@@ -7,12 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BGPageSwitcherDelegate.h"
+#import "BGGalleryTableViewController.h"
 
-@interface BGGalleryHomeViewController : UIViewController{
+@interface BGGalleryHomeViewController : UIViewController <BGGalleryTableViewControllerDelegate>{
+    id<BGPageSwitcherDelegate> delegate;
     BOOL isOnlineData;
     NSArray *dataSource;
 
 }
+
+@property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic, retain) NSArray *dataSource;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isOnlineData:(BOOL) online;
 

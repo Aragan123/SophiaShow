@@ -61,6 +61,19 @@
 }
 
 #pragma mark -
+#pragma mark Actions and Private methods
+- (NSString*) getGalleryImageURI: (NSDictionary*)galleryBook {
+    NSString *uri = [galleryBook objectForKey:@"GalleryURI"];
+    if (!isOnlineData) {
+        // is offline data
+        return [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@/index.png", uri];
+    }else{
+        // is online data
+        return [NSString stringWithFormat:@"%@/index.png", uri];
+    }
+}
+
+#pragma mark -
 #pragma mark ATArrayViewDelegate methods
 - (NSInteger)numberOfItemsInArrayView:(ATArrayView *)arrayView {
     return [self.dataSource count];
@@ -89,7 +102,7 @@
     
     UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height)] autorelease];
     imageView.tag = kRemoveViewTag;
-    NSString *imageURI = [self.dataSource objectAtIndex:index];
+    NSString *imageURI = [self getGalleryImageURI:[self.dataSource objectAtIndex:index]];
     NSLog(@"loading gallery imagURI: %@", imageURI);
     
     if (!isOnlineData){
