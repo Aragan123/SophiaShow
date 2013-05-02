@@ -64,7 +64,7 @@
 #pragma mark private methods
 - (void) beforeTerminate {
     // write global data to plist
-    
+    // no dynamic data need to write/save
 }
 
 @end

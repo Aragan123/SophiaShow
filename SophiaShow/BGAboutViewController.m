@@ -13,7 +13,7 @@
 @end
 
 @implementation BGAboutViewController
-@synthesize pages, scroll;
+@synthesize delegate, pages, scroll;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,6 +66,7 @@
 }
 
 - (void) dealloc{
+    delegate=nil;
     [scroll release];
     [pages release];
     

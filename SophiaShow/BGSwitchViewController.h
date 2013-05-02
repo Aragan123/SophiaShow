@@ -13,13 +13,11 @@
 @class BGAboutViewController;
 
 @interface BGSwitchViewController : UIViewController <BGPageSwitcherDelegate> {
-    BGViewController *mainPageViewController;
+    BGViewController *homeageViewController;
     BGAboutViewController *aboutPageViewController;
 }
 
-@property (nonatomic, retain) BGViewController *mainPageViewController;
+@property (nonatomic, retain) BGViewController *homePageViewController;
 @property (nonatomic, retain) BGAboutViewController *aboutPageViewController;
-
--(UIViewController *) getSwitchViewController: (int) pageNum;
 
 @end

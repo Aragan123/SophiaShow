@@ -28,7 +28,8 @@ static BGGlobalData *instance = nil;
 //		self.hasPregdaySet = [[settings objectForKey:@"HasPregdaySet"] boolValue];
 //		self.hasBirthdaySet = [[settings objectForKey:@"HasBirthdaySet"] boolValue];
 //		self.hasCarddaySet = [[settings objectForKey:@"HasCarddaySet"] boolValue];
-		
+		self.galleryBooks = [settings objectForKey:@"GalleryBooks"];
+        
 		[settings release];
 	}
 }
@@ -42,7 +43,8 @@ static BGGlobalData *instance = nil;
 //	[settings setValue:[NSNumber numberWithBool:self.hasPregdaySet] forKey:@"HasPregdaySet"];
 //	[settings setValue:[NSNumber numberWithBool:self.hasBirthdaySet] forKey:@"HasBirthdaySet"];
 //	[settings setValue:[NSNumber numberWithBool:self.hasCarddaySet] forKey:@"HasCarddaySet"];
-	
+	[settings setValue:self.galleryBooks forKey:@"GalleryBooks"];
+    
 	// write to file
 	[settings writeToFile:[self settingsDataFilePath] atomically:YES];
 	[settings release];
@@ -98,7 +100,9 @@ static BGGlobalData *instance = nil;
 
 - (oneway void) release{
 	instance = nil;
-	
+	[galleryBooks release];
+    [onlineGalleryBooks release];
+    
 	[super release];
 }
 

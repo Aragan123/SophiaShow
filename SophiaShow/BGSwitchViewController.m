@@ -7,6 +7,7 @@
 //
 
 #import "BGSwitchViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "BGViewController.h"
 #import "BGAboutViewController.h"
 
@@ -15,7 +16,7 @@
 @end
 
 @implementation BGSwitchViewController
-@synthesize mainPageViewController, aboutPageViewController;
+@synthesize homePageViewController, aboutPageViewController;
 
 - (void)viewDidLoad
 {
@@ -23,11 +24,11 @@
 	// Do any additional setup after loading the view.
     
     BGViewController *mainview = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
-    self.mainPageViewController = mainview;
-    self.mainPageViewController.delegate=self;
+    self.homePageViewController = mainview;
+    self.homePageViewController.delegate=self;
     [mainview release];
     
-    [self.view insertSubview: mainPageViewController.view atIndex:0];
+    [self.view insertSubview: self.homePageViewController.view atIndex:0];
 
 }
 
@@ -40,21 +41,23 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    if (self.mainPageViewController.view.subviews==nil) {
-        self.mainPageViewController=nil;
+    if (self.homePageViewController.view.superview==nil) {
+        self.homePageViewController=nil;
     }
-    if (self.aboutPageViewController.view.subviews==nil) {
+    if (self.aboutPageViewController.view.superview==nil) {
         self.aboutPageViewController=nil;
     }
 }
 
 - (void) viewDidUnload{
-    self.mainPageViewController=nil;
+    self.homePageViewController=nil;
     self.aboutPageViewController=nil;
+    
+    [super viewDidUnload];
 }
 
 - (void) dealloc{
-    [mainPageViewController release];
+    [homePageViewController release];
     [aboutPageViewController release];
     
     [super dealloc];
@@ -63,25 +66,28 @@
 #pragma mark -
 #pragma mark PageSwitcher delegate Functons
 -(void) switchViewTo: (int)toPage fromView:(int)fromPage  {
-	[UIView beginAnimations:@"PageSwitch" context:nil];
-	[UIView setAnimationDuration:0.75];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.55f];
+    [animation setType:kCATransitionReveal];
+    [animation setFillMode:kCAFillModeForwards];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
 	// set different transition types
 	if (toPage > fromPage) {
-		[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
+        [animation setSubtype:kCATransitionFromTop];
 	}else {
-		[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.view cache:YES];
+        [animation setSubtype:kCATransitionFromBottom];
 	}
     
     if (toPage == kPageMain) {
         NSLog(@"toPage = MainPage");
         
-        if (self.mainPageViewController == nil) {
+        if (self.homePageViewController == nil) {
             BGViewController *controller = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
-            self.mainPageViewController = controller;
+            self.homePageViewController = controller;
             [controller release];
         }
-        self.mainPageViewController.delegate = self;
+        self.homePageViewController.delegate = self;
     }
     
     else if (toPage == kPageAbout) {
@@ -92,7 +98,7 @@
             self.aboutPageViewController = controller;
             [controller release];
         }
-//        self.aboutPageViewController.delegate = self;
+        self.aboutPageViewController.delegate = self;
     }
     
     
@@ -105,14 +111,13 @@
 	[toViewController viewWillAppear:YES];
 	
 	[fromViewController.view removeFromSuperview];
-//	[self.view addSubview:toViewController.view];
 	[self.view insertSubview:toViewController.view atIndex:0];
 	
 	[fromViewController viewDidDisappear:YES];
 	[toViewController viewDidAppear:YES];
     
 	// commit animation
-	[UIView commitAnimations];
+    [self.view.layer addAnimation:animation forKey:@"Switch View Animation"];
 
 }
 
@@ -121,14 +126,16 @@
 -(UIViewController *) getSwitchViewController: (int) pageNum{
 	switch (pageNum) {
 		case kPageMain:
-			return self.mainPageViewController;
+			return self.homePageViewController;
 			break;
 			
 		case kPageGalleryHome:
+        case kPageOnlineGalleryHome:
 //			return self.galleryHomePageViewController;
 			break;
             
 		case kPageGallery:
+        case kPageOnlineGallery:
 //			return self.galleryPageViewController;
 			break;
             

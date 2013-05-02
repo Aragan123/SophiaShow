@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
 
 #ifndef kGlobalDataFileName
-#define kGlobalDataFileName @"BGGlobalVariants"
+#define kGlobalDataFileName @"SettingData"
 #endif
 
 @interface BGGlobalData : NSObject{
-    
+    NSArray *galleryBooks;
+    NSArray *onlineGalleryBooks;
 }
+
+@property (nonatomic, retain) NSArray *galleryBooks;
+@property (nonatomic, retain) NSArray *onlineGalleryBooks;
 
 + (BGGlobalData *) sharedData;
 -(void) loadSettingsDataFile;

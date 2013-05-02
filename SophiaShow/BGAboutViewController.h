@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BGPageSwitcherDelegate.h"
 
 @interface BGAboutViewController : UIViewController<UIScrollViewDelegate>{
+    id<BGPageSwitcherDelegate> delegate;
     UIScrollView *scroll;
     UIPageControl *pages;
 }
 
+@property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UIScrollView *scroll;
 @property (nonatomic, retain) IBOutlet UIPageControl *pages;
 

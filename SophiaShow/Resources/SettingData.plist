@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>GalleryBooks</key>
+	<array>
+		<dict>
+			<key>GalleryDesc_ENG</key>
+			<string>Gallery 1</string>
+			<key>GalleryDesc_CHN</key>
+			<string>作品集 1</string>
+			<key>GalleryImageNames</key>
+			<array>
+				<string>00.jpg</string>
+				<string>01.jpeg</string>
+				<string>02.jpg</string>
+				<string>03.jpg</string>
+			</array>
+			<key>GalleryURI</key>
+			<string>Gallery0</string>
+		</dict>
+		<dict>
+			<key>GalleryDesc_ENG</key>
+			<string>Gallery 2</string>
+			<key>GalleryDesc_CHN</key>
+			<string>作品集 2</string>
+			<key>GalleryImageNames</key>
+			<array>
+				<string>10.jpg</string>
+				<string>11.jpg</string>
+				<string>12.jpg</string>
+				<string>13.jpg</string>
+				<string>14.jpeg</string>
+			</array>
+			<key>GalleryURI</key>
+			<string>Gallery1</string>
+		</dict>
+		<dict>
+			<key>GalleryDesc_ENG</key>
+			<string>Gallery 3</string>
+			<key>GalleryDesc_CHN</key>
+			<string>作品集 3</string>
+			<key>GalleryImageNames</key>
+			<array>
+				<string>20.jpg</string>
+				<string>21.jpg</string>
+				<string>22.jpg</string>
+				<string>23.jpeg</string>
+			</array>
+			<key>GalleryURI</key>
+			<string>Gallery2</string>
+		</dict>
+	</array>
+</dict>
+</plist>

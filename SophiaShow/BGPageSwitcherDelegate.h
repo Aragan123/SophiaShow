@@ -12,14 +12,18 @@
     #define kPageMain 0
     #define kPageGalleryHome 1
     #define kPageGallery 2
-#define kPageAbout 3
-#define kPageUI 4
+    #define kPageOnlineGalleryHome 3
+    #define kPageOnlineGallery 4
+    #define kPageAbout 5
+    #define kPageUI 6
 #endif
 
 enum enumPage {
 	pageMain =0,
 	pageGalleryHome,
 	pageGallery,
+    pageOnlineGalleryHome,
+    pageOnlineGallery,
     pageAbout,
     pageUI,
 };
