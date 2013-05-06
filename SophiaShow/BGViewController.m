@@ -13,7 +13,7 @@
 @end
 
 @implementation BGViewController
-@synthesize delegate, gotoAbout;
+@synthesize delegate;
 
 - (void)viewDidLoad
 {
@@ -21,11 +21,6 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    // go to About page button
-    self.gotoAbout = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.gotoAbout.frame = CGRectMake(50, 100, 100, 80);
-    [self.gotoAbout addTarget:self action:@selector(clickAboutButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:gotoAbout];
     
 }
 
@@ -36,24 +31,24 @@
 }
 
 - (void)viewDidUnload{
-    self.gotoAbout=nil;
+
+    [super viewDidUnload];
 }
 
 - (void) dealloc{
     delegate=nil;
-    [gotoAbout release];
     
     [super dealloc];
 }
 
 #pragma mark - 
 #pragma mark Private Methods
-- (void) clickAboutButton: (id) sender{
-//    int pageNum = [(UIButton*)sender tag];
-//	NSLog(@"MainPage: button pressed, pagenum=%d", pageNum);
+- (void) clickMenuButton: (id) sender{
+    int pageNum = [(UIButton*)sender tag];
+	NSLog(@"MainPage: button pressed, pagenum=%d", pageNum);
     
 	if (delegate != nil) {
-		[delegate switchViewTo:kPageAbout fromView:kPageMain];
+		[delegate switchViewTo:pageNum fromView:kPageMain];
 	}
 
 }

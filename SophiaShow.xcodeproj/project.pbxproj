@@ -50,12 +50,15 @@
 		6D3BB81D16FC91D20045546F /* BGAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */; };
 		6D48B67416FC4CF0008B2371 /* BGSwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D48B67316FC4CF0008B2371 /* BGSwitchViewController.m */; };
 		6D4B179416FDD64800EE0EE9 /* BGGlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B179316FDD64800EE0EE9 /* BGGlobalData.m */; };
+		6D7529C81737849000B4BD96 /* BGGalleryHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */; };
+		6D7529C91737849000B4BD96 /* BGGalleryHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */; };
 		6DE747E91731FE8800A06939 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE747E81731FE8800A06939 /* QuartzCore.framework */; };
-		6DE747ED1732047100A06939 /* BGGalleryHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE747EB1732047000A06939 /* BGGalleryHomeViewController.m */; };
-		6DE747EE1732047100A06939 /* BGGalleryHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE747EC1732047100A06939 /* BGGalleryHomeViewController.xib */; };
 		6DE747F11732051100A06939 /* BGGalleryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE747F01732051100A06939 /* BGGalleryTableViewController.m */; };
 		6DE747F3173212F400A06939 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE747F2173212F400A06939 /* loading.jpg */; };
 		6DE747F51732156700A06939 /* SettingData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DE747F41732156700A06939 /* SettingData.plist */; };
+		6DE74FFD1734B13C00563CF5 /* BGDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE74FFC1734B13C00563CF5 /* BGDemo.m */; };
+		6DEBB76D17349A40002A6511 /* Gallery0 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEBB76B17349A40002A6511 /* Gallery0 */; };
+		6DEBB76E17349A40002A6511 /* Gallery1 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEBB76C17349A40002A6511 /* Gallery1 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,14 +131,18 @@
 		6D48B67516FC4E46008B2371 /* BGPageSwitcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGPageSwitcherDelegate.h; sourceTree = "<group>"; };
 		6D4B179216FDD64800EE0EE9 /* BGGlobalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGlobalData.h; sourceTree = "<group>"; };
 		6D4B179316FDD64800EE0EE9 /* BGGlobalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGlobalData.m; sourceTree = "<group>"; };
+		6D7529C51737849000B4BD96 /* BGGalleryHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryHomeViewController.h; sourceTree = "<group>"; };
+		6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryHomeViewController.m; sourceTree = "<group>"; };
+		6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGGalleryHomeViewController.xib; sourceTree = "<group>"; };
 		6DE747E81731FE8800A06939 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		6DE747EA1732047000A06939 /* BGGalleryHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryHomeViewController.h; sourceTree = "<group>"; };
-		6DE747EB1732047000A06939 /* BGGalleryHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryHomeViewController.m; sourceTree = "<group>"; };
-		6DE747EC1732047100A06939 /* BGGalleryHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGGalleryHomeViewController.xib; sourceTree = "<group>"; };
 		6DE747EF1732051100A06939 /* BGGalleryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryTableViewController.h; sourceTree = "<group>"; };
 		6DE747F01732051100A06939 /* BGGalleryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryTableViewController.m; sourceTree = "<group>"; };
 		6DE747F2173212F400A06939 /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
 		6DE747F41732156700A06939 /* SettingData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SettingData.plist; sourceTree = "<group>"; };
+		6DE74FFB1734B13C00563CF5 /* BGDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGDemo.h; sourceTree = "<group>"; };
+		6DE74FFC1734B13C00563CF5 /* BGDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDemo.m; sourceTree = "<group>"; };
+		6DEBB76B17349A40002A6511 /* Gallery0 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Gallery0; sourceTree = "<group>"; };
+		6DEBB76C17349A40002A6511 /* Gallery1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Gallery1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +265,8 @@
 		6D02C8D4172BB226006CD573 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6DEBB76B17349A40002A6511 /* Gallery0 */,
+				6DEBB76C17349A40002A6511 /* Gallery1 */,
 				6D02C8D5172BB226006CD573 /* about_title.jpg */,
 				6DE747F2173212F400A06939 /* loading.jpg */,
 				6D02C8D6172BB226006CD573 /* Icon-72.png */,
@@ -317,11 +326,13 @@
 				6D3BB81A16FC91D20045546F /* BGAboutViewController.m */,
 				6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */,
 				6D1539F616FB42A2001C0FAC /* Supporting Files */,
-				6DE747EA1732047000A06939 /* BGGalleryHomeViewController.h */,
-				6DE747EB1732047000A06939 /* BGGalleryHomeViewController.m */,
-				6DE747EC1732047100A06939 /* BGGalleryHomeViewController.xib */,
 				6DE747EF1732051100A06939 /* BGGalleryTableViewController.h */,
 				6DE747F01732051100A06939 /* BGGalleryTableViewController.m */,
+				6DE74FFB1734B13C00563CF5 /* BGDemo.h */,
+				6DE74FFC1734B13C00563CF5 /* BGDemo.m */,
+				6D7529C51737849000B4BD96 /* BGGalleryHomeViewController.h */,
+				6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */,
+				6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */,
 			);
 			path = SophiaShow;
 			sourceTree = "<group>";
@@ -411,9 +422,11 @@
 				6D02C8DE172BB226006CD573 /* Icon-Small.png in Resources */,
 				6D02C8DF172BB226006CD573 /* Icon-Small@2x.png in Resources */,
 				6D02C8E0172BB226006CD573 /* Icon@2x.png in Resources */,
-				6DE747EE1732047100A06939 /* BGGalleryHomeViewController.xib in Resources */,
 				6DE747F3173212F400A06939 /* loading.jpg in Resources */,
 				6DE747F51732156700A06939 /* SettingData.plist in Resources */,
+				6DEBB76D17349A40002A6511 /* Gallery0 in Resources */,
+				6DEBB76E17349A40002A6511 /* Gallery1 in Resources */,
+				6D7529C91737849000B4BD96 /* BGGalleryHomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,8 +458,9 @@
 				6D02C8D0172BB120006CD573 /* UIView+WhenTappedBlocks.m in Sources */,
 				6D02C8D1172BB120006CD573 /* SPXFrameScroller.m in Sources */,
 				6D02C8D3172BB120006CD573 /* SVProgressHUD.m in Sources */,
-				6DE747ED1732047100A06939 /* BGGalleryHomeViewController.m in Sources */,
 				6DE747F11732051100A06939 /* BGGalleryTableViewController.m in Sources */,
+				6DE74FFD1734B13C00563CF5 /* BGDemo.m in Sources */,
+				6D7529C81737849000B4BD96 /* BGGalleryHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

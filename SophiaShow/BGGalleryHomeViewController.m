@@ -2,7 +2,7 @@
 //  BGGalleryHomeViewController.m
 //  SophiaShow
 //
-//  Created by Jeff Zhong on 2013/05/02.
+//  Created by Jeff Zhong on 2013/05/06.
 //  Copyright (c) 2013 Brute Games Studio. All rights reserved.
 //
 
@@ -14,22 +14,13 @@
 @end
 
 @implementation BGGalleryHomeViewController
-@synthesize delegate, dataSource;
+@synthesize delegate, dataSource, isOnlineData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    return [self initWithNibName:nibNameOrNil
-                          bundle:nibBundleOrNil
-                    isOnlineData:NO];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isOnlineData:(BOOL) online
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        isOnlineData = online;
-        [self loadDataSource:isOnlineData];
     }
     return self;
 }
@@ -38,12 +29,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    BGGalleryTableViewController *tableViewController = [[BGGalleryTableViewController alloc] initWithDataSource:self.dataSource isOnlineData:isOnlineData];
-    tableViewController.view.frame = CGRectMake(20, 20, 984, 676);
-    tableViewController.delegate = self;
-    [self.view addSubview:tableViewController.view];
-    [tableViewController release];
     
+    BGGalleryTableViewController *tableViewController = [[[BGGalleryTableViewController alloc] init] autorelease];
+    tableViewController.view.frame = CGRectMake(20, 20, 600, 800);
+    tableViewController.isOnlineData = self.isOnlineData;
+    tableViewController.dataSource = self.dataSource;
+    [self.view addSubview:tableViewController.view];
     
 }
 
@@ -66,7 +57,8 @@
     [super dealloc];
 }
 
-
+#pragma mark -
+#pragma mark Action and Private Methods
 - (void) loadDataSource: (BOOL) online{
     if (!online) {
         // this is offline
@@ -77,42 +69,14 @@
     }
 }
 
-#pragma mark -
-#pragma mark BGGalleryTable View Controller Delegate Methods
-- (void) itemCellSelected: (int) atIndex{
-    if (nil == delegate) {
-        return;
-    }
-    
-    NSDictionary *gallaryBook = [self.dataSource objectAtIndex:atIndex];
-    NSString *galleryURI = [gallaryBook objectForKey:@"GalleryURI"];
-    NSArray *galleryImageNames = [gallaryBook objectForKey:@"GalleryImageNames"];
-    NSMutableArray *galleryImageArray = [NSMutableArray arrayWithCapacity:[galleryImageNames count]];
-    
-    // construct gallery image URI array
-    for (int i=0; i<galleryImageNames.count; i++) {
-        NSString *galleryImageName = [galleryImageNames objectAtIndex:i];
-        NSString *galleryImageURI;
+// when go home button is clicked
+- (IBAction)clickGoHomeButton:(id)sender{
+    if (nil != delegate) {
         if (!isOnlineData) {
-            // this is offline
-            galleryImageURI = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@/%@", galleryURI, galleryImageName];
+            [delegate switchViewTo:kPageMain fromView:kPageGalleryHome];
         }else{
-            // this is online
-            galleryImageURI = [NSString stringWithFormat:@"%@/%@", galleryURI, galleryImageName];
+            [delegate switchViewTo:kPageMain fromView:kPageOnlineGalleryHome];
         }
-        
-        [galleryImageArray addObject:galleryImageURI];
-    }
-    // persistent
-    [[BGGlobalData sharedData] setGalleryImages:[galleryImageArray copy]];
-    
-    // re-direct to gallery art page
-    if (!isOnlineData) {
-        // this is offline
-        [delegate switchViewTo:kPageGallery fromView:kPageGalleryHome];
-    }else{
-        // this is online
-        [delegate switchViewTo:kPageOnlineGallery fromView:kPageOnlineGalleryHome];
     }
 }
 

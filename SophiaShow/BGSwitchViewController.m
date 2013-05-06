@@ -10,13 +10,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BGViewController.h"
 #import "BGAboutViewController.h"
+#import "BGGalleryHomeViewController.h"
 
 @interface BGSwitchViewController ()
 
 @end
 
 @implementation BGSwitchViewController
-@synthesize homePageViewController, aboutPageViewController;
+@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController;
 
 - (void)viewDidLoad
 {
@@ -52,6 +53,7 @@
 - (void) viewDidUnload{
     self.homePageViewController=nil;
     self.aboutPageViewController=nil;
+    self.galleryHomePageViewController=nil;
     
     [super viewDidUnload];
 }
@@ -59,6 +61,7 @@
 - (void) dealloc{
     [homePageViewController release];
     [aboutPageViewController release];
+    [galleryHomePageViewController release];
     
     [super dealloc];
 }
@@ -101,6 +104,18 @@
         self.aboutPageViewController.delegate = self;
     }
     
+    else if (toPage == kPageGalleryHome) {
+        NSLog(@"toPage = GalleryHomePage");
+        
+        if (self.galleryHomePageViewController.view.superview == nil) {
+            BGGalleryHomeViewController *controller = [[BGGalleryHomeViewController alloc] initWithNibName:@"BGGalleryHomeViewController" bundle:nil];
+            self.galleryHomePageViewController = controller;
+            [controller release];
+        }
+        [self.galleryHomePageViewController loadDataSource:NO];
+        self.galleryHomePageViewController.delegate = self;
+    }
+    
     
     // get from and to view controller
 	UIViewController *fromViewController = [self getSwitchViewController:fromPage];
@@ -131,7 +146,7 @@
 			
 		case kPageGalleryHome:
         case kPageOnlineGalleryHome:
-//			return self.galleryHomePageViewController;
+			return self.galleryHomePageViewController;
 			break;
             
 		case kPageGallery:

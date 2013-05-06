@@ -12,11 +12,10 @@
 @interface BGViewController : UIViewController{
     id<BGPageSwitcherDelegate> delegate;
     
-    UIButton *gotoAbout;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 
-@property (nonatomic, retain) UIButton *gotoAbout;
+- (IBAction) clickMenuButton: (id) sender;
 
 @end

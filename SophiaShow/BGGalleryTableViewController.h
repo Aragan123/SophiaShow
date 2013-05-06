@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Brute Games Studio. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "ATArrayView.h"
 
 #ifndef kRemoveViewTag
@@ -25,7 +26,7 @@
 @property (nonatomic, retain) NSArray *dataSource;
 @property (nonatomic, assign) BOOL isOnlineData;
 
-- (id) initWithDataSource: (NSArray*) ds isOnlineData: (BOOL)online;
+//- (id) initWithDataSource: (NSArray*) ds isOnlineData: (BOOL)online;
 
 @end
 

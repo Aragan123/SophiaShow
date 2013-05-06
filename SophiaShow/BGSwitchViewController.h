@@ -11,13 +11,16 @@
 
 @class BGViewController;
 @class BGAboutViewController;
+@class BGGalleryHomeViewController;
 
 @interface BGSwitchViewController : UIViewController <BGPageSwitcherDelegate> {
     BGViewController *homeageViewController;
     BGAboutViewController *aboutPageViewController;
+    BGGalleryHomeViewController *galleryHomePageViewController;
 }
 
 @property (nonatomic, retain) BGViewController *homePageViewController;
 @property (nonatomic, retain) BGAboutViewController *aboutPageViewController;
+@property (nonatomic, retain) BGGalleryHomeViewController *galleryHomePageViewController;
 
 @end

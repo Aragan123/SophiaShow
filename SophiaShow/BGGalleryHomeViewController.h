@@ -2,7 +2,7 @@
 //  BGGalleryHomeViewController.h
 //  SophiaShow
 //
-//  Created by Jeff Zhong on 2013/05/02.
+//  Created by Jeff Zhong on 2013/05/06.
 //  Copyright (c) 2013 Brute Games Studio. All rights reserved.
 //
 
@@ -10,16 +10,18 @@
 #import "BGPageSwitcherDelegate.h"
 #import "BGGalleryTableViewController.h"
 
-@interface BGGalleryHomeViewController : UIViewController <BGGalleryTableViewControllerDelegate>{
+@interface BGGalleryHomeViewController : UIViewController{
     id<BGPageSwitcherDelegate> delegate;
-    BOOL isOnlineData;
+    
     NSArray *dataSource;
-
+    BOOL isOnlineData;
+    
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 @property (nonatomic, retain) NSArray *dataSource;
+@property (nonatomic, assign) BOOL isOnlineData;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isOnlineData:(BOOL) online;
+- (void) loadDataSource: (BOOL) online;
 
 @end
