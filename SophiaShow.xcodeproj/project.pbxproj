@@ -35,6 +35,8 @@
 		6D02C8DE172BB226006CD573 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D02C8D8172BB226006CD573 /* Icon-Small.png */; };
 		6D02C8DF172BB226006CD573 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D02C8D9172BB226006CD573 /* Icon-Small@2x.png */; };
 		6D02C8E0172BB226006CD573 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D02C8DA172BB226006CD573 /* Icon@2x.png */; };
+		6D0DCCB11737B27E00AE1DB3 /* beauty_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0DCCAF1737B27E00AE1DB3 /* beauty_background.png */; };
+		6D0DCCB21737B27E00AE1DB3 /* beauty_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0DCCB01737B27E00AE1DB3 /* beauty_background@2x.png */; };
 		6D1539F016FB42A2001C0FAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1539EF16FB42A2001C0FAC /* UIKit.framework */; };
 		6D1539F216FB42A2001C0FAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1539F116FB42A2001C0FAC /* Foundation.framework */; };
 		6D1539F416FB42A2001C0FAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1539F316FB42A2001C0FAC /* CoreGraphics.framework */; };
@@ -48,6 +50,9 @@
 		6D153A0C16FB42A2001C0FAC /* BGViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D153A0A16FB42A2001C0FAC /* BGViewController.xib */; };
 		6D3BB81C16FC91D20045546F /* BGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BB81A16FC91D20045546F /* BGAboutViewController.m */; };
 		6D3BB81D16FC91D20045546F /* BGAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */; };
+		6D41CE411737968400E1145C /* BGGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41CE401737968400E1145C /* BGGalleryViewController.m */; };
+		6D41CE4A1737983100E1145C /* BGGalleryScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41CE491737983100E1145C /* BGGalleryScrollViewController.m */; };
+		6D41CE4E1737A57200E1145C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41CE4D1737A57200E1145C /* iCarousel.m */; };
 		6D48B67416FC4CF0008B2371 /* BGSwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D48B67316FC4CF0008B2371 /* BGSwitchViewController.m */; };
 		6D4B179416FDD64800EE0EE9 /* BGGlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B179316FDD64800EE0EE9 /* BGGlobalData.m */; };
 		6D7529C81737849000B4BD96 /* BGGalleryHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */; };
@@ -56,7 +61,6 @@
 		6DE747F11732051100A06939 /* BGGalleryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE747F01732051100A06939 /* BGGalleryTableViewController.m */; };
 		6DE747F3173212F400A06939 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE747F2173212F400A06939 /* loading.jpg */; };
 		6DE747F51732156700A06939 /* SettingData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DE747F41732156700A06939 /* SettingData.plist */; };
-		6DE74FFD1734B13C00563CF5 /* BGDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE74FFC1734B13C00563CF5 /* BGDemo.m */; };
 		6DEBB76D17349A40002A6511 /* Gallery0 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEBB76B17349A40002A6511 /* Gallery0 */; };
 		6DEBB76E17349A40002A6511 /* Gallery1 in Resources */ = {isa = PBXBuildFile; fileRef = 6DEBB76C17349A40002A6511 /* Gallery1 */; };
 /* End PBXBuildFile section */
@@ -107,6 +111,8 @@
 		6D02C8D8172BB226006CD573 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		6D02C8D9172BB226006CD573 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		6D02C8DA172BB226006CD573 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6D0DCCAF1737B27E00AE1DB3 /* beauty_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beauty_background.png; sourceTree = "<group>"; };
+		6D0DCCB01737B27E00AE1DB3 /* beauty_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beauty_background@2x.png"; sourceTree = "<group>"; };
 		6D1539EC16FB42A2001C0FAC /* SophiaShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SophiaShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D1539EF16FB42A2001C0FAC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D1539F116FB42A2001C0FAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +132,12 @@
 		6D3BB81916FC91D20045546F /* BGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGAboutViewController.h; sourceTree = "<group>"; };
 		6D3BB81A16FC91D20045546F /* BGAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGAboutViewController.m; sourceTree = "<group>"; };
 		6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGAboutViewController.xib; sourceTree = "<group>"; };
+		6D41CE3F1737968400E1145C /* BGGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryViewController.h; sourceTree = "<group>"; };
+		6D41CE401737968400E1145C /* BGGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryViewController.m; sourceTree = "<group>"; };
+		6D41CE481737983100E1145C /* BGGalleryScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryScrollViewController.h; sourceTree = "<group>"; };
+		6D41CE491737983100E1145C /* BGGalleryScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryScrollViewController.m; sourceTree = "<group>"; };
+		6D41CE4C1737A57200E1145C /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		6D41CE4D1737A57200E1145C /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		6D48B67216FC4CF0008B2371 /* BGSwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGSwitchViewController.h; sourceTree = "<group>"; };
 		6D48B67316FC4CF0008B2371 /* BGSwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGSwitchViewController.m; sourceTree = "<group>"; };
 		6D48B67516FC4E46008B2371 /* BGPageSwitcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGPageSwitcherDelegate.h; sourceTree = "<group>"; };
@@ -139,8 +151,6 @@
 		6DE747F01732051100A06939 /* BGGalleryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryTableViewController.m; sourceTree = "<group>"; };
 		6DE747F2173212F400A06939 /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
 		6DE747F41732156700A06939 /* SettingData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SettingData.plist; sourceTree = "<group>"; };
-		6DE74FFB1734B13C00563CF5 /* BGDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGDemo.h; sourceTree = "<group>"; };
-		6DE74FFC1734B13C00563CF5 /* BGDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDemo.m; sourceTree = "<group>"; };
 		6DEBB76B17349A40002A6511 /* Gallery0 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Gallery0; sourceTree = "<group>"; };
 		6DEBB76C17349A40002A6511 /* Gallery1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Gallery1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +173,7 @@
 		6D02C88F172BB120006CD573 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				6D41CE4B1737A57200E1145C /* iCarousel */,
 				6D02C890172BB120006CD573 /* AFNetworking */,
 				6D02C8A4172BB120006CD573 /* AHAlertView */,
 				6D02C8AD172BB120006CD573 /* ATArrayView */,
@@ -274,6 +285,8 @@
 				6D02C8D8172BB226006CD573 /* Icon-Small.png */,
 				6D02C8D9172BB226006CD573 /* Icon-Small@2x.png */,
 				6D02C8DA172BB226006CD573 /* Icon@2x.png */,
+				6D0DCCAF1737B27E00AE1DB3 /* beauty_background.png */,
+				6D0DCCB01737B27E00AE1DB3 /* beauty_background@2x.png */,
 				6DE747F41732156700A06939 /* SettingData.plist */,
 			);
 			path = Resources;
@@ -325,14 +338,16 @@
 				6D3BB81916FC91D20045546F /* BGAboutViewController.h */,
 				6D3BB81A16FC91D20045546F /* BGAboutViewController.m */,
 				6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */,
-				6D1539F616FB42A2001C0FAC /* Supporting Files */,
-				6DE747EF1732051100A06939 /* BGGalleryTableViewController.h */,
-				6DE747F01732051100A06939 /* BGGalleryTableViewController.m */,
-				6DE74FFB1734B13C00563CF5 /* BGDemo.h */,
-				6DE74FFC1734B13C00563CF5 /* BGDemo.m */,
 				6D7529C51737849000B4BD96 /* BGGalleryHomeViewController.h */,
 				6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */,
 				6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */,
+				6DE747EF1732051100A06939 /* BGGalleryTableViewController.h */,
+				6DE747F01732051100A06939 /* BGGalleryTableViewController.m */,
+				6D1539F616FB42A2001C0FAC /* Supporting Files */,
+				6D41CE3F1737968400E1145C /* BGGalleryViewController.h */,
+				6D41CE401737968400E1145C /* BGGalleryViewController.m */,
+				6D41CE481737983100E1145C /* BGGalleryScrollViewController.h */,
+				6D41CE491737983100E1145C /* BGGalleryScrollViewController.m */,
 			);
 			path = SophiaShow;
 			sourceTree = "<group>";
@@ -349,6 +364,15 @@
 				6D153A0516FB42A2001C0FAC /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D41CE4B1737A57200E1145C /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				6D41CE4C1737A57200E1145C /* iCarousel.h */,
+				6D41CE4D1737A57200E1145C /* iCarousel.m */,
+			);
+			path = iCarousel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +451,8 @@
 				6DEBB76D17349A40002A6511 /* Gallery0 in Resources */,
 				6DEBB76E17349A40002A6511 /* Gallery1 in Resources */,
 				6D7529C91737849000B4BD96 /* BGGalleryHomeViewController.xib in Resources */,
+				6D0DCCB11737B27E00AE1DB3 /* beauty_background.png in Resources */,
+				6D0DCCB21737B27E00AE1DB3 /* beauty_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,8 +485,10 @@
 				6D02C8D1172BB120006CD573 /* SPXFrameScroller.m in Sources */,
 				6D02C8D3172BB120006CD573 /* SVProgressHUD.m in Sources */,
 				6DE747F11732051100A06939 /* BGGalleryTableViewController.m in Sources */,
-				6DE74FFD1734B13C00563CF5 /* BGDemo.m in Sources */,
 				6D7529C81737849000B4BD96 /* BGGalleryHomeViewController.m in Sources */,
+				6D41CE411737968400E1145C /* BGGalleryViewController.m in Sources */,
+				6D41CE4A1737983100E1145C /* BGGalleryScrollViewController.m in Sources */,
+				6D41CE4E1737A57200E1145C /* iCarousel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

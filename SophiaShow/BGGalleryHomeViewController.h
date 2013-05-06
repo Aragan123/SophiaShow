@@ -10,7 +10,7 @@
 #import "BGPageSwitcherDelegate.h"
 #import "BGGalleryTableViewController.h"
 
-@interface BGGalleryHomeViewController : UIViewController{
+@interface BGGalleryHomeViewController : UIViewController <BGGalleryTableViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     
     NSArray *dataSource;

@@ -11,13 +11,14 @@
 #import "BGViewController.h"
 #import "BGAboutViewController.h"
 #import "BGGalleryHomeViewController.h"
+#import "BGGalleryViewController.h"
 
 @interface BGSwitchViewController ()
 
 @end
 
 @implementation BGSwitchViewController
-@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController;
+@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController, galleryPageViewController;
 
 - (void)viewDidLoad
 {
@@ -48,12 +49,19 @@
     if (self.aboutPageViewController.view.superview==nil) {
         self.aboutPageViewController=nil;
     }
+    if (self.galleryHomePageViewController.view.superview==nil) {
+        self.galleryHomePageViewController=nil;
+    }
+    if (self.galleryPageViewController.view.superview==nil) {
+        self.galleryPageViewController=nil;
+    }
 }
 
 - (void) viewDidUnload{
     self.homePageViewController=nil;
     self.aboutPageViewController=nil;
     self.galleryHomePageViewController=nil;
+    self.galleryPageViewController=nil;
     
     [super viewDidUnload];
 }
@@ -62,6 +70,7 @@
     [homePageViewController release];
     [aboutPageViewController release];
     [galleryHomePageViewController release];
+    [galleryPageViewController release];
     
     [super dealloc];
 }
@@ -107,15 +116,27 @@
     else if (toPage == kPageGalleryHome) {
         NSLog(@"toPage = GalleryHomePage");
         
-        if (self.galleryHomePageViewController.view.superview == nil) {
+        if (self.galleryHomePageViewController == nil) {
             BGGalleryHomeViewController *controller = [[BGGalleryHomeViewController alloc] initWithNibName:@"BGGalleryHomeViewController" bundle:nil];
             self.galleryHomePageViewController = controller;
             [controller release];
         }
-        [self.galleryHomePageViewController loadDataSource:NO];
+        
         self.galleryHomePageViewController.delegate = self;
+        [self.galleryHomePageViewController loadDataSource:NO];
     }
     
+    else if (toPage == kPageGallery) {
+        NSLog(@"toPage = Gallery Page");
+        
+        if (self.galleryPageViewController.view.superview == nil) {
+            BGGalleryViewController *controller = [[BGGalleryViewController alloc] initWithNibName:@"BGGalleryHomeViewController" bundle:nil isOnlineGallery:NO];
+            self.galleryPageViewController = controller;
+            [controller release];
+        }
+        
+        self.galleryPageViewController.delegate = self;
+    }
     
     // get from and to view controller
 	UIViewController *fromViewController = [self getSwitchViewController:fromPage];
@@ -151,7 +172,7 @@
             
 		case kPageGallery:
         case kPageOnlineGallery:
-//			return self.galleryPageViewController;
+			return self.galleryPageViewController;
 			break;
             
         case kPageAbout:
