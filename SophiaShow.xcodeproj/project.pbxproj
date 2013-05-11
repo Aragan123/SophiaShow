@@ -35,6 +35,8 @@
 		6D02C8DE172BB226006CD573 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D02C8D8172BB226006CD573 /* Icon-Small.png */; };
 		6D02C8DF172BB226006CD573 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D02C8D9172BB226006CD573 /* Icon-Small@2x.png */; };
 		6D02C8E0172BB226006CD573 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D02C8DA172BB226006CD573 /* Icon@2x.png */; };
+		6D062412173E1F4E00CD1402 /* DSReflectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D062411173E1F4E00CD1402 /* DSReflectionLayer.m */; };
+		6D062418173E230600CD1402 /* UIView+BGReflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D062417173E230600CD1402 /* UIView+BGReflection.m */; };
 		6D0DCCB11737B27E00AE1DB3 /* beauty_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0DCCAF1737B27E00AE1DB3 /* beauty_background.png */; };
 		6D0DCCB21737B27E00AE1DB3 /* beauty_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0DCCB01737B27E00AE1DB3 /* beauty_background@2x.png */; };
 		6D1539F016FB42A2001C0FAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1539EF16FB42A2001C0FAC /* UIKit.framework */; };
@@ -55,8 +57,17 @@
 		6D41CE4E1737A57200E1145C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41CE4D1737A57200E1145C /* iCarousel.m */; };
 		6D48B67416FC4CF0008B2371 /* BGSwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D48B67316FC4CF0008B2371 /* BGSwitchViewController.m */; };
 		6D4B179416FDD64800EE0EE9 /* BGGlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B179316FDD64800EE0EE9 /* BGGlobalData.m */; };
+		6D4C4AD4173A412A00302830 /* BGSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4C4AD2173A412A00302830 /* BGSplashViewController.m */; };
+		6D4C4AD5173A412A00302830 /* BGSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D4C4AD3173A412A00302830 /* BGSplashViewController.xib */; };
+		6D4C4AD8173A4CF000302830 /* BGButterFly.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4C4AD7173A4CF000302830 /* BGButterFly.m */; };
+		6D61AED1173C943C0064F759 /* BGReflectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61AECF173C943C0064F759 /* BGReflectionViewController.m */; };
+		6D61AED2173C943C0064F759 /* BGReflectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D61AED0173C943C0064F759 /* BGReflectionViewController.xib */; };
+		6D61AED4173D23060064F759 /* ui_cross_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D61AED3173D23060064F759 /* ui_cross_a.png */; };
 		6D7529C81737849000B4BD96 /* BGGalleryHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */; };
 		6D7529C91737849000B4BD96 /* BGGalleryHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */; };
+		6DAC58D5173A93A00087EEC1 /* butterfly0.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D2173A93A00087EEC1 /* butterfly0.png */; };
+		6DAC58D6173A93A00087EEC1 /* butterfly1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D3173A93A00087EEC1 /* butterfly1.png */; };
+		6DAC58D7173A93A00087EEC1 /* butterfly2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D4173A93A00087EEC1 /* butterfly2.png */; };
 		6DE747E91731FE8800A06939 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE747E81731FE8800A06939 /* QuartzCore.framework */; };
 		6DE747F11732051100A06939 /* BGGalleryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE747F01732051100A06939 /* BGGalleryTableViewController.m */; };
 		6DE747F3173212F400A06939 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE747F2173212F400A06939 /* loading.jpg */; };
@@ -111,6 +122,10 @@
 		6D02C8D8172BB226006CD573 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		6D02C8D9172BB226006CD573 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		6D02C8DA172BB226006CD573 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6D062410173E1F4E00CD1402 /* DSReflectionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSReflectionLayer.h; sourceTree = "<group>"; };
+		6D062411173E1F4E00CD1402 /* DSReflectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSReflectionLayer.m; sourceTree = "<group>"; };
+		6D062416173E230600CD1402 /* UIView+BGReflection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BGReflection.h"; sourceTree = "<group>"; };
+		6D062417173E230600CD1402 /* UIView+BGReflection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BGReflection.m"; sourceTree = "<group>"; };
 		6D0DCCAF1737B27E00AE1DB3 /* beauty_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beauty_background.png; sourceTree = "<group>"; };
 		6D0DCCB01737B27E00AE1DB3 /* beauty_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beauty_background@2x.png"; sourceTree = "<group>"; };
 		6D1539EC16FB42A2001C0FAC /* SophiaShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SophiaShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,9 +158,21 @@
 		6D48B67516FC4E46008B2371 /* BGPageSwitcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGPageSwitcherDelegate.h; sourceTree = "<group>"; };
 		6D4B179216FDD64800EE0EE9 /* BGGlobalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGlobalData.h; sourceTree = "<group>"; };
 		6D4B179316FDD64800EE0EE9 /* BGGlobalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGlobalData.m; sourceTree = "<group>"; };
+		6D4C4AD1173A412A00302830 /* BGSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGSplashViewController.h; sourceTree = "<group>"; };
+		6D4C4AD2173A412A00302830 /* BGSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGSplashViewController.m; sourceTree = "<group>"; };
+		6D4C4AD3173A412A00302830 /* BGSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGSplashViewController.xib; sourceTree = "<group>"; };
+		6D4C4AD6173A4CF000302830 /* BGButterFly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGButterFly.h; sourceTree = "<group>"; };
+		6D4C4AD7173A4CF000302830 /* BGButterFly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGButterFly.m; sourceTree = "<group>"; };
+		6D61AECE173C943C0064F759 /* BGReflectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGReflectionViewController.h; sourceTree = "<group>"; };
+		6D61AECF173C943C0064F759 /* BGReflectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGReflectionViewController.m; sourceTree = "<group>"; };
+		6D61AED0173C943C0064F759 /* BGReflectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGReflectionViewController.xib; sourceTree = "<group>"; };
+		6D61AED3173D23060064F759 /* ui_cross_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ui_cross_a.png; sourceTree = "<group>"; };
 		6D7529C51737849000B4BD96 /* BGGalleryHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryHomeViewController.h; sourceTree = "<group>"; };
 		6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryHomeViewController.m; sourceTree = "<group>"; };
 		6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGGalleryHomeViewController.xib; sourceTree = "<group>"; };
+		6DAC58D2173A93A00087EEC1 /* butterfly0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly0.png; sourceTree = "<group>"; };
+		6DAC58D3173A93A00087EEC1 /* butterfly1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly1.png; sourceTree = "<group>"; };
+		6DAC58D4173A93A00087EEC1 /* butterfly2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly2.png; sourceTree = "<group>"; };
 		6DE747E81731FE8800A06939 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6DE747EF1732051100A06939 /* BGGalleryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryTableViewController.h; sourceTree = "<group>"; };
 		6DE747F01732051100A06939 /* BGGalleryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryTableViewController.m; sourceTree = "<group>"; };
@@ -173,6 +200,7 @@
 		6D02C88F172BB120006CD573 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				6D06240F173E1F4E00CD1402 /* DSReflection */,
 				6D41CE4B1737A57200E1145C /* iCarousel */,
 				6D02C890172BB120006CD573 /* AFNetworking */,
 				6D02C8A4172BB120006CD573 /* AHAlertView */,
@@ -287,9 +315,22 @@
 				6D02C8DA172BB226006CD573 /* Icon@2x.png */,
 				6D0DCCAF1737B27E00AE1DB3 /* beauty_background.png */,
 				6D0DCCB01737B27E00AE1DB3 /* beauty_background@2x.png */,
+				6DAC58D2173A93A00087EEC1 /* butterfly0.png */,
+				6DAC58D3173A93A00087EEC1 /* butterfly1.png */,
+				6DAC58D4173A93A00087EEC1 /* butterfly2.png */,
+				6D61AED3173D23060064F759 /* ui_cross_a.png */,
 				6DE747F41732156700A06939 /* SettingData.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6D06240F173E1F4E00CD1402 /* DSReflection */ = {
+			isa = PBXGroup;
+			children = (
+				6D062410173E1F4E00CD1402 /* DSReflectionLayer.h */,
+				6D062411173E1F4E00CD1402 /* DSReflectionLayer.m */,
+			);
+			path = DSReflection;
 			sourceTree = "<group>";
 		};
 		6D1539E316FB42A2001C0FAC = {
@@ -343,11 +384,21 @@
 				6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */,
 				6DE747EF1732051100A06939 /* BGGalleryTableViewController.h */,
 				6DE747F01732051100A06939 /* BGGalleryTableViewController.m */,
-				6D1539F616FB42A2001C0FAC /* Supporting Files */,
 				6D41CE3F1737968400E1145C /* BGGalleryViewController.h */,
 				6D41CE401737968400E1145C /* BGGalleryViewController.m */,
 				6D41CE481737983100E1145C /* BGGalleryScrollViewController.h */,
 				6D41CE491737983100E1145C /* BGGalleryScrollViewController.m */,
+				6D1539F616FB42A2001C0FAC /* Supporting Files */,
+				6D4C4AD1173A412A00302830 /* BGSplashViewController.h */,
+				6D4C4AD2173A412A00302830 /* BGSplashViewController.m */,
+				6D4C4AD3173A412A00302830 /* BGSplashViewController.xib */,
+				6D4C4AD6173A4CF000302830 /* BGButterFly.h */,
+				6D4C4AD7173A4CF000302830 /* BGButterFly.m */,
+				6D61AECE173C943C0064F759 /* BGReflectionViewController.h */,
+				6D61AECF173C943C0064F759 /* BGReflectionViewController.m */,
+				6D61AED0173C943C0064F759 /* BGReflectionViewController.xib */,
+				6D062416173E230600CD1402 /* UIView+BGReflection.h */,
+				6D062417173E230600CD1402 /* UIView+BGReflection.m */,
 			);
 			path = SophiaShow;
 			sourceTree = "<group>";
@@ -453,6 +504,12 @@
 				6D7529C91737849000B4BD96 /* BGGalleryHomeViewController.xib in Resources */,
 				6D0DCCB11737B27E00AE1DB3 /* beauty_background.png in Resources */,
 				6D0DCCB21737B27E00AE1DB3 /* beauty_background@2x.png in Resources */,
+				6D4C4AD5173A412A00302830 /* BGSplashViewController.xib in Resources */,
+				6DAC58D5173A93A00087EEC1 /* butterfly0.png in Resources */,
+				6DAC58D6173A93A00087EEC1 /* butterfly1.png in Resources */,
+				6DAC58D7173A93A00087EEC1 /* butterfly2.png in Resources */,
+				6D61AED2173C943C0064F759 /* BGReflectionViewController.xib in Resources */,
+				6D61AED4173D23060064F759 /* ui_cross_a.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +546,11 @@
 				6D41CE411737968400E1145C /* BGGalleryViewController.m in Sources */,
 				6D41CE4A1737983100E1145C /* BGGalleryScrollViewController.m in Sources */,
 				6D41CE4E1737A57200E1145C /* iCarousel.m in Sources */,
+				6D4C4AD4173A412A00302830 /* BGSplashViewController.m in Sources */,
+				6D4C4AD8173A4CF000302830 /* BGButterFly.m in Sources */,
+				6D61AED1173C943C0064F759 /* BGReflectionViewController.m in Sources */,
+				6D062412173E1F4E00CD1402 /* DSReflectionLayer.m in Sources */,
+				6D062418173E230600CD1402 /* UIView+BGReflection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

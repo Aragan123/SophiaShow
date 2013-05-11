@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
 
+@class BGSplashViewController;
+
 @interface BGViewController : UIViewController{
     id<BGPageSwitcherDelegate> delegate;
-    
+    BGSplashViewController *splashVc;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic, retain) BGSplashViewController *splashVc;
 
 - (IBAction) clickMenuButton: (id) sender;
 

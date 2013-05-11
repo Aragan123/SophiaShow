@@ -12,13 +12,14 @@
 #import "BGAboutViewController.h"
 #import "BGGalleryHomeViewController.h"
 #import "BGGalleryViewController.h"
+#import "BGReflectionViewController.h"
 
 @interface BGSwitchViewController ()
 
 @end
 
 @implementation BGSwitchViewController
-@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController, galleryPageViewController;
+@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController, galleryPageViewController, reflectionViewController;
 
 - (void)viewDidLoad
 {
@@ -55,6 +56,9 @@
     if (self.galleryPageViewController.view.superview==nil) {
         self.galleryPageViewController=nil;
     }
+    if (self.reflectionViewController.view.superview==nil) {
+        self.reflectionViewController=nil;
+    }
 }
 
 - (void) viewDidUnload{
@@ -62,6 +66,7 @@
     self.aboutPageViewController=nil;
     self.galleryHomePageViewController=nil;
     self.galleryPageViewController=nil;
+    self.reflectionViewController=nil;
     
     [super viewDidUnload];
 }
@@ -71,6 +76,7 @@
     [aboutPageViewController release];
     [galleryHomePageViewController release];
     [galleryPageViewController release];
+    [reflectionViewController release];
     
     [super dealloc];
 }
@@ -138,6 +144,18 @@
         self.galleryPageViewController.delegate = self;
     }
     
+    else if (toPage == kPageUI) {
+        NSLog(@"toPage = Reflection Page");
+        
+        if (self.reflectionViewController.view.superview == nil) {
+            BGReflectionViewController *controller = [[BGReflectionViewController alloc] initWithNibName:@"BGReflectionViewController" bundle:nil];
+            self.reflectionViewController = controller;
+            [controller release];
+        }
+        
+        self.reflectionViewController.delegate = self;
+    }
+    
     // get from and to view controller
 	UIViewController *fromViewController = [self getSwitchViewController:fromPage];
 	UIViewController *toViewController = [self getSwitchViewController:toPage];
@@ -180,7 +198,7 @@
             break;
             
         case kPageUI:
-            // return self.uiPageViewController;
+            return self.reflectionViewController;
             break;
 	}
 	return nil;

@@ -7,13 +7,14 @@
 //
 
 #import "BGViewController.h"
+#import "BGSplashViewController.h"
 
 @interface BGViewController ()
 
 @end
 
 @implementation BGViewController
-@synthesize delegate;
+@synthesize delegate, splashVc;
 
 - (void)viewDidLoad
 {
@@ -21,6 +22,10 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
+//    self.splashVc = [[BGSplashViewController alloc] initWithNibName:@"BGSplashViewController" bundle:nil];
+//    self.splashVc.view.frame = self.view.frame;
+//    [self.view addSubview:self.splashVc.view];
+//    [self.view bringSubviewToFront:self.splashVc.view];
     
 }
 
@@ -31,12 +36,14 @@
 }
 
 - (void)viewDidUnload{
-
+    splashVc=nil;
+    
     [super viewDidUnload];
 }
 
 - (void) dealloc{
     delegate=nil;
+    [splashVc release];
     
     [super dealloc];
 }
