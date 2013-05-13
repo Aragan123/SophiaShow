@@ -11,16 +11,19 @@
 
 @class DSReflectionLayer;
 
-@interface BGReflectionViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+@interface BGReflectionViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
-@property (retain, nonatomic) IBOutlet UIImageView *reflectionImage;
+
 @property (retain, nonatomic) IBOutlet UIView *reflectionImageContainer;
 @property (retain, nonatomic) IBOutlet UIView *reflectionArea;
 
+@property (retain, nonatomic) UIScrollView *reflectionScrollView;
+@property (retain, nonatomic) UIImageView *reflectionImageView;
+@property (retain, nonatomic) UIImageView *scrollImageView;
 @property (retain, nonatomic) UIPopoverController *popover;
 @property (retain, nonatomic) DSReflectionLayer *reflectionLayer;
 
@@ -31,10 +34,15 @@
 @property (retain, nonatomic) IBOutlet UISwitch *switchReflection;
 @property (retain, nonatomic) IBOutlet UISlider *sliderReflectionHeight;
 @property (retain, nonatomic) IBOutlet UISlider *sliderReflectionOpacity;
-@property (retain, nonatomic) IBOutlet UIButton *btnMoveUp;
-@property (retain, nonatomic) IBOutlet UIButton *btnMoveRight;
-@property (retain, nonatomic) IBOutlet UIButton *btnMoveDown;
-@property (retain, nonatomic) IBOutlet UIButton *btnMoveLeft;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveA;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveB;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveC;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveD;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveE;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveF;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveG;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveH;
+@property (retain, nonatomic) IBOutlet UIButton *btnMoveI;
 
 
 - (IBAction)returnHome:(id)sender;
@@ -42,9 +50,9 @@
 - (IBAction)clickOkButton:(id)sender;
 - (IBAction)clickSaveAndShare:(id)sender;
 - (IBAction)changeSliderReflectionOpacity:(UISlider *)sender;
-- (IBAction)clickMove:(id)sender;
 - (IBAction)changeSliderReflectionHeight:(UISlider *)sender;
 - (IBAction)changeSwitchReflection:(UISwitch *)sender;
+- (IBAction)clickBtnMove:(UIButton *)sender;
 
 
 @end

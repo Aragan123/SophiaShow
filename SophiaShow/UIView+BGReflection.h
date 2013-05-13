@@ -13,6 +13,7 @@
 
 - (void)setYRotation:(CGFloat)degrees;
 - (void)setXRotation:(CGFloat)degrees;
+- (void)setXRotation:(CGFloat)degreeX andYRotation: (CGFloat)degreeY;
 
 // Add a reflection in the super layer. 
 - (DSReflectionLayer *)addReflectionToSuperLayer;

@@ -42,6 +42,26 @@
     [self setXRotation:degrees anchorPoint:CGPointMake(0.5, 0.5) perspectiveCoeficient:800];
 }
 
+- (void)setXRotation:(CGFloat)degreeX andYRotation:(CGFloat)degreeY anchorPoint:(CGPoint)point perspectiveCoeficient:(CGFloat)m34
+{
+	CATransform3D transfrom = CATransform3DIdentity;
+	transfrom.m34 = 1.0 / m34;
+    CGFloat radiantX = degreeX / 360.0 * 2 * M_PI;
+    CGFloat radiantY = degreeY / 360.0 * 2 * M_PI;
+    
+	transfrom = CATransform3DRotate(transfrom, radiantX, 1.0f, 0.0f, 0.0f);
+    transfrom = CATransform3DRotate(transfrom, radiantY, 0.0f, 1.0f, 0.0f);
+    
+	CALayer *layer = self.layer;
+	layer.anchorPoint = point;
+	layer.transform = transfrom;
+
+}
+
+- (void)setXRotation:(CGFloat)degreeX andYRotation: (CGFloat)degreeY
+{
+    [self setXRotation:degreeX andYRotation:degreeY anchorPoint:CGPointMake(0.5, 0.5) perspectiveCoeficient:800];
+}
 
 - (DSReflectionLayer *)addReflectionToSuperLayer
 {

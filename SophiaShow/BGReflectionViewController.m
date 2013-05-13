@@ -22,7 +22,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization        
+        // Custom initialization
+
     }
     return self;
 }
@@ -33,8 +34,6 @@
     // Do any additional setup after loading the view from its nib.
     [self setupReflectionArea];
     [self setupControlsActivity];
-    [self.reflectionImage.layer setCornerRadius:6.0f];
-    
 
 }
 
@@ -48,39 +47,53 @@
     delegate=nil;
     [_popover release];
     [_reflectionLayer release];
+    [_reflectionImageView release];
+    [_reflectionScrollView release];
+    [_scrollImageView release];
     
-    [_reflectionImage release];
     [_reflectionImageContainer release];
     [_btnCancel release];
     [_btnOK release];
     [_btnSaveAndShare release];
     [_switchReflection release];
     [_sliderReflectionOpacity release];
-    [_btnMoveUp release];
-    [_btnMoveRight release];
-    [_btnMoveDown release];
-    [_btnMoveLeft release];
     [_reflectionArea release];
     [_sliderReflectionHeight release];
+    [_btnMoveA release];
+    [_btnMoveB release];
+    [_btnMoveC release];
+    [_btnMoveD release];
+    [_btnMoveE release];
+    [_btnMoveF release];
+    [_btnMoveG release];
+    [_btnMoveH release];
+    [_btnMoveI release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setPopover:nil];
     [self setReflectionLayer:nil];
+    [self setReflectionImageView:nil];
+    [self setReflectionScrollView:nil];
+    [self setScrollImageView:nil];
     
-    [self setReflectionImage:nil];
     [self setReflectionImageContainer:nil];
     [self setBtnCancel:nil];
     [self setBtnOK:nil];
     [self setBtnSaveAndShare:nil];
     [self setSwitchReflection:nil];
     [self setSliderReflectionOpacity:nil];
-    [self setBtnMoveUp:nil];
-    [self setBtnMoveRight:nil];
-    [self setBtnMoveDown:nil];
-    [self setBtnMoveLeft:nil];
     [self setReflectionArea:nil];
     [self setSliderReflectionHeight:nil];
+    [self setBtnMoveA:nil];
+    [self setBtnMoveB:nil];
+    [self setBtnMoveC:nil];
+    [self setBtnMoveD:nil];
+    [self setBtnMoveE:nil];
+    [self setBtnMoveF:nil];
+    [self setBtnMoveG:nil];
+    [self setBtnMoveH:nil];
+    [self setBtnMoveI:nil];
     [super viewDidUnload];
 }
 
@@ -96,10 +109,19 @@
 }
 
 - (void) setupReflectionArea{
-    self.reflectionImage.image = [UIImage imageNamed:@"ui_cross_a.png"];
-    [self.reflectionImage clearReflecitonLayer];
-    self.reflectionLayer =nil;
-    [self.reflectionImage whenTapped:^{
+    // reflection scroll and image views
+    self.reflectionScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(160.0, 80.0, 450.0, 400.0)];
+    [self.reflectionScrollView setBackgroundColor:[UIColor clearColor]];
+    [self.reflectionScrollView setDelegate:self];
+    [self.reflectionScrollView setShowsHorizontalScrollIndicator:NO];
+    [self.reflectionScrollView setShowsVerticalScrollIndicator:NO];
+    [self.reflectionScrollView setMaximumZoomScale:2.0f];
+        
+    // reflection image view
+    UIImage *firstImage = [UIImage imageNamed:@"ui_cross_a.png"];
+    self.scrollImageView = [[UIImageView alloc] initWithImage:firstImage];
+    [self.scrollImageView setFrame:CGRectMake(0.0, 0.0, 450.0, 400.0)];
+    [self.scrollImageView whenTapped:^{
         UIActionSheet* actionSheet = [[UIActionSheet alloc]
                                       initWithTitle:@"请选择文件来源"
                                       delegate:self
@@ -110,9 +132,18 @@
         [actionSheet release];
     }];
     
-    [self.reflectionImageContainer setXRotation:0.0f];
-    [self.reflectionImageContainer setYRotation:0.0f];
-
+    [self.reflectionScrollView addSubview:self.scrollImageView];
+    [self.reflectionImageContainer addSubview:self.reflectionScrollView];
+    
+    // remove reflctionImageView
+    if (self.reflectionImageView.superview != nil) {
+        [self.reflectionImageView clearReflecitonLayer];
+        self.reflectionLayer =nil;
+        [self.reflectionImageView removeFromSuperview];
+        
+        [self.reflectionImageContainer setXRotation:0.0f];
+        [self.reflectionImageContainer setYRotation:0.0f];
+    }
     
     // remove contains all guestures
     for (UIGestureRecognizer *recognizer in self.reflectionArea.gestureRecognizers) {
@@ -135,12 +166,18 @@
     [self disableControl:self.switchReflection];
     [self disableControl:self.sliderReflectionOpacity];
     [self disableControl:self.sliderReflectionHeight];
-    [self disableControl:self.btnMoveDown];
-    [self disableControl:self.btnMoveUp];
-    [self disableControl:self.btnMoveLeft];
-    [self disableControl:self.btnMoveRight];
     [self disableControl:self.btnOK];
     [self disableControl:self.btnCancel];
+    
+    [self disableControl:self.btnMoveA];
+    [self disableControl:self.btnMoveB];
+    [self disableControl:self.btnMoveC];
+    [self disableControl:self.btnMoveD];
+    [self disableControl:self.btnMoveE];
+    [self disableControl:self.btnMoveF];
+    [self disableControl:self.btnMoveG];
+    [self disableControl:self.btnMoveH];
+    [self disableControl:self.btnMoveI];
 }
 
 - (void) enableAllControls{
@@ -148,12 +185,25 @@
     [self enableControl:self.switchReflection];
     [self enableControl:self.sliderReflectionOpacity];
     [self enableControl:self.sliderReflectionHeight];
-    [self enableControl:self.btnMoveDown];
-    [self enableControl:self.btnMoveUp];
-    [self enableControl:self.btnMoveLeft];
-    [self enableControl:self.btnMoveRight];
     [self enableControl:self.btnOK];
     [self enableControl:self.btnCancel];
+    
+    [self enableControl:self.btnMoveA];
+    [self enableControl:self.btnMoveB];
+    [self enableControl:self.btnMoveC];
+    [self enableControl:self.btnMoveD];
+    [self enableControl:self.btnMoveE];
+    [self enableControl:self.btnMoveF];
+    [self enableControl:self.btnMoveG];
+    [self enableControl:self.btnMoveH];
+    [self enableControl:self.btnMoveI];
+}
+
+
+#pragma mark -
+#pragma mark UIScrollView Delegate methods
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+	return self.scrollImageView;
 }
 
 #pragma mark -
@@ -198,21 +248,24 @@
 #pragma UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSString *mediaType = [info
-                           objectForKey:UIImagePickerControllerMediaType];
-    
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     NSLog(@"selected image type: %@", mediaType);
+    
     if ([mediaType isEqualToString:@"public.image"]){
         // UIImage *selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
         NSLog(@"found an image");
-        [self.reflectionImage setContentMode:UIViewContentModeScaleAspectFit];
-        [self.reflectionImage setImage:image];
+        [self.scrollImageView setImage:image];
+        [self.scrollImageView setFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+        self.reflectionScrollView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.reflectionScrollView setContentSize:self.scrollImageView.frame.size];
+        [self.reflectionScrollView setMinimumZoomScale:self.reflectionScrollView.frame.size.width / self.scrollImageView.frame.size.width];
+        [self.reflectionScrollView setZoomScale:[self.reflectionScrollView minimumZoomScale]];
+        self.scrollImageView.center = CGPointMake(self.reflectionScrollView.frame.size.width*0.5, self.reflectionScrollView.frame.size.height*0.5);
+
     }
     
 //    UIImage  *img = [info objectForKey:UIImagePickerControllerEditedImage];
-
-//    self.reflectionImage.image = [UIImage imageNamed:@"Icon-72.png"];
     
     [self.popover dismissPopoverAnimated:YES];
     [self enableControl:self.btnOK]; // enable OK button
@@ -230,32 +283,33 @@
 {
 	CGPoint location = [pan locationInView:self.reflectionArea];
 	CGSize viewSize = self.reflectionArea.bounds.size;
-	location = CGPointMake((location.x - viewSize.width / 2) / viewSize.width,
-						   (location.y - viewSize.height / 2) / viewSize.height);
-	[CATransaction begin];
-	[CATransaction setDisableActions:YES];
-    CALayer *layer = self.reflectionImageContainer.layer;
+//	location = CGPointMake((location.x - viewSize.width*0.5) / viewSize.width,
+//						   (location.y - viewSize.height*0.5) / viewSize.height);
+//	[CATransaction begin];
+//	[CATransaction setDisableActions:YES];
+//    CALayer *layer = self.reflectionImageContainer.layer;
+//    
+//	layer.transform = CATransform3DRotate(CATransform3DMakeRotation(M_PI * location.x, 0, 1, 0), -M_PI * location.y, 1, 0, 0);
+//	[CATransaction commit];
     
-	layer.transform = CATransform3DRotate(CATransform3DMakeRotation(M_PI * location.x, 0, 1, 0), -M_PI * location.y, 1, 0, 0);
-	// if I weren't using SMShadowedTransformLayer, here I would simply do:
-	// [layer setTransform:layer.transform animatePerFrame:YES];
-	[CATransaction commit];
+    location = CGPointMake((location.x - viewSize.width*0.5) / viewSize.width, (location.y - viewSize.height*0.5) / viewSize.height);
+    [self.reflectionImageContainer setXRotation:(180*location.y) andYRotation:(-180*location.x)];
 }
 
 - (void)tap:(UITapGestureRecognizer*)tap
 {
 	CGPoint location = [tap locationInView:self.reflectionArea];
 	CGSize viewSize = self.reflectionArea.bounds.size;
-	location = CGPointMake((location.x - viewSize.width / 2) / viewSize.width,
-						   (location.y - viewSize.height / 2) / viewSize.height);
-	[CATransaction begin];
-	[CATransaction setAnimationDuration:1.f];
-    CALayer *layer = self.reflectionImageContainer.layer;
-    
-	layer.transform = CATransform3DRotate(CATransform3DMakeRotation(M_PI * location.x, 0, 1, 0), -M_PI * location.y, 1, 0, 0);
-	// if I weren't using SMShadowedTransformLayer, here I would simply do:
-	// [layer setTransform:layer.transform animatePerFrame:YES];
-	[CATransaction commit];
+//	location = CGPointMake((location.x - viewSize.width*0.5) / viewSize.width,
+//						   (location.y - viewSize.height*0.5) / viewSize.height);
+//	[CATransaction begin];
+//	[CATransaction setAnimationDuration:1.f];
+//    CALayer *layer = self.reflectionImageContainer.layer;
+//    
+//	layer.transform = CATransform3DRotate(CATransform3DMakeRotation(M_PI * location.x, 0, 1, 0), -M_PI * location.y, 1, 0, 0);
+//	[CATransaction commit];
+    location = CGPointMake((location.x - viewSize.width*0.5) / viewSize.width, (location.y - viewSize.height*0.5) / viewSize.height);
+    [self.reflectionImageContainer setXRotation:(180*location.y) andYRotation:(-180*location.x)];
 }
 
 #pragma mark -
@@ -267,23 +321,39 @@
 }
 
 - (IBAction)clickCancelButton:(id)sender {
-    [self setupControlsActivity];
+    [self.scrollImageView removeFromSuperview];
+    self.scrollImageView=nil;
+    [self.reflectionScrollView removeFromSuperview];
+    self.reflectionScrollView=nil;
     
+    [self setupControlsActivity];
     [self setupReflectionArea];
 }
 
 - (IBAction)clickOkButton:(id)sender {
+    if (self.reflectionImageView == nil) {
+        self.reflectionImageView = [[UIImageView alloc] initWithFrame:self.reflectionScrollView.frame];
+    }
+    [self.reflectionImageView setImage:[self finishCropping]]; // set image
+    
+    [self.reflectionImageContainer addSubview:self.reflectionImageView];
+    [self.scrollImageView removeFromSuperview];
+    self.scrollImageView=nil;
+    [self.reflectionScrollView removeFromSuperview];
+    self.reflectionScrollView=nil;
+    
     [self enableAllControls];
     [self disableControl:self.btnOK];
     
-    for (UIGestureRecognizer *recognizer in self.reflectionImage.gestureRecognizers) {
-        [self.reflectionImage removeGestureRecognizer:recognizer];
+    for (UIGestureRecognizer *recognizer in self.reflectionImageView.gestureRecognizers) {
+        [self.reflectionImageView removeGestureRecognizer:recognizer];
     }
     
+    
     // enable more controls and set them to default states
-    self.reflectionLayer = [self.reflectionImage addReflectionToSuperLayer];
+    self.reflectionLayer = [self.reflectionImageView addReflectionToSuperLayer];
     self.reflectionLayer.verticalOffset = 4.0f;
-    [self.reflectionImageContainer setYRotation:25];
+    [self.reflectionImageContainer setYRotation:25.0f];
     
     // set control default values
     [self.sliderReflectionOpacity setValue:self.reflectionLayer.opacity animated:YES];
@@ -295,6 +365,22 @@
     [self.reflectionArea addGestureRecognizer:pan];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self.reflectionArea addGestureRecognizer:tap];
+}
+
+- (UIImage*)finishCropping {
+	float zoomScale = 1.0 / [self.reflectionScrollView zoomScale];
+	
+	CGRect rect;
+	rect.origin.x = [self.reflectionScrollView contentOffset].x * zoomScale;
+	rect.origin.y = [self.reflectionScrollView contentOffset].y * zoomScale;
+	rect.size.width = [self.reflectionScrollView bounds].size.width * zoomScale;
+	rect.size.height = [self.reflectionScrollView bounds].size.height * zoomScale;
+	
+	CGImageRef cr = CGImageCreateWithImageInRect([[self.scrollImageView image] CGImage], rect);
+	UIImage *cropped = [UIImage imageWithCGImage:cr];
+	CGImageRelease(cr);
+    
+    return cropped;
 }
 
 - (IBAction)clickSaveAndShare:(id)sender {
@@ -318,7 +404,7 @@
 - (IBAction)changeSwitchReflection:(UISwitch *)sender {
     BOOL switchOn = sender.isOn;
     if (switchOn) {
-        self.reflectionLayer = [self.reflectionImage addReflectionToSuperLayer];
+        self.reflectionLayer = [self.reflectionImageView addReflectionToSuperLayer];
         self.reflectionLayer.verticalOffset = 4.0f;
         [self.reflectionImageContainer setYRotation:25];
         
@@ -331,7 +417,7 @@
         [self enableControl:self.sliderReflectionHeight];
     }else{
         // switch off
-        [self.reflectionImage clearReflecitonLayer];
+        [self.reflectionImageView clearReflecitonLayer];
         self.reflectionLayer =nil;
         [self.sliderReflectionOpacity setValue:0.0f animated:YES];
         [self.sliderReflectionHeight setValue:0.0f animated:YES];
@@ -341,7 +427,39 @@
     }
 }
 
-- (IBAction)clickMove:(id)sender {
+- (IBAction)clickBtnMove:(UIButton *)sender {
+    int tag = sender.tag;
+    switch (tag) {
+        case 1: // UpLeft
+            [self.reflectionImageContainer setXRotation:-25.0f andYRotation:45.0f];
+            break;
+        case 2: // Up 45
+            [self.reflectionImageContainer setXRotation:-45.0f];
+            break;
+        case 3: // Up Right
+            [self.reflectionImageContainer setXRotation:-25.0f andYRotation:-45.0f];
+            break;
+        case 4: // Left 45
+            [self.reflectionImageContainer setYRotation:45.0f];
+            break;
+        case 5: // Centre
+            [self.reflectionImageContainer setYRotation:0.0f];
+            break;
+        case 6: // Right 45
+            [self.reflectionImageContainer setYRotation:-45.0f];
+            break;
+        case 7: // Down Left
+             [self.reflectionImageContainer setXRotation:25.0f andYRotation:45.0f];
+            break;
+        case 8: // Down 45
+            [self.reflectionImageContainer setXRotation:45.0f];
+            break;
+        case 9: // Down Right
+             [self.reflectionImageContainer setXRotation:25.0f andYRotation:-45.0f];
+            break;
+        default:
+            break;
+    }
 }
 
 @end
