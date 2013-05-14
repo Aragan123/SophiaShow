@@ -68,6 +68,8 @@
 		6DAC58D5173A93A00087EEC1 /* butterfly0.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D2173A93A00087EEC1 /* butterfly0.png */; };
 		6DAC58D6173A93A00087EEC1 /* butterfly1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D3173A93A00087EEC1 /* butterfly1.png */; };
 		6DAC58D7173A93A00087EEC1 /* butterfly2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D4173A93A00087EEC1 /* butterfly2.png */; };
+		6DC94617174265C50019FDA4 /* NSObject+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC94616174265C50019FDA4 /* NSObject+Blocks.m */; };
+		6DC94619174274730019FDA4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC94618174274730019FDA4 /* Social.framework */; };
 		6DE747E91731FE8800A06939 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE747E81731FE8800A06939 /* QuartzCore.framework */; };
 		6DE747F11732051100A06939 /* BGGalleryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE747F01732051100A06939 /* BGGalleryTableViewController.m */; };
 		6DE747F3173212F400A06939 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE747F2173212F400A06939 /* loading.jpg */; };
@@ -173,6 +175,9 @@
 		6DAC58D2173A93A00087EEC1 /* butterfly0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly0.png; sourceTree = "<group>"; };
 		6DAC58D3173A93A00087EEC1 /* butterfly1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly1.png; sourceTree = "<group>"; };
 		6DAC58D4173A93A00087EEC1 /* butterfly2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly2.png; sourceTree = "<group>"; };
+		6DC94615174265C50019FDA4 /* NSObject+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Blocks.h"; sourceTree = "<group>"; };
+		6DC94616174265C50019FDA4 /* NSObject+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Blocks.m"; sourceTree = "<group>"; };
+		6DC94618174274730019FDA4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		6DE747E81731FE8800A06939 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6DE747EF1732051100A06939 /* BGGalleryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryTableViewController.h; sourceTree = "<group>"; };
 		6DE747F01732051100A06939 /* BGGalleryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryTableViewController.m; sourceTree = "<group>"; };
@@ -187,10 +192,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DE747E91731FE8800A06939 /* QuartzCore.framework in Frameworks */,
 				6D1539F016FB42A2001C0FAC /* UIKit.framework in Frameworks */,
 				6D1539F216FB42A2001C0FAC /* Foundation.framework in Frameworks */,
 				6D1539F416FB42A2001C0FAC /* CoreGraphics.framework in Frameworks */,
+				6DE747E91731FE8800A06939 /* QuartzCore.framework in Frameworks */,
+				6DC94619174274730019FDA4 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +206,7 @@
 		6D02C88F172BB120006CD573 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				6DC94614174265C50019FDA4 /* NSObjectBlocks */,
 				6D06240F173E1F4E00CD1402 /* DSReflection */,
 				6D41CE4B1737A57200E1145C /* iCarousel */,
 				6D02C890172BB120006CD573 /* AFNetworking */,
@@ -354,6 +361,7 @@
 		6D1539EE16FB42A2001C0FAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DC94618174274730019FDA4 /* Social.framework */,
 				6DE747E81731FE8800A06939 /* QuartzCore.framework */,
 				6D1539EF16FB42A2001C0FAC /* UIKit.framework */,
 				6D1539F116FB42A2001C0FAC /* Foundation.framework */,
@@ -424,6 +432,15 @@
 				6D41CE4D1737A57200E1145C /* iCarousel.m */,
 			);
 			path = iCarousel;
+			sourceTree = "<group>";
+		};
+		6DC94614174265C50019FDA4 /* NSObjectBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				6DC94615174265C50019FDA4 /* NSObject+Blocks.h */,
+				6DC94616174265C50019FDA4 /* NSObject+Blocks.m */,
+			);
+			path = NSObjectBlocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,6 +568,7 @@
 				6D61AED1173C943C0064F759 /* BGReflectionViewController.m in Sources */,
 				6D062412173E1F4E00CD1402 /* DSReflectionLayer.m in Sources */,
 				6D062418173E230600CD1402 /* UIView+BGReflection.m in Sources */,
+				6DC94617174265C50019FDA4 /* NSObject+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

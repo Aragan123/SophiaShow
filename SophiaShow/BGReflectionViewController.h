@@ -18,14 +18,18 @@
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 
-@property (retain, nonatomic) IBOutlet UIView *reflectionImageContainer;
 @property (retain, nonatomic) IBOutlet UIView *reflectionArea;
+@property (retain, nonatomic) IBOutlet UIView *reflectionImageContainer;
+@property (retain, nonatomic) IBOutlet UIView *reflectionScrollContainer;
 
 @property (retain, nonatomic) UIScrollView *reflectionScrollView;
-@property (retain, nonatomic) UIImageView *reflectionImageView;
 @property (retain, nonatomic) UIImageView *scrollImageView;
+
+@property (retain, nonatomic) UIImageView *reflectionImageView;
+
 @property (retain, nonatomic) UIPopoverController *popover;
 @property (retain, nonatomic) DSReflectionLayer *reflectionLayer;
+@property (retain, nonatomic) UIImage *savedImage;
 
 // controls
 @property (retain, nonatomic) IBOutlet UIButton *btnCancel;

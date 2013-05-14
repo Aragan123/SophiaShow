@@ -7,9 +7,13 @@
 //
 
 #import "BGReflectionViewController.h"
+#import <Social/Social.h>
 #import "JMWhenTapped.h"
 #import "DSReflectionLayer.h"
 #import "UIView+BGReflection.h"
+#import "SVProgressHUD.h"
+#import "AHAlertView.h"
+#import "NSObject+Blocks.h"
 
 @interface BGReflectionViewController ()
 
@@ -32,6 +36,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    // set alert view style
+    [AHAlertView applyCustomAlertAppearance];
+    
     [self setupReflectionArea];
     [self setupControlsActivity];
 
@@ -50,6 +57,7 @@
     [_reflectionImageView release];
     [_reflectionScrollView release];
     [_scrollImageView release];
+    [_savedImage release];
     
     [_reflectionImageContainer release];
     [_btnCancel release];
@@ -68,6 +76,7 @@
     [_btnMoveG release];
     [_btnMoveH release];
     [_btnMoveI release];
+    [_reflectionScrollContainer release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -76,6 +85,7 @@
     [self setReflectionImageView:nil];
     [self setReflectionScrollView:nil];
     [self setScrollImageView:nil];
+    [self setSavedImage:nil];
     
     [self setReflectionImageContainer:nil];
     [self setBtnCancel:nil];
@@ -94,6 +104,7 @@
     [self setBtnMoveG:nil];
     [self setBtnMoveH:nil];
     [self setBtnMoveI:nil];
+    [self setReflectionScrollContainer:nil];
     [super viewDidUnload];
 }
 
@@ -110,7 +121,7 @@
 
 - (void) setupReflectionArea{
     // reflection scroll and image views
-    self.reflectionScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(160.0, 80.0, 450.0, 400.0)];
+    self.reflectionScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 450.0, 400.0)];
     [self.reflectionScrollView setBackgroundColor:[UIColor clearColor]];
     [self.reflectionScrollView setDelegate:self];
     [self.reflectionScrollView setShowsHorizontalScrollIndicator:NO];
@@ -133,7 +144,7 @@
     }];
     
     [self.reflectionScrollView addSubview:self.scrollImageView];
-    [self.reflectionImageContainer addSubview:self.reflectionScrollView];
+    [self.reflectionScrollContainer addSubview:self.reflectionScrollView];
     
     // remove reflctionImageView
     if (self.reflectionImageView.superview != nil) {
@@ -257,16 +268,14 @@
         NSLog(@"found an image");
         [self.scrollImageView setImage:image];
         [self.scrollImageView setFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
-        self.reflectionScrollView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.reflectionScrollView setContentSize:self.scrollImageView.frame.size];
-        [self.reflectionScrollView setMinimumZoomScale:self.reflectionScrollView.frame.size.width / self.scrollImageView.frame.size.width];
+//        self.reflectionScrollView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.reflectionScrollView setContentSize:image.size];
+        [self.reflectionScrollView setMinimumZoomScale:MIN((self.reflectionScrollView.frame.size.width / self.scrollImageView.frame.size.width), (self.reflectionScrollView.frame.size.height / self.scrollImageView.frame.size.height)) ];
         [self.reflectionScrollView setZoomScale:[self.reflectionScrollView minimumZoomScale]];
         self.scrollImageView.center = CGPointMake(self.reflectionScrollView.frame.size.width*0.5, self.reflectionScrollView.frame.size.height*0.5);
 
     }
-    
-//    UIImage  *img = [info objectForKey:UIImagePickerControllerEditedImage];
-    
+        
     [self.popover dismissPopoverAnimated:YES];
     [self enableControl:self.btnOK]; // enable OK button
     [self enableControl:self.btnCancel]; // enable Cancel button
@@ -331,40 +340,50 @@
 }
 
 - (IBAction)clickOkButton:(id)sender {
-    if (self.reflectionImageView == nil) {
-        self.reflectionImageView = [[UIImageView alloc] initWithFrame:self.reflectionScrollView.frame];
+    // dispay HUD at least x second.
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+
+    [self performBlock:^{
+        if (self.reflectionImageView == nil) {
+            self.reflectionImageView = [[UIImageView alloc] initWithFrame:self.reflectionScrollContainer.frame];
+        }
+//        [self.reflectionImageView setImage:[self finishCropping]]; // set image
+        [self.reflectionImageView setImage:[self screenshot:self.reflectionScrollContainer]];
+        
+        [self.reflectionImageContainer addSubview:self.reflectionImageView];
+        [self.scrollImageView removeFromSuperview];
+        self.scrollImageView=nil;
+        [self.reflectionScrollView removeFromSuperview];
+        self.reflectionScrollView=nil;
+        
+        [self enableAllControls];
+        [self disableControl:self.btnOK];
+        
+        for (UIGestureRecognizer *recognizer in self.reflectionImageView.gestureRecognizers) {
+            [self.reflectionImageView removeGestureRecognizer:recognizer];
+        }
+        
+        // enable more controls and set them to default states
+        self.reflectionLayer = [self.reflectionImageView addReflectionToSuperLayer];
+        self.reflectionLayer.verticalOffset = 4.0f;
+        [self.reflectionImageContainer setYRotation:25.0f];
+        
+        // set control default values
+        [self.sliderReflectionOpacity setValue:self.reflectionLayer.opacity animated:YES];
+        [self.sliderReflectionHeight setValue:self.reflectionLayer.reflectionHeight animated:YES];
+        [self.switchReflection setOn:YES animated:YES];
+        
+        // add gesture to reflection image containter
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        [self.reflectionArea addGestureRecognizer:pan];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        [self.reflectionArea addGestureRecognizer:tap];
+        
+        // dismiss HUD
+        [SVProgressHUD dismiss];
     }
-    [self.reflectionImageView setImage:[self finishCropping]]; // set image
-    
-    [self.reflectionImageContainer addSubview:self.reflectionImageView];
-    [self.scrollImageView removeFromSuperview];
-    self.scrollImageView=nil;
-    [self.reflectionScrollView removeFromSuperview];
-    self.reflectionScrollView=nil;
-    
-    [self enableAllControls];
-    [self disableControl:self.btnOK];
-    
-    for (UIGestureRecognizer *recognizer in self.reflectionImageView.gestureRecognizers) {
-        [self.reflectionImageView removeGestureRecognizer:recognizer];
-    }
-    
-    
-    // enable more controls and set them to default states
-    self.reflectionLayer = [self.reflectionImageView addReflectionToSuperLayer];
-    self.reflectionLayer.verticalOffset = 4.0f;
-    [self.reflectionImageContainer setYRotation:25.0f];
-    
-    // set control default values
-    [self.sliderReflectionOpacity setValue:self.reflectionLayer.opacity animated:YES];
-    [self.sliderReflectionHeight setValue:self.reflectionLayer.reflectionHeight animated:YES];
-    [self.switchReflection setOn:YES animated:YES];
-    
-    // add gesture to reflection image containter
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    [self.reflectionArea addGestureRecognizer:pan];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    [self.reflectionArea addGestureRecognizer:tap];
+    afterDelay:0.55f];
+
 }
 
 - (UIImage*)finishCropping {
@@ -373,8 +392,8 @@
 	CGRect rect;
 	rect.origin.x = [self.reflectionScrollView contentOffset].x * zoomScale;
 	rect.origin.y = [self.reflectionScrollView contentOffset].y * zoomScale;
-	rect.size.width = [self.reflectionScrollView bounds].size.width * zoomScale;
-	rect.size.height = [self.reflectionScrollView bounds].size.height * zoomScale;
+	rect.size.width = [self.reflectionScrollView frame].size.width * zoomScale;
+	rect.size.height = [self.reflectionScrollView frame].size.height * zoomScale;
 	
 	CGImageRef cr = CGImageCreateWithImageInRect([[self.scrollImageView image] CGImage], rect);
 	UIImage *cropped = [UIImage imageWithCGImage:cr];
@@ -384,7 +403,26 @@
 }
 
 - (IBAction)clickSaveAndShare:(id)sender {
-    // save to local photo album and display modal view to share to Weibo (iOS 6 above)
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self performBlock:^{
+        // save to local photo album and display modal view to share to Weibo (iOS 6 above)
+        self.savedImage = [self screenshot:self.reflectionArea];
+        UIImageWriteToSavedPhotosAlbum(self.savedImage, nil, nil, nil); // save to photo album
+        // show share buttons
+        AHAlertView *alert = [[AHAlertView alloc] initWithTitle:NSLocalizedString(@"Already add it to your photo album", nil) message:NSLocalizedString(@"You can share it to SinaWeibo", nil)];
+        [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+        [alert setCancelButtonTitle:NSLocalizedString(@"Not Share", nil) block:nil];
+        [alert addButtonWithTitle:NSLocalizedString(@"Share to SinaWeibo", nil) block:^{
+            [alert dismiss];
+            [self shareToWeibo];
+        }];
+        
+        [SVProgressHUD dismiss]; // dismiss HUD first
+        [alert show];
+        [alert release];
+        
+    } afterDelay:0.75f];
+
 }
 
 - (IBAction)changeSliderReflectionOpacity:(UISlider *)sender {
@@ -406,7 +444,6 @@
     if (switchOn) {
         self.reflectionLayer = [self.reflectionImageView addReflectionToSuperLayer];
         self.reflectionLayer.verticalOffset = 4.0f;
-        [self.reflectionImageContainer setYRotation:25];
         
         // set control default values
         [self.sliderReflectionOpacity setValue:self.reflectionLayer.opacity animated:YES];
@@ -431,13 +468,13 @@
     int tag = sender.tag;
     switch (tag) {
         case 1: // UpLeft
-            [self.reflectionImageContainer setXRotation:-25.0f andYRotation:45.0f];
+            [self.reflectionImageContainer setXRotation:-35.0f andYRotation:45.0f];
             break;
         case 2: // Up 45
             [self.reflectionImageContainer setXRotation:-45.0f];
             break;
         case 3: // Up Right
-            [self.reflectionImageContainer setXRotation:-25.0f andYRotation:-45.0f];
+            [self.reflectionImageContainer setXRotation:-35.0f andYRotation:-45.0f];
             break;
         case 4: // Left 45
             [self.reflectionImageContainer setYRotation:45.0f];
@@ -449,17 +486,82 @@
             [self.reflectionImageContainer setYRotation:-45.0f];
             break;
         case 7: // Down Left
-             [self.reflectionImageContainer setXRotation:25.0f andYRotation:45.0f];
+             [self.reflectionImageContainer setXRotation:35.0f andYRotation:45.0f];
             break;
         case 8: // Down 45
             [self.reflectionImageContainer setXRotation:45.0f];
             break;
         case 9: // Down Right
-             [self.reflectionImageContainer setXRotation:25.0f andYRotation:-45.0f];
+             [self.reflectionImageContainer setXRotation:35.0f andYRotation:-45.0f];
             break;
         default:
             break;
     }
 }
+
+#pragma mark -
+#pragma mark Private Methods
+// used to get screenshot
+- (UIImage*)screenshot: (UIView*) view{
+    UIGraphicsBeginImageContext(view.bounds.size);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // hack, helps w/ our colors when blurring
+    //    NSData *imageData = UIImageJPEGRepresentation(image, 1); // convert to jpeg
+    NSData *imageData = UIImagePNGRepresentation(image); // convert to png
+    image = [UIImage imageWithData:imageData];
+    
+    return image;
+}
+
+- (void)shareToWeibo{
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo])
+    {
+        SLComposeViewController *socialVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
+        // add handler
+        SLComposeViewControllerCompletionHandler socialHandler = ^(SLComposeViewControllerResult result) {
+            NSString *output;
+            switch (result) {
+                case SLComposeViewControllerResultCancelled:
+                    output = NSLocalizedString(@"Sharing Cancelled", nil);
+                    break;
+                case SLComposeViewControllerResultDone:
+                    output = NSLocalizedString(@"Sharing Sucessful", nil);
+                    break;
+                default:
+                    break;
+            }
+            
+            [socialVC dismissViewControllerAnimated:YES completion:^(void){
+                AHAlertView *alert = [[AHAlertView alloc] initWithTitle:output message:nil];
+                [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+                [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^{
+                    [self.view endEditing:YES];
+                }];
+                [alert show];
+                [alert release];
+            }];
+        };
+        
+        socialVC.completionHandler = socialHandler;
+        [socialVC setInitialText:@"#Sophia的App#"];
+        [socialVC addImage:self.savedImage];
+        //        [socialVC addURL:[NSURL URLWithString:@"http://www.brutegame.com/"]];
+        
+        // finally display social view controller
+        [self presentViewController:socialVC animated:YES completion:nil];
+    }else{
+        // if < iOS 6.0 and sharing is not available
+        AHAlertView *alert = [[AHAlertView alloc] initWithTitle:NSLocalizedString(@"无法使用新浪微博分享功能，请升级到iOS 6.0或以上版本", nil) message:nil];
+        [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+        [alert setCancelButtonTitle:NSLocalizedString(@"OK", nil) block:nil];
+        [alert show];
+        [alert release];
+    }
+    
+}
+
 
 @end
