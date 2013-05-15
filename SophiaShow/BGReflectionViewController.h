@@ -13,6 +13,7 @@
 
 @interface BGReflectionViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>{
     id<BGPageSwitcherDelegate> delegate;
+    BOOL newImage;
     
 }
 

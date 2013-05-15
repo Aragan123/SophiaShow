@@ -27,7 +27,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-
     }
     return self;
 }
@@ -224,22 +223,31 @@
     NSLog(@"buttonIndex = [%d]",buttonIndex);
     switch (buttonIndex) {
         case 0://照相机
-        {   UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.delegate = self;
-            imagePicker.allowsEditing = YES;
-            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            [self presentViewController:imagePicker animated:YES completion:nil];
-            [imagePicker release];
+        {
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                newImage=YES;
+                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                imagePicker.delegate = self;
+                imagePicker.allowsEditing = NO;
+                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+                [imagePicker release];
+            }else {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"You don't have camera!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }
         }
             break;
         case 1://本地相簿
         {
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            if ([UIImagePickerController isSourceTypeAvailable:
-                 UIImagePickerControllerSourceTypePhotoLibrary]) {
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                newImage=NO;
+                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 imagePicker.delegate = self;
                 [imagePicker setAllowsEditing:NO];
+//                imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *) kUTTypeImage, nil];
                 self.popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
                 [self.popover presentPopoverFromRect:CGRectMake(0, 0, 450, 400) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 [imagePicker release];
@@ -261,29 +269,60 @@
 {
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     NSLog(@"selected image type: %@", mediaType);
-    
+
     if ([mediaType isEqualToString:@"public.image"]){
-        // UIImage *selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+//        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
         NSLog(@"found an image");
         [self.scrollImageView setImage:image];
-        [self.scrollImageView setFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
-//        self.reflectionScrollView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.scrollImageView setFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];        
+        
+        self.reflectionScrollView.contentMode = UIViewContentModeScaleAspectFit;
         [self.reflectionScrollView setContentSize:image.size];
         [self.reflectionScrollView setMinimumZoomScale:MIN((self.reflectionScrollView.frame.size.width / self.scrollImageView.frame.size.width), (self.reflectionScrollView.frame.size.height / self.scrollImageView.frame.size.height)) ];
         [self.reflectionScrollView setZoomScale:[self.reflectionScrollView minimumZoomScale]];
         self.scrollImageView.center = CGPointMake(self.reflectionScrollView.frame.size.width*0.5, self.reflectionScrollView.frame.size.height*0.5);
 
     }
-        
-    [self.popover dismissPopoverAnimated:YES];
+    
+    if (newImage) {
+        // from camera
+        NSLog(@"dismiss picker view controller");
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        // from photo library
+        [self.popover dismissPopoverAnimated:YES];
+        [self.popover release];
+    }
+
+    
     [self enableControl:self.btnOK]; // enable OK button
     [self enableControl:self.btnCancel]; // enable Cancel button
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    if (newImage) {
+        // from camera
+        NSLog(@"dismiss picker view controller");
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        // from photo library
+        [self.popover dismissPopoverAnimated:YES];
+        [self.popover release];
+    }}
+
+-(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Save failed"
+                              message: @"Failed to save image"\
+                              delegate: nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 #pragma mark -
