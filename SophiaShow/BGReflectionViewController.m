@@ -8,6 +8,7 @@
 
 #import "BGReflectionViewController.h"
 #import <Social/Social.h>
+#import <QuartzCore/QuartzCore.h>
 #import "JMWhenTapped.h"
 #import "DSReflectionLayer.h"
 #import "UIView+BGReflection.h"
@@ -421,7 +422,7 @@
         // dismiss HUD
         [SVProgressHUD dismiss];
     }
-    afterDelay:0.55f];
+    afterDelay:0.5f];
 
 }
 
@@ -445,7 +446,8 @@
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self performBlock:^{
         // save to local photo album and display modal view to share to Weibo (iOS 6 above)
-        self.savedImage = [self screenshot:self.reflectionArea];
+//        self.savedImage = [self screenshot:self.reflectionScrollContainer];
+        self.savedImage = [self glToUIImage:self.reflectionImageContainer];
         UIImageWriteToSavedPhotosAlbum(self.savedImage, nil, nil, nil); // save to photo album
         // show share buttons
         AHAlertView *alert = [[AHAlertView alloc] initWithTitle:NSLocalizedString(@"Already add it to your photo album", nil) message:NSLocalizedString(@"You can share it to SinaWeibo", nil)];
@@ -460,9 +462,49 @@
         [alert show];
         [alert release];
         
-    } afterDelay:0.75f];
+    } afterDelay:0.5f];
 
 }
+
+-(UIImage *) glToUIImage: (UIView*) view {
+    int width = view.frame.size.width;
+    int height = view.frame.size.height;
+    NSInteger myDataLength = width * height * 4;
+    
+    // allocate array and read pixels into it.
+    GLubyte *buffer = (GLubyte *) malloc(myDataLength);
+    glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    
+    // gl renders "upside down" so swap top to bottom into new array.
+    // there's gotta be a better way, but this works.
+    GLubyte *buffer2 = (GLubyte *) malloc(myDataLength);
+    for(int y = 0; y <height; y++)
+    {
+        for(int x = 0; x <width * 4; x++)
+        {
+            buffer2[(height -1 - y) * width * 4 + x] = buffer[y * 4 * width + x];
+        }
+    }
+    
+    // make data provider with data.
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer2, myDataLength, NULL);
+    
+    // prep the ingredients
+    int bitsPerComponent = 8;
+    int bitsPerPixel = 32;
+    int bytesPerRow = 4 * width;
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    
+    // make the cgimage
+    CGImageRef imageRef = CGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpaceRef, bitmapInfo, provider, NULL, NO, renderingIntent);
+    
+    // then make the uiimage from that
+    UIImage *myImage = [UIImage imageWithCGImage:imageRef];
+    return myImage;
+}
+
 
 - (IBAction)changeSliderReflectionOpacity:(UISlider *)sender {
     [CATransaction begin];
@@ -542,7 +584,15 @@
 #pragma mark Private Methods
 // used to get screenshot
 - (UIImage*)screenshot: (UIView*) view{
-    UIGraphicsBeginImageContext(view.bounds.size);
+//    UIGraphicsBeginImageContext(view.bounds.size);
+    /* in retina screen
+     */
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, [UIScreen mainScreen].scale);
+    else
+        UIGraphicsBeginImageContext(view.bounds.size);
+    
+    
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

@@ -19,4 +19,5 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scroll;
 @property (nonatomic, retain) IBOutlet UIPageControl *pages;
 
+- (IBAction)returnHome:(id)sender;
 @end

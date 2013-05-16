@@ -32,7 +32,7 @@
 
     // init scroll view
     self.scroll.pagingEnabled = YES;
-    self.scroll.backgroundColor = [UIColor whiteColor];
+    self.scroll.backgroundColor = [UIColor clearColor];
     self.scroll.showsHorizontalScrollIndicator = NO;
     self.scroll.showsVerticalScrollIndicator = NO;
     self.scroll.contentMode = UIViewContentModeCenter;
@@ -43,14 +43,16 @@
     [self.scroll setContentSize:scrollContentSize];
     
     // init two views and add them to scroll view
-    UIView *v1 = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height)] autorelease];
-    v1.backgroundColor = [UIColor redColor];
+    UIImageView *v1 = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height)] autorelease];
+    v1.backgroundColor = [UIColor clearColor];
     v1.contentMode = UIViewContentModeCenter;
+    v1.image = [UIImage imageNamed:@"about_text_cn.png"];
     [self.scroll addSubview:v1];
     
-    UIView *v2 = [[[UIView alloc] initWithFrame:CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height)] autorelease];
-    v2.backgroundColor = [UIColor yellowColor];
+    UIImageView *v2 = [[[UIImageView alloc] initWithFrame:CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height)] autorelease];
+    v2.backgroundColor = [UIColor clearColor];
     v2.contentMode = UIViewContentModeCenter;
+    v2.image = [UIImage imageNamed:@"about_text_en.png"];
     [self.scroll addSubview:v2];
 }
 
@@ -82,5 +84,11 @@
     
 }
 
-
+#pragma mark -
+#pragma mark Action and Private Methods
+- (IBAction)returnHome:(id)sender {
+    if (nil != delegate) {
+        [delegate switchViewTo:kPageMain fromView:kPageAbout];
+    }
+}
 @end

@@ -38,9 +38,9 @@
     [self.view addSubview:tableViewController.view];
     
     // add go home button
-    UIButton *homeBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [homeBtn setFrame:CGRectMake(913, 705, 91, 44)];
-    [homeBtn setTitle:@"Go Home" forState:UIControlStateNormal];
+    UIButton *homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [homeBtn setFrame:CGRectMake(944, 688, 60, 60)];
+    [homeBtn setImage:[UIImage imageNamed:@"home_2.png"] forState:UIControlStateNormal];
     [homeBtn addTarget:self action:@selector(clickGoHomeButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:homeBtn];
 }
