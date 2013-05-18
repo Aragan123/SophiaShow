@@ -111,7 +111,7 @@
     else if (toPage == kPageAbout) {
         NSLog(@"toPage = AboutPage");
         
-        if (self.aboutPageViewController == nil) {
+        if (self.aboutPageViewController.view.superview == nil) {
             BGAboutViewController *controller = [[BGAboutViewController alloc] initWithNibName:@"BGAboutViewController" bundle:nil];
             self.aboutPageViewController = controller;
             [controller release];

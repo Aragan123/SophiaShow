@@ -24,7 +24,10 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
 //    self.viewController = [[[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil] autorelease];
+//    [application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+
     self.viewController = [[BGSwitchViewController alloc] init];
+    [NSThread sleepForTimeInterval:1.20f]; // show splash screen for n seconds
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

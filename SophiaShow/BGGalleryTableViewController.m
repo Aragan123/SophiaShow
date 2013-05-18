@@ -9,6 +9,7 @@
 #import "BGGalleryTableViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "JMWhenTapped.h"
+#import "SWSnapshotStackView.h"
 
 @interface BGGalleryTableViewController ()
 
@@ -37,7 +38,7 @@
 	// Do any additional setup after loading the view.
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.view.backgroundColor = [UIColor clearColor];
-    self.arrayView.itemSize = CGSizeMake(200, 200);
+    self.arrayView.itemSize = CGSizeMake(250, 250);
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,20 +101,30 @@
         }
     }];
     
-    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height)] autorelease];
-    imageView.tag = kRemoveViewTag;
+//    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height)] autorelease];
+//    imageView.tag = kRemoveViewTag;
+//    NSString *imageURI = [self getGalleryImageURI:[self.dataSource objectAtIndex:index]];
+//    NSLog(@"loading gallery imagURI: %@", imageURI);
+//    
+//    if (!isOnlineData){
+//        // local gallery
+//        imageView.image = [UIImage imageWithContentsOfFile:imageURI];
+//    }else{
+//        // online gallery
+//        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
+//    }
+//    
+//    [itemView addSubview:imageView];
+    
+    SWSnapshotStackView *snapView = [[SWSnapshotStackView alloc] initWithFrame:CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height)];
+    snapView.tag = kRemoveViewTag;
     NSString *imageURI = [self getGalleryImageURI:[self.dataSource objectAtIndex:index]];
     NSLog(@"loading gallery imagURI: %@", imageURI);
+    snapView.image = [UIImage imageWithContentsOfFile:imageURI];
+    snapView.contentMode = UIViewContentModeRedraw;
+    snapView.displayAsStack = YES;
     
-    if (!isOnlineData){
-        // local gallery
-        imageView.image = [UIImage imageWithContentsOfFile:imageURI];
-    }else{
-        // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
-    }
-    
-    [itemView addSubview:imageView];
+    [itemView addSubview:snapView];
     
     return itemView;
 }

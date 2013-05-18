@@ -42,7 +42,7 @@
 						<string key="NSFrameSize">{1024, 768}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="559205453"/>
+						<reference key="NSNextKeyView" ref="385679211"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -54,17 +54,16 @@
 					<object class="IBUIButton" id="385679211">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{201, 563}, {94, 44}}</string>
+						<string key="NSFrame">{{0, 270}, {430, 360}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="546838889"/>
+						<reference key="NSNextKeyView" ref="559205453"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">5</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">About me</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="954147200">
 							<int key="NSColorSpace">3</int>
@@ -77,6 +76,10 @@
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="1003573708">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">menu_button_2.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="1044639412">
 							<int key="type">2</int>
@@ -91,7 +94,7 @@
 					<object class="IBUIButton" id="559205453">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{462, 563}, {75, 44}}</string>
+						<string key="NSFrame">{{480, 260}, {500, 420}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="827205452"/>
@@ -101,7 +104,6 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">Gallery</string>
 						<reference key="IBUIHighlightedTitleColor" ref="954147200"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
@@ -109,23 +111,25 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1003573708"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">menu_button_1.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="1044639412"/>
 						<reference key="IBUIFont" ref="736650625"/>
 					</object>
 					<object class="IBUIButton" id="827205452">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{710, 563}, {90, 44}}</string>
+						<string key="NSFrame">{{135, 0}, {500, 380}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">6</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">Photo 3D</string>
 						<reference key="IBUIHighlightedTitleColor" ref="954147200"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
@@ -133,6 +137,10 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1003573708"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">menu_button_3.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="1044639412"/>
 						<reference key="IBUIFont" ref="736650625"/>
 					</object>
@@ -140,7 +148,7 @@
 				<string key="NSFrameSize">{1024, 768}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="385679211"/>
+				<reference key="NSNextKeyView" ref="546838889"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -233,10 +241,10 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="385679211"/>
 							<reference ref="827205452"/>
 							<reference ref="559205453"/>
 							<reference ref="546838889"/>
+							<reference ref="385679211"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -310,10 +318,12 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">home_background.jpg</string>
-			<string key="NS.object.0">{1024, 768}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="home_background.jpg">{1024, 768}</string>
+			<string key="menu_button_1.png">{500, 420}</string>
+			<string key="menu_button_2.png">{430, 360}</string>
+			<string key="menu_button_3.png">{500, 380}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

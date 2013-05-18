@@ -31,6 +31,7 @@
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
     // init scroll view
+    self.scroll.frame = CGRectMake(800, 20, 610, 700); // initial position
     self.scroll.pagingEnabled = YES;
     self.scroll.backgroundColor = [UIColor clearColor];
     self.scroll.showsHorizontalScrollIndicator = NO;
@@ -45,15 +46,19 @@
     // init two views and add them to scroll view
     UIImageView *v1 = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, scrollViewSize.width, scrollViewSize.height)] autorelease];
     v1.backgroundColor = [UIColor clearColor];
-    v1.contentMode = UIViewContentModeCenter;
+    v1.contentMode = UIViewContentModeScaleAspectFill;
     v1.image = [UIImage imageNamed:@"about_text_cn.png"];
     [self.scroll addSubview:v1];
     
     UIImageView *v2 = [[[UIImageView alloc] initWithFrame:CGRectMake(scrollViewSize.width, 0, scrollViewSize.width, scrollViewSize.height)] autorelease];
     v2.backgroundColor = [UIColor clearColor];
-    v2.contentMode = UIViewContentModeCenter;
+    v2.contentMode = UIViewContentModeScaleAspectFill;
     v2.image = [UIImage imageNamed:@"about_text_en.png"];
     [self.scroll addSubview:v2];
+    
+    [UIView animateWithDuration:0.5 delay:0.5f options:0  animations:^{
+        self.scroll.center = CGPointMake(325, 370);
+    } completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
