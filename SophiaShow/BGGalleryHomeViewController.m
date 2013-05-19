@@ -33,7 +33,7 @@
 
     // add gallery image table view
     BGGalleryTableViewController *tableViewController = [[[BGGalleryTableViewController alloc] initWithDataSource:self.dataSource isOnlineData:self.isOnlineData] autorelease];
-    tableViewController.view.frame = CGRectMake(20, 20, 984, 673);
+    tableViewController.view.frame = CGRectMake(20, self.view.frame.size.height, 984, 673);
     tableViewController.delegate = self;
     [self.view addSubview:tableViewController.view];
     
@@ -43,6 +43,11 @@
     [homeBtn setImage:[UIImage imageNamed:@"home_2.png"] forState:UIControlStateNormal];
     [homeBtn addTarget:self action:@selector(clickGoHomeButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:homeBtn];
+    
+    // run animation of gallery table view
+    [UIView animateWithDuration:0.5f delay:0.5f options:0 animations:^{
+        tableViewController.view.center = CGPointMake(20+tableViewController.view.frame.size.width*0.5, 20+tableViewController.view.frame.size.height*0.5);
+    } completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

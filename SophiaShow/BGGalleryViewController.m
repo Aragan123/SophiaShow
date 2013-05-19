@@ -179,13 +179,14 @@
     if (!isOnlineData){
         // local gallery
         UIImage *imageObj = [UIImage imageWithContentsOfFile:imageURI]; //get images
-        imageView.image =[self imageScaledToSize:imageObj withSize:CGSizeMake(160.0f, 160.0f)];;
+//        imageView.image =[self imageScaledToSize:imageObj withSize:CGSizeMake(160.0f, 160.0f)];
+        imageView.image = [self resizeImageToSize:imageObj withSize:CGSizeMake(160.0f, 160.0f)];
     }else{
         // online gallery
         [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
     }
-    [view addSubview:imageView];
     
+    [view addSubview:imageView];
     return view;
 }
 
@@ -275,5 +276,63 @@
     [self.navItem setTitle:[NSString stringWithFormat:@"%i of %i", _currentArtIndex+1, [self.dataSource count]]];
     
 }
+
+- (UIImage *)resizeImageToSize: (UIImage*) sourceImage withSize: (CGSize)targetSize
+{
+    UIImage *newImage = nil;
+    
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO) {
+        
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor < heightFactor)
+            scaleFactor = widthFactor;
+        else
+            scaleFactor = heightFactor;
+        
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // make image center aligned
+        if (widthFactor < heightFactor)
+        {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        }
+        else if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+        }
+    }
+    
+    UIGraphicsBeginImageContext(targetSize);
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    if(newImage == nil)
+        NSLog(@"could not scale image");
+    
+    return newImage ;
+}
+
 
 @end

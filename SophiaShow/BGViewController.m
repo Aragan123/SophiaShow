@@ -27,6 +27,16 @@
 //    [self.view addSubview:self.splashVc.view];
 //    [self.view bringSubviewToFront:self.splashVc.view];
     
+    self.btn_gallery.center = CGPointMake(self.view.frame.size.width + self.btn_gallery.frame.size.width*0.5, self.view.frame.size.height + self.btn_gallery.frame.size.height*0.5);
+    self.btn_ui.center = CGPointMake(self.view.frame.size.width*0.5, 0-self.btn_ui.frame.size.height*0.5);
+    
+    [UIView animateWithDuration:0.75 delay:0.5f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.btn_ui.center = CGPointMake(135+self.btn_ui.frame.size.width*0.5, 0+self.btn_ui.frame.size.height*0.5);
+    } completion:nil];
+    
+    [UIView animateWithDuration:0.75 delay:0.75f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.btn_gallery.center = CGPointMake(480+self.btn_gallery.frame.size.width*0.5, 260+self.btn_gallery.frame.size.height*0.5);
+    } completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,6 +48,8 @@
 - (void)viewDidUnload{
     splashVc=nil;
     
+    [self setBtn_ui:nil];
+    [self setBtn_gallery:nil];
     [super viewDidUnload];
 }
 
@@ -45,6 +57,8 @@
     delegate=nil;
     [splashVc release];
     
+    [_btn_ui release];
+    [_btn_gallery release];
     [super dealloc];
 }
 
