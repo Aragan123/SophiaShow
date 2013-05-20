@@ -18,6 +18,7 @@
 
 @property (retain, nonatomic) IBOutlet UIButton *btn_ui;
 @property (retain, nonatomic) IBOutlet UIButton *btn_gallery;
+@property (retain, nonatomic) IBOutlet UIButton *btn_about;
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 @property (nonatomic, retain) BGSplashViewController *splashVc;

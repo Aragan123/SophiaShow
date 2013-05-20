@@ -57,7 +57,7 @@
 						<string key="NSFrame">{{0, 270}, {430, 360}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="559205453"/>
+						<reference key="NSNextKeyView" ref="827205452"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">5</int>
@@ -97,7 +97,6 @@
 						<string key="NSFrame">{{480, 260}, {500, 420}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="827205452"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">1</int>
@@ -124,6 +123,7 @@
 						<string key="NSFrame">{{135, 0}, {500, 380}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="559205453"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">6</int>
@@ -205,6 +205,14 @@
 						<reference key="destination" ref="559205453"/>
 					</object>
 					<int key="connectionID">14</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btn_about</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="385679211"/>
+					</object>
+					<int key="connectionID">15</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -301,7 +309,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">14</int>
+			<int key="maxID">15</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -320,10 +328,15 @@
 						</object>
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btn_about">UIButton</string>
 						<string key="btn_gallery">UIButton</string>
 						<string key="btn_ui">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btn_about">
+							<string key="name">btn_about</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="btn_gallery">
 							<string key="name">btn_gallery</string>
 							<string key="candidateClassName">UIButton</string>
@@ -350,7 +363,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="home_background.jpg">{1024, 768}</string>
-			<string key="menu_button_1.png">{500, 420}</string>
+			<string key="menu_button_1.png">{500, 419}</string>
 			<string key="menu_button_2.png">{430, 360}</string>
 			<string key="menu_button_3.png">{500, 380}</string>
 		</dictionary>

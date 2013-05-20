@@ -95,7 +95,7 @@
     [super viewDidAppear:animated];    
     // to full screen
     if (!_isFullScreen) {
-        [self performSelector:@selector(enterFullscreen) withObject:nil afterDelay:1.5f];
+        [self performSelector:@selector(enterFullscreen) withObject:nil afterDelay:1.2f];
     }
     
 }

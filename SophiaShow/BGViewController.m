@@ -26,17 +26,25 @@
 //    self.splashVc.view.frame = self.view.frame;
 //    [self.view addSubview:self.splashVc.view];
 //    [self.view bringSubviewToFront:self.splashVc.view];
+    [self.view setUserInteractionEnabled:NO]; // disable user interaction till all animations complete
     
+    self.btn_about.center = CGPointMake(0-self.btn_about.frame.size.width*0.5, 0-self.btn_about.frame.size.height*0.5);
     self.btn_gallery.center = CGPointMake(self.view.frame.size.width + self.btn_gallery.frame.size.width*0.5, self.view.frame.size.height + self.btn_gallery.frame.size.height*0.5);
     self.btn_ui.center = CGPointMake(self.view.frame.size.width*0.5, 0-self.btn_ui.frame.size.height*0.5);
-    
-    [UIView animateWithDuration:0.75 delay:0.5f options:UIViewAnimationOptionCurveEaseIn animations:^{
+    // animation of appearance of buttons
+    [UIView animateWithDuration:0.75 delay:0.5f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.btn_about.center = CGPointMake(0+self.btn_about.frame.size.width*0.5, 270 +self.btn_about.frame.size.height*0.5);
+    } completion:nil];
+     
+    [UIView animateWithDuration:0.75 delay:1.2f options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.btn_ui.center = CGPointMake(135+self.btn_ui.frame.size.width*0.5, 0+self.btn_ui.frame.size.height*0.5);
     } completion:nil];
     
-    [UIView animateWithDuration:0.75 delay:0.75f options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.75 delay:1.45f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.btn_gallery.center = CGPointMake(480+self.btn_gallery.frame.size.width*0.5, 260+self.btn_gallery.frame.size.height*0.5);
-    } completion:nil];
+    } completion:^(BOOL complete){
+        [self.view setUserInteractionEnabled:YES]; // enable interaction finally
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +58,7 @@
     
     [self setBtn_ui:nil];
     [self setBtn_gallery:nil];
+    [self setBtn_about:nil];
     [super viewDidUnload];
 }
 
@@ -59,6 +68,7 @@
     
     [_btn_ui release];
     [_btn_gallery release];
+    [_btn_about release];
     [super dealloc];
 }
 

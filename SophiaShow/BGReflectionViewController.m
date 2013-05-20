@@ -39,9 +39,30 @@
     // set alert view style
     [AHAlertView applyCustomAlertAppearance];
     
+    // add side bars
+    UIImageView *sidebar = [[UIImageView alloc] initWithFrame:CGRectMake(768, 0, 1, 768)];
+    sidebar.backgroundColor = [UIColor clearColor];
+    sidebar.image = [UIImage imageNamed:@"ui_sidebar.png"];
+    [self.view addSubview:sidebar];
+    [sidebar release];
+    // add seperators
+    UIImage *seperator_image = [UIImage imageNamed:@"ui_seperator.png"];
+    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(768, 200, 256, 1)];
+    seperator.backgroundColor = [UIColor clearColor];
+    seperator.image = seperator_image;
+    [self.view addSubview:seperator];
+    [seperator release];
+    UIImageView *seperator2 = [[UIImageView alloc] initWithFrame:CGRectMake(768, 470, 256, 1)];
+    seperator2.backgroundColor = [UIColor clearColor];
+    seperator2.image = seperator_image;
+    [self.view addSubview:seperator2];
+    [seperator2 release];
+    
+    // load area data
     [self setupReflectionArea];
     [self setupControlsActivity];
 
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -129,7 +150,7 @@
     [self.reflectionScrollView setMaximumZoomScale:2.0f];
         
     // reflection image view
-    UIImage *firstImage = [UIImage imageNamed:@"ui_cross_a.png"];
+    UIImage *firstImage = [UIImage imageNamed:@"ui_cross_b.png"];
     self.scrollImageView = [[UIImageView alloc] initWithImage:firstImage];
     [self.scrollImageView setFrame:CGRectMake(0.0, 0.0, 450.0, 400.0)];
     [self.scrollImageView whenTapped:^{
