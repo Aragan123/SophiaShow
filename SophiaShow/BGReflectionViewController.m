@@ -255,7 +255,7 @@
                 [self presentViewController:imagePicker animated:YES completion:nil];
                 [imagePicker release];
             }else {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"You don't have camera!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"你的设备无法使用摄像头!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
                 [alert release];
             }
@@ -274,7 +274,7 @@
                 [self.popover presentPopoverFromRect:CGRectMake(0, 0, 450, 400) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 [imagePicker release];
             } else {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"Error accessing photo library!" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"错误：无法正常进入你的照片集!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
                 [alert release];
             }

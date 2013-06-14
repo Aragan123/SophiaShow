@@ -64,7 +64,7 @@
     self.topToolBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     [self.topToolBar setBarStyle:UIBarStyleBlackTranslucent];
     self.navItem = [[UINavigationItem alloc] init];
-    self.navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Go Back"
+    self.navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
                                                                  style:UIBarButtonItemStyleBordered
                                                                 target:self
                                                                 action:@selector(clickGoHomeButton:)];
