@@ -84,6 +84,7 @@
 		6DC94619174274730019FDA4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC94618174274730019FDA4 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6DD0C85F1744CF05003254C0 /* home_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD0C85E1744CF05003254C0 /* home_2.png */; };
 		6DD0C86717451DFA003254C0 /* galleryHome_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DD0C86617451DF9003254C0 /* galleryHome_background.jpg */; };
+		6DE49EF2176C46F800509B5F /* BGGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE49EF1176C46F800509B5F /* BGGalleryViewController.xib */; };
 		6DE747E91731FE8800A06939 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE747E81731FE8800A06939 /* QuartzCore.framework */; };
 		6DE747F11732051100A06939 /* BGGalleryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE747F01732051100A06939 /* BGGalleryTableViewController.m */; };
 		6DE747F3173212F400A06939 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE747F2173212F400A06939 /* loading.jpg */; };
@@ -209,6 +210,7 @@
 		6DC94618174274730019FDA4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		6DD0C85E1744CF05003254C0 /* home_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_2.png; sourceTree = "<group>"; };
 		6DD0C86617451DF9003254C0 /* galleryHome_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = galleryHome_background.jpg; sourceTree = "<group>"; };
+		6DE49EF1176C46F800509B5F /* BGGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGGalleryViewController.xib; sourceTree = "<group>"; };
 		6DE747E81731FE8800A06939 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6DE747EF1732051100A06939 /* BGGalleryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryTableViewController.h; sourceTree = "<group>"; };
 		6DE747F01732051100A06939 /* BGGalleryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryTableViewController.m; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				6DE747F01732051100A06939 /* BGGalleryTableViewController.m */,
 				6D41CE3F1737968400E1145C /* BGGalleryViewController.h */,
 				6D41CE401737968400E1145C /* BGGalleryViewController.m */,
+				6DE49EF1176C46F800509B5F /* BGGalleryViewController.xib */,
 				6D41CE481737983100E1145C /* BGGalleryScrollViewController.h */,
 				6D41CE491737983100E1145C /* BGGalleryScrollViewController.m */,
 				6D1539F616FB42A2001C0FAC /* Supporting Files */,
@@ -600,6 +603,7 @@
 				6D39E3EA174A1AE700CD82E5 /* ui_cross_b.png in Resources */,
 				6D39E3ED174A1F2300CD82E5 /* about_text_cn.png in Resources */,
 				6D39E3EE174A1F2300CD82E5 /* about_text_en.png in Resources */,
+				6DE49EF2176C46F800509B5F /* BGGalleryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

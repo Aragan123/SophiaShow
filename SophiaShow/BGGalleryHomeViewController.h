@@ -9,10 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
 #import "BGGalleryTableViewController.h"
+#import "iCarousel.h"
 
-@interface BGGalleryHomeViewController : UIViewController <BGGalleryTableViewControllerDelegate>{
+#ifndef kRemoveViewTag
+#define kRemoveViewTag 118
+#endif
+
+@interface BGGalleryHomeViewController : UIViewController <BGGalleryTableViewControllerDelegate, iCarouselDataSource, iCarouselDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     
+    iCarousel *galleryCarousel;
     NSArray *dataSource;
     BOOL isOnlineData;
     
@@ -21,6 +27,7 @@
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 @property (nonatomic, retain) NSArray *dataSource;
 @property (nonatomic, assign) BOOL isOnlineData;
+@property (nonatomic, retain) IBOutlet iCarousel *galleryCarousel;
 
 - (void) loadDataSource: (BOOL) online;
 

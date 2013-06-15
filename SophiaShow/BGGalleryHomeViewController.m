@@ -9,12 +9,14 @@
 #import "BGGalleryHomeViewController.h"
 #import "BGGlobalData.h"
 
+
+
 @interface BGGalleryHomeViewController ()
 
 @end
 
 @implementation BGGalleryHomeViewController
-@synthesize delegate, dataSource, isOnlineData;
+@synthesize delegate, dataSource, isOnlineData, galleryCarousel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,10 +34,14 @@
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
     // add gallery image table view
-    BGGalleryTableViewController *tableViewController = [[[BGGalleryTableViewController alloc] initWithDataSource:self.dataSource isOnlineData:self.isOnlineData] autorelease];
-    tableViewController.view.frame = CGRectMake(20, self.view.frame.size.height, 984, 673);
-    tableViewController.delegate = self;
-    [self.view addSubview:tableViewController.view];
+//    BGGalleryTableViewController *tableViewController = [[[BGGalleryTableViewController alloc] initWithDataSource:self.dataSource isOnlineData:self.isOnlineData] autorelease];
+//    tableViewController.view.frame = CGRectMake(20, self.view.frame.size.height, 984, 673);
+//    tableViewController.delegate = self;
+//    [self.view addSubview:tableViewController.view];
+    
+    // add gallery carousel view
+    self.galleryCarousel.type = iCarouselTypeWheel;
+    
     
     // add go home button
     UIButton *homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -45,9 +51,9 @@
     [self.view addSubview:homeBtn];
     
     // run animation of gallery table view
-    [UIView animateWithDuration:0.5f delay:0.5f options:0 animations:^{
-        tableViewController.view.center = CGPointMake(20+tableViewController.view.frame.size.width*0.5, 20+tableViewController.view.frame.size.height*0.5);
-    } completion:nil];
+//    [UIView animateWithDuration:0.5f delay:0.5f options:0 animations:^{
+//        tableViewController.view.center = CGPointMake(20+tableViewController.view.frame.size.width*0.5, 20+tableViewController.view.frame.size.height*0.5);
+//    } completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,7 +64,8 @@
 
 - (void) viewDidUnload{
     dataSource=nil;
-    
+
+    galleryCarousel = nil;
     [super viewDidUnload];
 }
 
@@ -66,6 +73,9 @@
     delegate=nil;
     [dataSource release];
     
+    galleryCarousel.delegate=nil;
+    galleryCarousel.dataSource=nil;
+    [galleryCarousel release];
     [super dealloc];
 }
 
@@ -93,6 +103,17 @@
         }else{
             [delegate switchViewTo:kPageMain fromView:kPageOnlineGalleryHome];
         }
+    }
+}
+
+- (NSString*) getGalleryImageURI: (NSDictionary*)galleryBook {
+    NSString *uri = [galleryBook objectForKey:@"GalleryURI"];
+    if (!isOnlineData) {
+        // is offline data
+        return [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@/index.jpg", uri];
+    }else{
+        // is online data
+        return [NSString stringWithFormat:@"%@/index.jpg", uri];
     }
 }
 
@@ -133,6 +154,73 @@
         // this is online
         [delegate switchViewTo:kPageOnlineGallery fromView:kPageOnlineGalleryHome];
     }
+}
+
+#pragma mark - 
+#pragma mark iCarousel DataSource and delegate methods
+- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    return [self.dataSource count];
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
+{
+    if (view == nil) {
+        // create new view
+        view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)] autorelease];
+        [view setBackgroundColor:[UIColor clearColor]];
+    }else{
+        UIView *removeView = nil;
+        removeView = [view viewWithTag:kRemoveViewTag];
+        if (removeView) {
+            [removeView removeFromSuperview];
+        }
+    }
+    
+    UIImageView *snapView = [[[UIImageView alloc] initWithFrame:view.frame] autorelease];
+    snapView.tag = kRemoveViewTag;
+    NSString *imageURI = [self getGalleryImageURI:[self.dataSource objectAtIndex:index]];
+    NSLog(@"loading gallery imagURI: %@", imageURI);
+    snapView.image = [UIImage imageWithContentsOfFile:imageURI];
+    snapView.contentMode = UIViewContentModeRedraw;
+    
+    [view addSubview:snapView];
+    
+    return view;
+}
+
+//- (CATransform3D)carousel:(iCarousel *)_carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform
+//{
+//    //implement 'flip3D' style carousel
+//    transform = CATransform3DRotate(transform, M_PI / 8.0f, 0.0f, 1.0f, 0.0f);
+//    return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * galleryCarousel.itemWidth);
+//}
+
+- (CGFloat)carousel:(iCarousel *)_carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    //customize carousel display
+    switch (option)
+    {
+        case iCarouselOptionWrap:
+        {
+            //normally you would hard-code this to YES or NO
+            return YES;
+        }
+        case iCarouselOptionSpacing:
+        {
+            //add a bit of spacing between the item views
+            return value * 2.0f;
+        }
+        default:
+        {
+            return value;
+        }
+    }
+}
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
+    NSLog(@"Gallery book is selected at index: %i", index);
+    [self itemCellSelected:index];
 }
 
 @end
