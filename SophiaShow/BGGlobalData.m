@@ -11,7 +11,7 @@
 static BGGlobalData *instance = nil;
 
 @implementation BGGlobalData
-@synthesize galleryImages, galleryBooks, onlineGalleryBooks;
+@synthesize galleryImages, galleryBooks, onlineGalleryBooks, filterResourceIcons, filterResources;
 
 #pragma mark -
 #pragma mark Data File Read & Write
@@ -30,6 +30,8 @@ static BGGlobalData *instance = nil;
 //		self.hasBirthdaySet = [[settings objectForKey:@"HasBirthdaySet"] boolValue];
 //		self.hasCarddaySet = [[settings objectForKey:@"HasCarddaySet"] boolValue];
 		self.galleryBooks = [settings objectForKey:@"GalleryBooks"];
+        self.filterResourceIcons = [settings objectForKey:@"FilterResourceIcons"];
+        self.filterResources = [settings objectForKey:@"FilterResources"];
         
 		[settings release];
 	}
@@ -104,8 +106,101 @@ static BGGlobalData *instance = nil;
 	[galleryBooks release];
     [onlineGalleryBooks release];
     [galleryImages release];
+    [filterResourceIcons release];
+    [filterResources release];
     
 	[super release];
+}
+
+#pragma mark --
+#pragma mark Utilities
+-(NSString*) getFilterKeyStringByKeyIndex: (int) keyIndex{
+    NSString *key = @"";
+    switch (keyIndex) {
+        case kMenuBgPattern:
+            key = @"BackgroundPattern"; break;
+        case kMenuPhotoFrame:
+            key = @"PhotoFrame"; break;
+        case kMenuPhotoFilter:
+            key = @"PhotoFilter"; break;
+            break;
+            
+        default:
+            break;
+    }
+
+    return key;
+}
+
+- (NSString*) getFilterDataStringByIndex: (int) index andKeyIndex:(int) keyIndex{
+    NSString *key = [self getFilterKeyStringByKeyIndex:keyIndex];
+    NSArray *arr = [self.filterResources objectForKey:key];
+    NSString *resStr = [arr objectAtIndex:index];
+
+    return resStr;
+}
+
+-(UIImage*) getFilterResourceByIndex: (int) index andKeyIndex:(int)keyIndex{
+    NSString *resStr = [self getFilterDataStringByIndex:index andKeyIndex:keyIndex];
+    
+    NSString *resUri = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:resStr];
+    UIImage *img = [UIImage imageWithContentsOfFile:resUri];
+    
+    return img;
+}
+
+- (BGFilterData) getFilterDataByIndex: (int) index{
+    NSString *resStr =  [self getFilterDataStringByIndex:index andKeyIndex:kMenuPhotoFilter];
+    
+    NSArray *resArr = [resStr componentsSeparatedByString:@"|"];
+    BGFilterData filterData;
+    filterData.type = [resArr[0] intValue];
+    filterData.alpha = [resArr[2] floatValue];
+    filterData.blendMode = [resArr[3] intValue];
+    
+    if (filterData.type == 0) {
+        // this is file
+        NSString *resUri = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:resArr[1]];
+        filterData.image = [UIImage imageWithContentsOfFile:resUri];
+        filterData.color = nil;
+    }else{
+        // this is a color
+        NSArray *colorArray = [resArr[1] componentsSeparatedByString:@","];
+        filterData.color = [UIColor colorWithRed:[colorArray[0] intValue]
+                                           green:[colorArray[1] intValue]
+                                            blue:[colorArray[2] intValue]
+                                           alpha:filterData.alpha];
+        filterData.image = nil;
+    }
+
+    return filterData;
+}
+
+- (NSArray*) getSpecialDataByIndex: (int) index{
+    NSString *resStr =  [self getFilterDataStringByIndex:index andKeyIndex:kMenuPhotoFilter];
+    NSArray *resArr = [resStr componentsSeparatedByString:@"&"];
+    
+    NSMutableArray *dataArr = [NSMutableArray arrayWithCapacity:resArr.count];
+    for (NSString *dataString in resArr){
+        BGSpecialData specialData = [self getSingleSpecialDataByIndex:dataString];
+        NSValue *myValue = [NSValue value:&specialData withObjCType:@encode(BGSpecialData)]; // write struct to array as NSValue
+        [dataArr addObject:myValue];
+    }
+    
+    return dataArr;
+
+}
+
+- (BGSpecialData) getSingleSpecialDataByIndex: (NSString*) dataString{
+    NSArray *resArr = [dataString componentsSeparatedByString:@"|"];
+    BGSpecialData data;
+    NSString *resUri = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:resArr[0]];
+    data.image = [UIImage imageWithContentsOfFile:resUri];
+    data.alpha = [resArr[1] floatValue];
+    data.posLandscape = CGRectFromString(resArr[2]);
+    data.posPortrait = CGRectFromString(resArr[3]);
+    
+    return data;
 }
 
 @end

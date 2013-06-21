@@ -13,13 +13,14 @@
 #import "BGGalleryHomeViewController.h"
 #import "BGGalleryViewController.h"
 #import "BGReflectionViewController.h"
+#import "BGImageFilterViewController.h"
 
 @interface BGSwitchViewController ()
 
 @end
 
 @implementation BGSwitchViewController
-@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController, galleryPageViewController, reflectionViewController;
+@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController, galleryPageViewController, reflectionViewController, imageFilterViewController;
 
 - (void)viewDidLoad
 {
@@ -59,6 +60,9 @@
     if (self.reflectionViewController.view.superview==nil) {
         self.reflectionViewController=nil;
     }
+    if (self.imageFilterViewController.view.superview==nil) {
+        self.imageFilterViewController=nil;
+    }
 }
 
 - (void) viewDidUnload{
@@ -67,6 +71,7 @@
     self.galleryHomePageViewController=nil;
     self.galleryPageViewController=nil;
     self.reflectionViewController=nil;
+    self.imageFilterViewController=nil;
     
     [super viewDidUnload];
 }
@@ -77,6 +82,7 @@
     [galleryHomePageViewController release];
     [galleryPageViewController release];
     [reflectionViewController release];
+    [imageFilterViewController release];
     
     [super dealloc];
 }
@@ -199,13 +205,21 @@
     else if (toPage == kPageUI) {
         NSLog(@"toPage = Reflection Page");
         
-        if (self.reflectionViewController.view.superview == nil) {
-            BGReflectionViewController *controller = [[BGReflectionViewController alloc] initWithNibName:@"BGReflectionViewController" bundle:nil];
-            self.reflectionViewController = controller;
+//        if (self.reflectionViewController.view.superview == nil) {
+//            BGReflectionViewController *controller = [[BGReflectionViewController alloc] initWithNibName:@"BGReflectionViewController" bundle:nil];
+//            self.reflectionViewController = controller;
+//            [controller release];
+//        }
+//        
+//        self.reflectionViewController.delegate = self;
+        
+        if (self.imageFilterViewController.view.superview == nil) {
+            BGImageFilterViewController *controller = [[BGImageFilterViewController alloc] initWithNibName:@"BGImageFilterViewController" bundle:nil];
+            self.imageFilterViewController = controller;
             [controller release];
         }
         
-        self.reflectionViewController.delegate = self;
+        self.imageFilterViewController.delegate = self;
     }
 }
 
@@ -230,7 +244,8 @@
             break;
             
         case kPageUI:
-            return self.reflectionViewController;
+//            return self.reflectionViewController;
+            return self.imageFilterViewController;
             break;
 	}
 	return nil;
