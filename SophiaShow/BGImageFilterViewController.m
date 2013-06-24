@@ -148,7 +148,16 @@
 
 // act when return button in side menu is pressed
 - (IBAction)clickReturnButton:(id)sender{
-    if (nil != delegate) {
+    if (nil != delegate && isEdited) {
+        AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"确定要返回主页面？" message:@"此操作将撤销照片所有未保存的操作"] autorelease];
+        [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
+        [alert setCancelButtonTitle:NSLocalizedString(@"取消", nil) block:nil];
+        [alert addButtonWithTitle:NSLocalizedString(@"确定", nil) block:^{
+            [alert dismiss]; // dismiss alert view
+            [delegate switchViewTo:kPageMain fromView:kPageUI];
+        }];
+        [alert show];
+    }else if (nil != delegate) {
         [delegate switchViewTo:kPageMain fromView:kPageUI];
     }
 
@@ -157,8 +166,8 @@
 // when image saving button in side menu is pressed
 - (IBAction)saveImageToPhotoAlbum:(id)sender {
     // show alert before save
-    //            UIImage *savedImage = [self screenshot:self.bgView];
-    //            UIImageWriteToSavedPhotosAlbum (savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    UIImage *savedImage = [self.filterAreaViewController screenshot];
+    UIImageWriteToSavedPhotosAlbum (savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
@@ -169,12 +178,20 @@
     {
         // Show error message...
         NSLog(@"Image save with error");
-        
+        AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"保存时发生错误" message:@"照片没有保存到你的相册，请稍后再试或重启本程序"] autorelease];
+        [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
+        [alert setCancelButtonTitle:NSLocalizedString(@"我知道了", nil) block:nil];
+        [alert show];
     }
     else  // No errors
     {
         // Show message image successfully saved
         NSLog(@"Image Saved successfully!!!");
+        isEdited=NO;
+        AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"保存成功" message:@"照片已经保存到你的相册"] autorelease];
+        [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
+        [alert setCancelButtonTitle:NSLocalizedString(@"我知道了", nil) block:nil];
+        [alert show];
     }
 }
 
@@ -198,19 +215,31 @@
 
 // act when cancel all actions
 - (IBAction)clickCancelAll:(UIButton*)sender {
-    NSLog(@"hide cancel all button");
-    if (self.filterAreaViewController != nil) {
-        [self.filterAreaViewController.view removeFromSuperview];
-        self.filterAreaViewController = nil;
+    if (!isEdited) {
+        return; // if not edited, do nothing
     }
-    // hide more option bar
-    [self hideMoreOptionBar];
-    // hide side menu bar
-    [self.sideMenu close];
+    AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"确定要取消对照片的所有操作？" message:nil] autorelease];
+    [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
+    [alert setCancelButtonTitle:NSLocalizedString(@"返回", nil) block:nil];
+    [alert addButtonWithTitle:NSLocalizedString(@"确定", nil) block:^{        
+        NSLog(@"hide cancel all button");
+        if (self.filterAreaViewController != nil) {
+            [self.filterAreaViewController.view removeFromSuperview];
+            self.filterAreaViewController = nil;
+        }
+        // hide more option bar
+        [self hideMoreOptionBar];
+        // hide side menu bar
+        [self.sideMenu close];
+        
+        self.btnChoosePhoto.hidden=NO;
+        self.sliderParameter.hidden=YES;
+        isEdited=NO;
+        
+        [alert dismiss]; // dismiss alert view
+    }];
+    [alert show];
 
-    self.btnChoosePhoto.hidden=NO;
-    self.sliderParameter.hidden=YES;
-    isEdited=NO;
 }
 
 // act when slider value changed (visible for filter use only)
@@ -287,6 +316,7 @@
         } completion:^(BOOL finished) {
             // remove from supperview
             [self.carousel removeFromSuperview];
+            selectedMenu=10;
         }];
     }
 }
@@ -308,14 +338,15 @@
 #pragma mark iCarousel delegate and its DataSrouce delegate methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return [self.iCarousel_ds count];
+    return ([self.iCarousel_ds count] + 1); // +1 because first one is the button to close more option bar
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
     //create new view if no view is available for recycling
     if (view == nil){
-        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110.0f, 110.0f)] autorelease];
+        view = [[[UIImageView alloc] init] autorelease];
+        view.frame = CGRectMake(0.0f, 0.0f, 110.0f, 110.0f);
         view.contentMode = UIViewContentModeCenter;
         [view setBackgroundColor:[UIColor clearColor]];
     }else{
@@ -326,13 +357,23 @@
         }
     }
     
-    // add images
-    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(5,5, 100, 100)] autorelease];
+    // add items
+    UIImageView *imageView = [[[UIImageView alloc] init] autorelease];
     imageView.backgroundColor = [UIColor clearColor];
     imageView.tag = kRemoveViewTag;
-    NSString *imageURI = [self.iCarousel_ds objectAtIndex:index];
-    imageView.image = [UIImage imageNamed:imageURI]; //get images
     
+    if (index == 0) {
+        // first one is alwasy close button
+        imageView.frame = CGRectMake(50.0f, 50.0f, 60.0f, 60.0f);
+        imageView.image = [UIImage imageNamed:@"btn_closeOptionBar.png"];
+        
+    }else{
+        // add options' images
+        imageView.frame = CGRectMake(5.0f,5.0f, 100.0f, 100.0f);
+        NSString *imageURI = [self.iCarousel_ds objectAtIndex:(index-1)];
+        imageView.image = [UIImage imageNamed:imageURI]; //get images
+    }
+
     [view addSubview:imageView];
         
     return view;
@@ -340,6 +381,14 @@
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
     NSLog(@"select filter index: %i", index);
+    
+    if (index == 0) {// close option menu bar
+        [self hideMoreOptionBar];
+        return;
+    }else{
+        index--;
+        isEdited=YES;
+    }
     
     if (selectedMenu == kMenuSpecial) {
         // TODO: for special filters, need special function to run it for each individual

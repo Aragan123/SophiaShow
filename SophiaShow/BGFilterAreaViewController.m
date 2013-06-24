@@ -150,6 +150,7 @@
 - (void) updatePhotoFilter: (BGFilterData) data{
     NSLog(@"update photo filter is called");
     self.filterData = data;
+    [self.filterData.image retain];
     
     if (data.image == nil) {
         // remove filter layer
@@ -182,7 +183,6 @@
         // TODO: remove scroll view and insert new UIImageView to display result image
         UIImage *resizedImage = [data.image resizedImageToSize:self.cropedImage.size];
         data.image = resizedImage;
-        [data.image retain];
         UIImage *result = [self.cropedImage imageBlendedWithImage:resizedImage blendMode:data.blendMode alpha:data.alpha];
         self.resultFilterView.image = result;
     }

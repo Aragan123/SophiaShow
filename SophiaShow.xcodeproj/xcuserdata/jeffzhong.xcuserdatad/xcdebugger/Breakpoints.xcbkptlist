@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SophiaShow/BGImageFilterViewController.m"
-         timestampString = "393756587.705496"
+         timestampString = "393779722.271129"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "349"
-         endingLineNumber = "349"
+         startingLineNumber = "398"
+         endingLineNumber = "398"
          landmarkName = "-carousel:didSelectItemAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
