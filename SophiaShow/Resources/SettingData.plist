@@ -12,6 +12,7 @@
 		</array>
 		<key>PhotoFilter</key>
 		<array>
+			<string>filter_original.png</string>
 			<string>filter_mx_0.png</string>
 			<string>filter_mx_1.png</string>
 			<string>filter_mx_2.png</string>
@@ -32,7 +33,11 @@
 			<string>pat009.jpg</string>
 		</array>
 		<key>Specials</key>
-		<array/>
+		<array>
+			<string>filter_original.png</string>
+			<string>special00.jpg</string>
+			<string>special01.jpg</string>
+		</array>
 	</dict>
 	<key>GalleryBooks</key>
 	<array>
@@ -77,12 +82,12 @@
 		</array>
 		<key>PhotoFilter</key>
 		<array>
-			<string>/Filters/mtxx_lomo0.jpg</string>
-			<string>/Filters/mtxx_lomo1.jpg</string>
-			<string>/Filters/mtxx_lomo2.jpg</string>
-			<string>/Filters/mtxx_lomo3.jpg</string>
-			<string>/Filters/mtxx_lomo4.jpg</string>
-			<string>0|/Filters/mtxx_lomo5.jpg|0.5|0</string>
+			<string>0</string>
+			<string>0|/Filters/mtxx_lomo0.jpg|0.3|1</string>
+			<string>0|/Filters/mtxx_lomo1.jpg|0.3|1</string>
+			<string>0|/Filters/mtxx_lomo2.jpg|0.4|1</string>
+			<string>0|/Filters/mtxx_lomo3.jpg|0.5|1</string>
+			<string>0|/Filters/mtxx_lomo4.jpg|0.6|1</string>
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
@@ -98,7 +103,11 @@
 			<string>/Filters/pat009.jpg</string>
 		</array>
 		<key>Specials</key>
-		<array/>
+		<array>
+			<string>0</string>
+			<string>/Filters/special_butterfly_a.png|1.0|1|{{0,0},{350,285}}|{{0,0},{350,285}}&amp;/Filters/special_butterfly_b.png|1.0|1|{{650,334},{174,145}}|{{644,385},{174,145}}</string>
+			<string>/Filters/special_flower1_a.png|1.0|1|{{0,0},{415,215}}|{{0,0},{415,215}}&amp;/Filters/special_flower1_b.png|1.0|1|{{691,278},{133,340}}|{{685,60},{133,340}}</string>
+		</array>
 	</dict>
 </dict>
 </plist>

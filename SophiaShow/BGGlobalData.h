@@ -16,6 +16,9 @@
 #define kMenuPhotoFilter 2
 #define kMenuSpecial 3
 
+#define kForeSpecialLayerKey @"FORESPECIALS"
+#define kBackSpecialLayerKey @"BACKSPECIALS"
+
 #endif
 
 typedef struct{
@@ -29,6 +32,7 @@ typedef struct{
 typedef struct{
     UIImage *image;
     float alpha;
+    int layer;
     CGRect posLandscape;
     CGRect posPortrait;
 } BGSpecialData;
@@ -55,5 +59,7 @@ typedef struct{
 
 -(NSString*) getFilterKeyStringByKeyIndex: (int) keyIndex;
 -(UIImage*) getFilterResourceByIndex: (int) index andKeyIndex:(int)keyIndex;
+- (BGFilterData) getFilterDataByIndex: (int) index;
+- (NSDictionary*) getSpecialDataByIndex: (int) index;
 
 @end

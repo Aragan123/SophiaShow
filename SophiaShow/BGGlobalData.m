@@ -123,7 +123,8 @@ static BGGlobalData *instance = nil;
             key = @"PhotoFrame"; break;
         case kMenuPhotoFilter:
             key = @"PhotoFilter"; break;
-            break;
+        case kMenuSpecial:
+            key = @"Specials"; break;
             
         default:
             break;
@@ -176,18 +177,26 @@ static BGGlobalData *instance = nil;
     return filterData;
 }
 
-- (NSArray*) getSpecialDataByIndex: (int) index{
-    NSString *resStr =  [self getFilterDataStringByIndex:index andKeyIndex:kMenuPhotoFilter];
+- (NSDictionary*) getSpecialDataByIndex: (int) index{
+    NSString *resStr =  [self getFilterDataStringByIndex:index andKeyIndex:kMenuSpecial];
     NSArray *resArr = [resStr componentsSeparatedByString:@"&"];
     
-    NSMutableArray *dataArr = [NSMutableArray arrayWithCapacity:resArr.count];
+    NSMutableArray *foreDataArr = [NSMutableArray arrayWithCapacity:(resArr.count/2)];
+    NSMutableArray *backDataArr = [NSMutableArray arrayWithCapacity:(resArr.count/2)];
+    
     for (NSString *dataString in resArr){
         BGSpecialData specialData = [self getSingleSpecialDataByIndex:dataString];
         NSValue *myValue = [NSValue value:&specialData withObjCType:@encode(BGSpecialData)]; // write struct to array as NSValue
-        [dataArr addObject:myValue];
+        
+        if (specialData.layer == 0) { // back layer
+            [backDataArr addObject:myValue];
+        }else{
+            [foreDataArr addObject:myValue];
+        }
     }
     
-    return dataArr;
+    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[backDataArr, foreDataArr] forKeys:@[kBackSpecialLayerKey, kForeSpecialLayerKey]];
+    return dict;
 
 }
 
@@ -197,8 +206,9 @@ static BGGlobalData *instance = nil;
     NSString *resUri = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:resArr[0]];
     data.image = [UIImage imageWithContentsOfFile:resUri];
     data.alpha = [resArr[1] floatValue];
-    data.posLandscape = CGRectFromString(resArr[2]);
-    data.posPortrait = CGRectFromString(resArr[3]);
+    data.layer = [resArr[2] intValue];
+    data.posLandscape = CGRectFromString(resArr[3]);
+    data.posPortrait = CGRectFromString(resArr[4]);
     
     return data;
 }

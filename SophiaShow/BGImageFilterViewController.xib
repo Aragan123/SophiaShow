@@ -42,6 +42,7 @@
 						<string key="NSFrame">{{227, 726}, {484, 23}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="467328744"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -55,7 +56,7 @@
 						<string key="NSFrame">{{312, 184}, {400, 400}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="115992803"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -84,25 +85,27 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUIButton" id="115992803">
+					<object class="IBUIButton" id="467328744">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 705}, {102, 44}}</string>
+						<string key="NSFrame">{{954, 705}, {50, 50}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="952021684"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">取消所有操作</string>
 						<reference key="IBUIHighlightedTitleColor" ref="336979365"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="706964767"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">btn_home.png</string>
+						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
 							<double key="pointSize">15</double>
@@ -10009,14 +10012,6 @@ AAEAAQABA</bytes>
 					<int key="connectionID">9</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">btnCancelAll</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="115992803"/>
-					</object>
-					<int key="connectionID">12</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">sliderValueChange:</string>
 						<reference key="source" ref="952021684"/>
@@ -10036,12 +10031,12 @@ AAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">clickCancelAll:</string>
-						<reference key="source" ref="115992803"/>
+						<string key="label">clickReturnButton:</string>
+						<reference key="source" ref="467328744"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">13</int>
+					<int key="connectionID">15</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -10069,7 +10064,7 @@ AAEAAQABA</bytes>
 						<array class="NSMutableArray" key="children">
 							<reference ref="952021684"/>
 							<reference ref="741552120"/>
-							<reference ref="115992803"/>
+							<reference ref="467328744"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -10084,8 +10079,8 @@ AAEAAQABA</bytes>
 						<reference key="parent" ref="766721923"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">11</int>
-						<reference key="object" ref="115992803"/>
+						<int key="objectID">14</int>
+						<reference key="object" ref="467328744"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
 				</array>
@@ -10095,7 +10090,7 @@ AAEAAQABA</bytes>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -10104,7 +10099,7 @@ AAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">13</int>
+			<int key="maxID">15</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -10112,7 +10107,7 @@ AAEAAQABA</bytes>
 					<string key="className">BGImageFilterViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="clickCancelAll:">id</string>
+						<string key="clickCancelAll:">UIButton</string>
 						<string key="clickChoosePhoto:">UIButton</string>
 						<string key="clickMenuButton:">UIButton</string>
 						<string key="clickReturnButton:">id</string>
@@ -10122,7 +10117,7 @@ AAEAAQABA</bytes>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="clickCancelAll:">
 							<string key="name">clickCancelAll:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBActionInfo" key="clickChoosePhoto:">
 							<string key="name">clickChoosePhoto:</string>
@@ -10175,6 +10170,10 @@ AAEAAQABA</bytes>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">btn_home.png</string>
+			<string key="NS.object.0">{50, 50}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

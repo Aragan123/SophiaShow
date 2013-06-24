@@ -11,6 +11,8 @@
 #import "iCarousel.h"
 #import "BGFilterAreaViewController.h"
 
+@class HMSideMenu;
+
 #ifndef kRemoveViewTag
 #define kRemoveViewTag 118
 #endif
@@ -20,13 +22,14 @@
 @interface BGImageFilterViewController : UIViewController <iCarouselDataSource, iCarouselDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     int selectedMenu;
+    BOOL isEdited;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic, retain) HMSideMenu *sideMenu;
 @property (nonatomic, retain) iCarousel *carousel;
 @property (nonatomic, retain) NSArray *iCarousel_ds;
 @property (retain, nonatomic) IBOutlet UIButton *btnChoosePhoto;
-@property (retain, nonatomic) IBOutlet UIButton *btnCancelAll;
 @property (retain, nonatomic) IBOutlet UISlider *sliderParameter;
 @property (retain, nonatomic) UIPopoverController *popover;
 @property (nonatomic, retain) BGFilterAreaViewController *filterAreaViewController;
@@ -35,5 +38,6 @@
 - (IBAction)clickCancelAll:(UIButton *)sender;
 - (IBAction)sliderValueChange:(UISlider *)sender;
 
+- (IBAction)clickReturnButton:(id)sender;
 
 @end

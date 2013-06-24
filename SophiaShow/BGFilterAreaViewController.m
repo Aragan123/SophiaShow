@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImage+BGAdditional.h"
 #import "UIImage+Resize.h"
-#import "BGGlobalData.h"
 
 @interface BGFilterAreaViewController ()
 
@@ -43,24 +42,27 @@
     [_photoView release];
     [_scrollView release];
     [_frameView release];
-    [_filterLayer release];
-    [_specialLayer release];
+    [_resultFilterView release];
+    [_specialForeLayer release];
+    [_specialBackLayer release];
     
     [_originalImage release];
     [_cropedImage release];
-    [_filterImage release];
+    [self.filterData.image release];
+    [_specialArray release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setPhotoView:nil];
     [self setScrollView:nil];
     [self setFrameView:nil];
-    [self setFilterLayer:nil];
-    [self setSpecialLayer:nil];
+    [self setResultFilterView:nil];
+    [self setSpecialForeLayer:nil];
+    [self setSpecialBackLayer:nil];
     
     [self setOriginalImage:nil];
     [self setCropedImage:nil];
-    [self setFilterImage:nil];
+    [self setSpecialArray:nil];
     [super viewDidUnload];
 }
 
@@ -70,10 +72,16 @@
     NSLog(@"set up Filter Area subviews");
     self.originalImage = srcImage;
     self.view.frame = [self calculateFilterAreaRect:srcImage.size];
+    CGSize areaSize = self.view.frame.size;
 
     // default color pattern
     UIColor *bgPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pat009.jpg"]]; // default pattern
     self.view.backgroundColor = bgPattern;
+    // default back special layer - UIImageView
+    self.specialBackLayer = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)];
+    [self.specialBackLayer setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:self.specialBackLayer];
+
     // default frame view
     self.frameView = [[UIImageView alloc] initWithFrame:[self calculateFrameViewRect:self.view.frame]];
     NSString *defaultFrameURI = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/Filters/009.png"];
@@ -93,40 +101,42 @@
     [self.scrollView setBounces:NO];
     [self.scrollView setShowsHorizontalScrollIndicator:NO];
     [self.scrollView setShowsVerticalScrollIndicator:NO];
-    [self.scrollView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.scrollView setContentSize:srcImage.size];
-    [self.scrollView setMinimumZoomScale:MIN((self.scrollView.frame.size.width / srcImage.size.width), (self.scrollView.frame.size.height / srcImage.size.height)) ];
-    [self.scrollView setZoomScale:[self.scrollView minimumZoomScale]];
-    [self.scrollView setMaximumZoomScale:[self calculateScrollerMaxZoom:self.scrollView.frame.size andPhotoSize:srcImage.size]];
-    [self.scrollView.layer setCornerRadius:4.0f];
-    
-    // default photo view
-//    self.photoView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
-    self.photoView = [[UIImageView alloc] initWithImage:srcImage];
-    self.photoView.backgroundColor = [UIColor clearColor];
-    self.photoView.frame = CGRectMake(0.0, 0.0, srcImage.size.width, srcImage.size.height);
-    self.photoView.center = CGPointMake(self.scrollView.frame.size.width*0.5, self.scrollView.frame.size.height*0.5);
-    [self.scrollView addSubview:self.photoView];
+    [self.scrollView setContentMode:UIViewContentModeCenter];
     [self.view addSubview:self.scrollView];
     
-
-    // default filter layer to scroll view
-    self.filterLayer = [CALayer layer];
-    [self.filterLayer setBackgroundColor:[UIColor clearColor].CGColor];
-    [self.filterLayer setFrame:CGRectMake(0.0f, 0.0f, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
-    [self.frameView.layer addSublayer:self.filterLayer];
+    CGFloat imageWidth = CGImageGetWidth(srcImage.CGImage);
+    CGFloat imageHeight = CGImageGetHeight(srcImage.CGImage);
+    NSLog(@"Source image Size: w=%f, h=%f", imageWidth, imageHeight);
+    // default photo view
+    self.photoView = [[UIImageView alloc] initWithImage:srcImage];
+    self.photoView.backgroundColor = [UIColor clearColor];
+//    self.photoView.frame = CGRectMake(0.0, 0.0, imageWidth, imageHeight);
+//    self.photoView.center = CGPointMake(self.scrollView.frame.size.width*0.5, self.scrollView.frame.size.height*0.5);
     
-    // default special layer
-    self.specialLayer = [CALayer layer];
-    [self.specialLayer setBackgroundColor:[UIColor clearColor].CGColor];
-    [self.specialLayer setFrame:self.view.frame];
-    [self.view.layer addSublayer:self.specialLayer];
+    [self.scrollView setContentSize:CGSizeMake(imageWidth, imageHeight)];
+    [self.scrollView setMinimumZoomScale:MIN((self.scrollView.frame.size.width / imageWidth), (self.scrollView.frame.size.height / imageHeight)) ];
+    [self.scrollView setZoomScale:[self.scrollView minimumZoomScale]];
+    [self.scrollView setMaximumZoomScale:[self calculateScrollerMaxZoom:self.scrollView.frame.size andPhotoSize:CGSizeMake(imageWidth, imageHeight)]];
+    [self.scrollView.layer setCornerRadius:4.0f];
+    [self.scrollView addSubview:self.photoView]; // add views
+
+    
+    // default result image view
+    self.resultFilterView = [[UIImageView alloc] initWithFrame:self.scrollView.frame];
+    [self.resultFilterView setBackgroundColor:[UIColor clearColor]];
+    [self.resultFilterView setContentMode:UIViewContentModeCenter];
+    [self.view addSubview:self.resultFilterView];
+    
+    // default special layer UIImageView
+    self.specialForeLayer = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)];
+    [self.specialForeLayer setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:self.specialForeLayer];
     
 
     
 }
 
-#pragma mark --
+#pragma mark -
 #pragma mark Public Methods
 - (void) updateBackgroundPattern: (UIImage*) image{
     UIColor *bgColor = [UIColor colorWithPatternImage:image];
@@ -137,34 +147,76 @@
     self.frameView.image = [self drawPhotoFrame:image withOffsize:13.0f];
 }
 
-- (void) updatePhotoFilter: (UIImage*) image{
+- (void) updatePhotoFilter: (BGFilterData) data{
     NSLog(@"update photo filter is called");
-    self.filterImage = image;
+    self.filterData = data;
     
-    if (image == nil) {
+    if (data.image == nil) {
         // remove filter layer
+        // TODO: remove result image view and add back scroll view to display original photo image
         NSLog(@"remove photo filter");
-//        self.filterLayer.contents = nil;
-//        self.filterLayer.opacity = 0.0f;
+        if (self.cropedImage == nil) {
+            return; // do nothing, this happends when 1st filter button is clicked but not filtered yet
+        }else{
+            self.cropedImage = nil; // set it to nil
+            [self.resultFilterView removeFromSuperview];
+            self.resultFilterView = nil;
+            [self.view insertSubview:self.scrollView aboveSubview:self.frameView];
+        }
         
     }else{
         // add filter image
-//        self.filterLayer.contents = (id)[image CIImage];
-//        self.filterLayer.opacity = 0.5f;
-        if (self.cropedImage == nil) {
-            self.cropedImage = [self cropFromScrollView];
+        if (self.cropedImage == nil) { // first time
+            self.cropedImage = [self screenshot:self.scrollView];
+            [self.scrollView removeFromSuperview]; // remove scroll view
+            
+            if (self.resultFilterView == nil) {
+                self.resultFilterView = [[UIImageView alloc] initWithFrame:self.scrollView.frame];
+                [self.resultFilterView setBackgroundColor:[UIColor clearColor]];
+//                [self.resultFilterView setContentMode:UIViewContentModeCenter];
+                [self.resultFilterView.layer setCornerRadius:4.0f];
+            }
+            [self.view insertSubview:self.resultFilterView aboveSubview:self.frameView];
+
         }
-        UIImage *result = [self.cropedImage imageBlendedWithImage:image blendMode:kCGBlendModeNormal alpha:0.5f];
-        self.photoView.image = result;
+        // TODO: remove scroll view and insert new UIImageView to display result image
+        UIImage *resizedImage = [data.image resizedImageToSize:self.cropedImage.size];
+        data.image = resizedImage;
+        [data.image retain];
+        UIImage *result = [self.cropedImage imageBlendedWithImage:resizedImage blendMode:data.blendMode alpha:data.alpha];
+        self.resultFilterView.image = result;
     }
 }
 
+// Slider change to update filter opacity
 - (void) updateFilterOpacity: (float) value{
-    UIImage *result = [self.cropedImage imageBlendedWithImage:self.filterImage blendMode:kCGBlendModeNormal alpha:value];
+    UIImage *result = [self.cropedImage imageBlendedWithImage:self.filterData.image blendMode:self.filterData.blendMode alpha:value];
     self.photoView.image = result;
 }
 
-#pragma mark --
+// specials is chosen
+- (void) updatePhotoSpecials: (NSDictionary*) dataDict{
+//    self.specialArray = dataArr;
+    
+    if (dataDict == nil) {
+        // actions to remove all specials
+        self.specialForeLayer.image = nil;
+        self.specialBackLayer.image = nil;
+    }else{
+        NSArray *dataForeArr = [dataDict objectForKey:kForeSpecialLayerKey];
+        NSArray *dataBackArr = [dataDict objectForKey:kBackSpecialLayerKey];
+        
+        UIImage *imageFore = [self drawPhotoSpecialWithData: (NSArray*) dataForeArr];
+        UIImage *imageBack = [self drawPhotoSpecialWithData: (NSArray*) dataBackArr];
+        
+        self.specialForeLayer.image = imageFore;
+        self.specialBackLayer.image = imageBack;
+        
+    }
+    
+}
+
+#pragma mark -
 #pragma mark Utility and Private Methods
 
 - (CGRect) calculateFilterAreaRect: (CGSize) imageSize{
@@ -201,8 +253,35 @@
     return cropped;
 }
 
-#pragma mark --
+- (UIImage*) screenshot{
+    return [self screenshot: self.view];
+}
+
+- (UIImage*)screenshot: (UIView*) view{
+    //    UIGraphicsBeginImageContext(view.bounds.size);
+    /* in retina screen
+     */
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, [UIScreen mainScreen].scale);
+    else
+        UIGraphicsBeginImageContext(view.bounds.size);
+    
+    
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // hack, helps w/ our colors when blurring
+    //    NSData *imageData = UIImageJPEGRepresentation(image, 1); // convert to jpeg
+    NSData *imageData = UIImagePNGRepresentation(image); // convert to png
+    image = [UIImage imageWithData:imageData];
+    
+    return image;
+}
+
+#pragma mark -
 #pragma mark Drawing
+// draw photo frames
 - (UIImage *) drawPhotoFrame: (UIImage*) frameSource withOffsize:(float) offsize{
     CGSize srcSize = CGSizeMake(50.0f, 50.0f);
     //    float offsize = 14.0f;
@@ -274,6 +353,32 @@
     
     return result;
 }
+
+// draw special effects
+- (UIImage*) drawPhotoSpecialWithData: (NSArray*) dataArr{
+    if (dataArr == nil || dataArr.count == 0) {
+        return nil;
+    }
+    
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+	CGContextTranslateCTM(ctx, 0.0, self.view.frame.size.height);
+	CGContextScaleCTM(ctx, 1.0, -1.0);
+    
+    for (NSValue *value in dataArr) {
+        BGSpecialData data;
+        [value getValue:&data]; // convert value to expected struct data
+        
+        CGContextDrawImage(ctx, data.posLandscape, [data.image CGImage]);
+        
+    }
+    
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
+
 
 #pragma mark -
 #pragma mark UIScrollView Delegate methods

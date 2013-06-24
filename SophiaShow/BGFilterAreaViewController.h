@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "BGGlobalData.h"
 
 #define GOLDEN_WIDTH 824
 #define GOLDEN_HEIGHT 618
@@ -18,19 +19,23 @@
 
 @property (retain, nonatomic) UIImage *originalImage;
 @property (retain, nonatomic) UIImage *cropedImage;
-@property (retain, nonatomic) UIImage *filterImage;
+@property (assign, nonatomic) BGFilterData filterData;
+@property (retain, nonatomic) NSArray *specialArray;
 
 @property (retain, nonatomic) IBOutlet UIImageView *photoView;
 @property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (retain, nonatomic) UIImageView *frameView;
-@property (retain, nonatomic) CALayer *filterLayer;
-@property (retain, nonatomic) CALayer *specialLayer;
+@property (retain, nonatomic) UIImageView *resultFilterView;
+@property (retain, nonatomic) UIImageView *specialForeLayer;
+@property (retain, nonatomic) UIImageView *specialBackLayer;
 
 - (void) setupViewsWithSourceImage: (UIImage*) srcImage;
+- (UIImage*) screenshot;
 
 - (void) updateBackgroundPattern: (UIImage*) image;
 - (void) updatePhotoFrame: (UIImage*) image;
-- (void) updatePhotoFilter: (UIImage*) image;
+- (void) updatePhotoFilter: (BGFilterData) data;
 - (void) updateFilterOpacity: (float) value;
+- (void) updatePhotoSpecials: (NSDictionary*) dataDict;
 
 @end

@@ -12,6 +12,7 @@
 #import "AHAlertView.h"
 #import "NSObject+Blocks.h"
 #import "BGGlobalData.h"
+#import "JMWhenTapped.h"
 
 @interface BGImageFilterViewController ()
 
@@ -40,7 +41,7 @@
     selectedMenu=10;
     self.sliderParameter.hidden = YES;
     self.btnChoosePhoto.hidden = NO;
-    self.btnCancelAll.hidden = YES;
+    isEdited = NO;
     
     // contruct HM SideMenu
     // item 1
@@ -67,26 +68,28 @@
     // item 5
     UIView *itemSave = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
     UIButton *btnSave = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(saveImageToPhotoAlbum:) Image:@"icon_save_photo" ImagePressed:@"icon_save_photo"];
-//    btnSave.tag=4;
     [itemSave addSubview:btnSave];
     // item 6
-    UIView *itemReturn = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnReturn = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickReturnButton:) Image:@"btn_home_b" ImagePressed:@"btn_home_b"];
-//    btnReturn.tag=5;
-    [itemReturn addSubview:btnReturn];
+    UIView *itemCancelAll = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 48, 48)] autorelease];
+    UIButton *btnCancelAll = [self createButtonWithFrame:CGRectMake(0, 0, 48, 48) Target:self Selector:@selector(clickCancelAll:) Image:@"btn_cancelAll" ImagePressed:@"btn_cancelAll"];
+    [itemCancelAll addSubview:btnCancelAll];
 
     // placeholder
     UIView *itemPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 50)] autorelease];
     itemPlaceholder.backgroundColor = [UIColor clearColor];
     
-    HMSideMenu *sideMenu = [[[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemReturn]] autorelease];
-    [sideMenu setItemSpacing:5.0f];
-    [self.view addSubview:sideMenu];
-    [self.view performBlock:^{
-        [sideMenu open];
-    } afterDelay:1.0f];
+    self.sideMenu = [[[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemCancelAll]] autorelease];
+    [self.sideMenu setItemSpacing:5.0f];
+    [self.view addSubview:self.sideMenu];
+//    [self.view performBlock:^{
+//        [sideMenu open];
+//    } afterDelay:1.0f];
     
     
+    // add gesture of whole area to hid side menu's more option bar
+//    [self.view whenTapped:^{
+//        [self hideMoreOptionBar];
+//    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,10 +103,10 @@
     [self setICarousel_ds:nil];
     [self setFilterAreaViewController:nil];
     [self setPopover:nil];
+    [self setSideMenu:nil];
     
     [self setBtnChoosePhoto:nil];
     [self setSliderParameter:nil];
-    [self setBtnCancelAll:nil];
     [super viewDidUnload];
 }
 
@@ -113,16 +116,16 @@
     [_iCarousel_ds release];
     [_filterAreaViewController release];
     [_popover release];
+    [_sideMenu release];
     
     [_btnChoosePhoto release];
     [_sliderParameter release];
-    [_btnCancelAll release];
     [super dealloc];
 }
 
 
 
-#pragma mark --
+#pragma mark -
 #pragma mark IBOutlet Actions
 
 // when side menu button is pressed
@@ -200,17 +203,14 @@
         [self.filterAreaViewController.view removeFromSuperview];
         self.filterAreaViewController = nil;
     }
-    
-    if (self.carousel!=nil && self.carousel.superview != nil) {
-        [self hideMoreOptionBar];
-    }
+    // hide more option bar
+    [self hideMoreOptionBar];
+    // hide side menu bar
+    [self.sideMenu close];
 
     self.btnChoosePhoto.hidden=NO;
-    self.btnCancelAll.hidden = YES;
     self.sliderParameter.hidden=YES;
-    
-    
-
+    isEdited=NO;
 }
 
 // act when slider value changed (visible for filter use only)
@@ -273,34 +273,38 @@
 }
 
 - (void) displayMoreOptionBar{
-    [UIView animateWithDuration:0.4f animations:^{
-        self.carousel.layer.position = CGPointMake (self.view.frame.size.width - self.carousel.frame.size.width*0.5 - 60.0f, self.view.frame.size.height*0.5);
-    }];
+    if (self.carousel !=nil) {
+        [UIView animateWithDuration:0.4f animations:^{
+            self.carousel.layer.position = CGPointMake (self.view.frame.size.width - self.carousel.frame.size.width*0.5 - 60.0f, self.view.frame.size.height*0.5);
+        }];
+    }
 }
 
 - (void) hideMoreOptionBar{
-    [UIView animateWithDuration:0.3f animations:^{
-        self.carousel.layer.position = CGPointMake (self.view.frame.size.width + self.carousel.frame.size.width*0.5, self.view.frame.size.height*0.5);
-    } completion:^(BOOL finished) {
-        // remove from supperview
-        [self.carousel removeFromSuperview];
-    }];
+    if (self.carousel!=nil && self.carousel.superview != nil) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.carousel.layer.position = CGPointMake (self.view.frame.size.width + self.carousel.frame.size.width*0.5, self.view.frame.size.height*0.5);
+        } completion:^(BOOL finished) {
+            // remove from supperview
+            [self.carousel removeFromSuperview];
+        }];
+    }
 }
 
 - (void) hideThenDisplayMoreOptionBar{
-    [UIView animateWithDuration:0.3f animations:^{
-        self.carousel.layer.position = CGPointMake (self.view.frame.size.width +self.carousel.frame.size.width*0.5, self.view.frame.size.height*0.5);
-    } completion:^(BOOL finished) {
-        [self.carousel reloadData];
-        self.carousel.currentItemIndex = 2;
-        [self displayMoreOptionBar];
-    }];
+    if (self.carousel!=nil && self.carousel.superview != nil) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.carousel.layer.position = CGPointMake (self.view.frame.size.width +self.carousel.frame.size.width*0.5, self.view.frame.size.height*0.5);
+        } completion:^(BOOL finished) {
+            [self.carousel reloadData];
+            self.carousel.currentItemIndex = 2;
+            [self displayMoreOptionBar];
+        }];
+    }
 }
 
 
-
-
-#pragma mark --
+#pragma mark -
 #pragma mark iCarousel delegate and its DataSrouce delegate methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
@@ -337,36 +341,43 @@
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
     NSLog(@"select filter index: %i", index);
     
-    if (selectedMenu != kMenuSpecial) {
-        // there is a special case
-        if (selectedMenu == kMenuPhotoFilter && index == 0) {
-            // need to remove filter
-            [self.filterAreaViewController updatePhotoFilter:nil];
-            self.sliderParameter.hidden = YES;
+    if (selectedMenu == kMenuSpecial) {
+        // TODO: for special filters, need special function to run it for each individual
+        if (index == 0) { // this is option to remove all specials
+            [self.filterAreaViewController updatePhotoSpecials:nil];
+        }else{
+            NSDictionary *dataArr = [[BGGlobalData sharedData] getSpecialDataByIndex:index];
+            [self.filterAreaViewController updatePhotoSpecials:dataArr];
         }
-        NSLog(@"################");
-        
-        UIImage *res = [[BGGlobalData sharedData] getFilterResourceByIndex:index andKeyIndex:selectedMenu];
+    }
+    else if (selectedMenu == kMenuPhotoFilter){
+        // for Photo filters
+        if (index == 0) { // this is option to remove filters
+            BGFilterData data = {0, nil, nil, 0.0f, 1};
+            [self.filterAreaViewController updatePhotoFilter:data];
+            self.sliderParameter.hidden = YES;
+        }else{
+            BGFilterData data = [[BGGlobalData sharedData] getFilterDataByIndex:index];
+            [self.filterAreaViewController updatePhotoFilter:data];
+            // show slider
+            self.sliderParameter.hidden = NO;
+            self.sliderParameter.maximumValue = data.alpha;
+            self.sliderParameter.value = data.alpha;
+        }
+    }
+    else{
+        // for Photo Frames and Background Patterns
+        UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:index andKeyIndex:selectedMenu];
         switch (selectedMenu) {
-            case kMenuBgPattern:
-                [self.filterAreaViewController updateBackgroundPattern:res];
-                break;
-            case kMenuPhotoFrame:
-                [self.filterAreaViewController updatePhotoFrame:res];
-                break;
-            case kMenuPhotoFilter:
-                [self.filterAreaViewController updatePhotoFilter:res];
-                // show slider
-                self.sliderParameter.hidden = NO;
-                self.sliderParameter.maximumValue = 0.6f;
-                self.sliderParameter.value = 0.6f;
-                break;
-                
+            case kMenuBgPattern:{
+                [self.filterAreaViewController updateBackgroundPattern:data];
+                break;}
+            case kMenuPhotoFrame:{
+                [self.filterAreaViewController updatePhotoFrame:data];
+                break;}
             default:
                 break;
         }
-    }else{
-        // TODO: for special filters, need special function to run it for each individual
     }
 }
 
@@ -389,7 +400,7 @@
             UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
             
             self.btnChoosePhoto.hidden = YES;
-            self.btnCancelAll.hidden = NO;
+            isEdited=YES;
             
             if (self.filterAreaViewController == nil) {
                 self.filterAreaViewController = [[BGFilterAreaViewController alloc] init];
@@ -397,8 +408,14 @@
             
             [self.filterAreaViewController setupViewsWithSourceImage:image];
             [self.view addSubview:self.filterAreaViewController.view];
-            
+            // dismiss HUD
             [SVProgressHUD dismiss];
+            
+            // show side menubar
+            [self.view performBlock:^{
+                [self.sideMenu open];
+            } afterDelay:0.5f];
+            
         }else{
             [SVProgressHUD dismiss];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请选择系统可以识别的图片!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
