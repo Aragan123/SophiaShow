@@ -14,7 +14,7 @@
 - (UIImage *)imageRotatedByDegrees:(CGFloat)degrees
 {
     // calculate the size of the rotated view's containing box for our drawing space
-    UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.size.width, self.size.height)];
+    UIView *rotatedViewBox = [[[UIView alloc] initWithFrame:CGRectMake(0,0,self.size.width, self.size.height)] autorelease];
     CGAffineTransform t = CGAffineTransformMakeRotation(DegreesToRadians(degrees));
     rotatedViewBox.transform = t;
     CGSize rotatedSize = rotatedViewBox.frame.size;
@@ -72,6 +72,16 @@
     UIGraphicsEndImageContext();
     
     return blendedImage;
+}
+
+// jeff defined
+- (UIImage*) imageScaledToSize: (CGSize) newSize{
+    UIGraphicsBeginImageContext(newSize);
+    [self drawInRect: CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 @end

@@ -18,4 +18,7 @@
 - (UIImage *)imageBlendedWithImage:(UIImage *)overlayImage blendMode:(CGBlendMode)blendMode alpha:(CGFloat)alpha;
 
 
+// jeff defined
+- (UIImage*) imageScaledToSize: (CGSize) newSize;
+
 @end

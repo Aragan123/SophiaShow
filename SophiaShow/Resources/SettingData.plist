@@ -24,10 +24,7 @@
 			<string>pat000.jpg</string>
 			<string>pat001.jpg</string>
 			<string>pat002.jpg</string>
-			<string>pat003.jpg</string>
-			<string>pat004.jpg</string>
 			<string>pat005.jpg</string>
-			<string>pat006.jpg</string>
 			<string>pat007.jpg</string>
 			<string>pat008.jpg</string>
 			<string>pat009.jpg</string>
@@ -83,21 +80,18 @@
 		<key>PhotoFilter</key>
 		<array>
 			<string>0</string>
-			<string>0|/Filters/mtxx_lomo0.jpg|0.3|1</string>
-			<string>0|/Filters/mtxx_lomo1.jpg|0.3|1</string>
-			<string>0|/Filters/mtxx_lomo2.jpg|0.4|1</string>
-			<string>0|/Filters/mtxx_lomo3.jpg|0.5|1</string>
-			<string>0|/Filters/mtxx_lomo4.jpg|0.6|1</string>
+			<string>0|/Filters/mtxx_lomo0.jpg|1.0|14</string>
+			<string>0|/Filters/mtxx_lomo1.jpg|0.75|3</string>
+			<string>0|/Filters/mtxx_lomo2.jpg|0.75|3</string>
+			<string>0|/Filters/mtxx_lomo3.jpg|1.0|14</string>
+			<string>0|/Filters/mtxx_lomo4.jpg|1.0|3</string>
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
 			<string>/Filters/pat000.jpg</string>
 			<string>/Filters/pat001.jpg</string>
 			<string>/Filters/pat002.jpg</string>
-			<string>/Filters/pat003.jpg</string>
-			<string>/Filters/pat004.jpg</string>
 			<string>/Filters/pat005.jpg</string>
-			<string>/Filters/pat006.jpg</string>
 			<string>/Filters/pat007.jpg</string>
 			<string>/Filters/pat008.jpg</string>
 			<string>/Filters/pat009.jpg</string>

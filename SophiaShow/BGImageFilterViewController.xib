@@ -49,6 +49,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<float key="IBUIValue">0.5</float>
+						<bool key="IBUIContinuous">NO</bool>
 					</object>
 					<object class="IBUIButton" id="741552120">
 						<reference key="NSNextResponder" ref="766721923"/>
@@ -56,7 +57,7 @@
 						<string key="NSFrame">{{312, 184}, {400, 400}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="952021684"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -91,6 +92,7 @@
 						<string key="NSFrame">{{954, 705}, {50, 50}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -10109,7 +10111,6 @@ AAEAAQABA</bytes>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="clickCancelAll:">UIButton</string>
 						<string key="clickChoosePhoto:">UIButton</string>
-						<string key="clickMenuButton:">UIButton</string>
 						<string key="clickReturnButton:">id</string>
 						<string key="saveImageToPhotoAlbum:">id</string>
 						<string key="sliderValueChange:">UISlider</string>
@@ -10121,10 +10122,6 @@ AAEAAQABA</bytes>
 						</object>
 						<object class="IBActionInfo" key="clickChoosePhoto:">
 							<string key="name">clickChoosePhoto:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="clickMenuButton:">
-							<string key="name">clickMenuButton:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBActionInfo" key="clickReturnButton:">
@@ -10141,15 +10138,10 @@ AAEAAQABA</bytes>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="btnCancelAll">UIButton</string>
 						<string key="btnChoosePhoto">UIButton</string>
 						<string key="sliderParameter">UISlider</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="btnCancelAll">
-							<string key="name">btnCancelAll</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="btnChoosePhoto">
 							<string key="name">btnChoosePhoto</string>
 							<string key="candidateClassName">UIButton</string>

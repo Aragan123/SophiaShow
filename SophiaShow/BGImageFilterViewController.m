@@ -81,15 +81,7 @@
     self.sideMenu = [[[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemCancelAll]] autorelease];
     [self.sideMenu setItemSpacing:5.0f];
     [self.view addSubview:self.sideMenu];
-//    [self.view performBlock:^{
-//        [sideMenu open];
-//    } afterDelay:1.0f];
-    
-    
-    // add gesture of whole area to hid side menu's more option bar
-//    [self.view whenTapped:^{
-//        [self hideMoreOptionBar];
-//    }];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -166,8 +158,11 @@
 // when image saving button in side menu is pressed
 - (IBAction)saveImageToPhotoAlbum:(id)sender {
     // show alert before save
-    UIImage *savedImage = [self.filterAreaViewController screenshot];
-    UIImageWriteToSavedPhotosAlbum (savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [self performBlock:^{
+        UIImage *savedImage = [self.filterAreaViewController screenshot];
+        UIImageWriteToSavedPhotosAlbum (savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    } afterDelay:0.5f];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
@@ -181,6 +176,7 @@
         AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"保存时发生错误" message:@"照片没有保存到你的相册，请稍后再试或重启本程序"] autorelease];
         [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
         [alert setCancelButtonTitle:NSLocalizedString(@"我知道了", nil) block:nil];
+        [SVProgressHUD dismiss];
         [alert show];
     }
     else  // No errors
@@ -191,6 +187,7 @@
         AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"保存成功" message:@"照片已经保存到你的相册"] autorelease];
         [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
         [alert setCancelButtonTitle:NSLocalizedString(@"我知道了", nil) block:nil];
+        [SVProgressHUD dismiss];
         [alert show];
     }
 }
@@ -216,29 +213,36 @@
 // act when cancel all actions
 - (IBAction)clickCancelAll:(UIButton*)sender {
     if (!isEdited) {
-        return; // if not edited, do nothing
+        // if not edited, do cancel all actions right away
+        [self cancelAllActions];
+    }else{
+        // otherwise, need to show a warning alert to user to input 
+        AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"确定要取消对照片的所有操作？" message:nil] autorelease];
+        [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
+        [alert setCancelButtonTitle:NSLocalizedString(@"返回", nil) block:nil];
+        [alert addButtonWithTitle:NSLocalizedString(@"确定", nil) block:^{        
+            [self cancelAllActions];
+            [alert dismiss]; // dismiss alert view
+        }];
+        [alert show];
     }
-    AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"确定要取消对照片的所有操作？" message:nil] autorelease];
-    [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
-    [alert setCancelButtonTitle:NSLocalizedString(@"返回", nil) block:nil];
-    [alert addButtonWithTitle:NSLocalizedString(@"确定", nil) block:^{        
-        NSLog(@"hide cancel all button");
-        if (self.filterAreaViewController != nil) {
-            [self.filterAreaViewController.view removeFromSuperview];
-            self.filterAreaViewController = nil;
-        }
-        // hide more option bar
-        [self hideMoreOptionBar];
-        // hide side menu bar
-        [self.sideMenu close];
-        
-        self.btnChoosePhoto.hidden=NO;
-        self.sliderParameter.hidden=YES;
-        isEdited=NO;
-        
-        [alert dismiss]; // dismiss alert view
-    }];
-    [alert show];
+}
+
+// invoked by IBAction cancel All button is clicked. 
+- (void) cancelAllActions{
+    NSLog(@"hide cancel all button");
+    if (self.filterAreaViewController != nil) {
+        [self.filterAreaViewController.view removeFromSuperview];
+        self.filterAreaViewController = nil;
+    }
+    // hide more option bar
+    [self hideMoreOptionBar];
+    // hide side menu bar
+    [self.sideMenu close];
+    
+    self.btnChoosePhoto.hidden=NO;
+    self.sliderParameter.hidden=YES;
+    isEdited=NO;
 
 }
 
@@ -391,12 +395,16 @@
     }
     
     if (selectedMenu == kMenuSpecial) {
-        // TODO: for special filters, need special function to run it for each individual
         if (index == 0) { // this is option to remove all specials
             [self.filterAreaViewController updatePhotoSpecials:nil];
         }else{
-            NSDictionary *dataArr = [[BGGlobalData sharedData] getSpecialDataByIndex:index];
-            [self.filterAreaViewController updatePhotoSpecials:dataArr];
+            // display HUD
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+            [self performBlock:^{
+                NSDictionary *dataArr = [[BGGlobalData sharedData] getSpecialDataByIndex:index];
+                [self.filterAreaViewController updatePhotoSpecials:dataArr]; // update/display special effects
+                [SVProgressHUD dismiss]; // dismiss HUD
+            } afterDelay:0.5f];
         }
     }
     else if (selectedMenu == kMenuPhotoFilter){
@@ -406,12 +414,18 @@
             [self.filterAreaViewController updatePhotoFilter:data];
             self.sliderParameter.hidden = YES;
         }else{
-            BGFilterData data = [[BGGlobalData sharedData] getFilterDataByIndex:index];
-            [self.filterAreaViewController updatePhotoFilter:data];
-            // show slider
-            self.sliderParameter.hidden = NO;
-            self.sliderParameter.maximumValue = data.alpha;
-            self.sliderParameter.value = data.alpha;
+            // display HUD
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+            [self performBlock:^{
+                // update filter
+                BGFilterData data = [[BGGlobalData sharedData] getFilterDataByIndex:index];
+                [self.filterAreaViewController updatePhotoFilter:data];
+                // show slider
+                self.sliderParameter.hidden = NO;
+                self.sliderParameter.maximumValue = data.alpha;
+                self.sliderParameter.value = data.alpha;
+                [SVProgressHUD dismiss]; // dismiss HUD
+            } afterDelay:0.5f];
         }
     }
     else{

@@ -7,25 +7,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "SophiaShow/BGImageFilterViewController.m"
-         timestampString = "393779722.271129"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "398"
-         endingLineNumber = "398"
-         landmarkName = "-carousel:didSelectItemAtIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "SophiaShow/BGFilterAreaViewController.m"
-         timestampString = "393753080.451705"
+         timestampString = "393861249.112513"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
          landmarkName = "-updatePhotoSpecials:"
          landmarkType = "5">
       </FileBreakpoint>
