@@ -19,15 +19,6 @@
 
 @implementation BGFilterAreaViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -73,6 +64,8 @@
 - (void) setupViewsWithSourceImage: (UIImage*) srcImage{
     NSLog(@"set up Filter Area subviews");
     self.originalImage = srcImage;
+    
+    isPortrait = [[BGGlobalData sharedData] isPortrait];
     self.view.frame = [self calculateFilterAreaRect:srcImage.size];
     CGSize areaSize = self.view.frame.size;
 
@@ -98,12 +91,12 @@
     
     // default photo scroll views
     self.scrollView = [[UIScrollView alloc] initWithFrame:[self calculatePhotoViewRect:self.view.frame]];
-    [self.scrollView setBackgroundColor:[UIColor clearColor]];
+    [self.scrollView setBackgroundColor:[UIColor whiteColor]];
     [self.scrollView setDelegate:self];
     [self.scrollView setBounces:NO];
     [self.scrollView setShowsHorizontalScrollIndicator:NO];
     [self.scrollView setShowsVerticalScrollIndicator:NO];
-//    [self.scrollView setContentMode:UIViewContentModeCenter];
+//    [self.scrollView.layer setCornerRadius:4.0f];
     [self.view addSubview:self.scrollView];
     
     CGFloat imageWidth = CGImageGetWidth(srcImage.CGImage);
@@ -118,7 +111,6 @@
     [self.scrollView setMinimumZoomScale:MIN((self.scrollView.frame.size.width / imageWidth), (self.scrollView.frame.size.height / imageHeight)) ];
     [self.scrollView setZoomScale:[self.scrollView minimumZoomScale]];
     [self.scrollView setMaximumZoomScale:[self calculateScrollerMaxZoom:self.scrollView.frame.size andPhotoSize:CGSizeMake(imageWidth, imageHeight)]];
-    [self.scrollView.layer setCornerRadius:4.0f];
     
     // default result image view
     self.resultFilterView = [[UIImageView alloc] initWithFrame:self.scrollView.frame];
@@ -131,8 +123,14 @@
     [self.specialForeLayer setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.specialForeLayer];
     
+}
 
-    
+- (void) clearContents{
+    NSArray *contents = [self.view subviews];
+    for (UIView *view in contents){
+        [view removeFromSuperview];
+        view = nil;
+    }
 }
 
 #pragma mark -
@@ -222,16 +220,31 @@
 
 - (CGRect) calculateFilterAreaRect: (CGSize) imageSize{
     // TODO: real calculation is required
-    
-    return CGRectMake(50, 60, 824, 618);
+    CGRect rect = CGRectZero;
+    if (isPortrait)
+        rect = CGRectMake(166.5, 10, 641, 748);
+    else rect = CGRectMake(50, 60, 824, 618);
+
+    return rect;
 }
 
 - (CGRect) calculateFrameViewRect: (CGRect) filterAreaRect{
-    return CGRectMake(35, 35, 754, 548);
+    CGRect rect = CGRectZero;
+    if (isPortrait) {
+        rect = CGRectMake(50, 30, 541, 688);
+    }else
+        rect = CGRectMake(35, 35, 754, 548);
+    return rect;
 }
 
 - (CGRect) calculatePhotoViewRect: (CGRect) filterAreaRect{
-    return CGRectMake(70, 70, 684, 478);
+    CGRect rect = CGRectZero;
+    if (isPortrait) {
+        rect = CGRectMake(85, 60, 471, 628);
+    }else
+        rect =  CGRectMake(70, 70, 684, 478);
+    
+    return rect;
 }
 
 - (float) calculateScrollerMaxZoom: (CGSize) scrollerSize andPhotoSize:(CGSize) photoSize{

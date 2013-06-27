@@ -44,6 +44,9 @@ typedef struct{
     NSArray *galleryImages;
     NSDictionary *filterResourceIcons;
     NSDictionary *filterResources;
+    
+    // for filter view only
+    BOOL isPortrait; // default is YES
 }
 
 @property (nonatomic, retain) NSArray *galleryBooks;
@@ -51,6 +54,8 @@ typedef struct{
 @property (nonatomic, retain) NSArray *galleryImages;
 @property (nonatomic, retain) NSDictionary *filterResourceIcons;
 @property (nonatomic, retain) NSDictionary *filterResources;
+@property (nonatomic, assign) BOOL isPortrait;
+
 
 + (BGGlobalData *) sharedData;
 -(void) loadSettingsDataFile;

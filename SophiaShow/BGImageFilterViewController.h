@@ -39,5 +39,5 @@
 - (IBAction)sliderValueChange:(UISlider *)sender;
 
 - (IBAction)clickReturnButton:(id)sender;
-
+- (IBAction) selectFilterAreaOrientation :(UIButton*)sender;
 @end

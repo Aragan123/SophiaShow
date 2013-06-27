@@ -11,7 +11,7 @@
 static BGGlobalData *instance = nil;
 
 @implementation BGGlobalData
-@synthesize galleryImages, galleryBooks, onlineGalleryBooks, filterResourceIcons, filterResources;
+@synthesize galleryImages, galleryBooks, onlineGalleryBooks, filterResourceIcons, filterResources, isPortrait;
 
 #pragma mark -
 #pragma mark Data File Read & Write
@@ -66,6 +66,8 @@ static BGGlobalData *instance = nil;
 	self = [super init];
 	if (self) {
 		[self loadSettingsDataFile];
+        
+        isPortrait = YES; // default value
 	}
 	return self;
 }

@@ -14,7 +14,7 @@
 #define GOLDEN_HEIGHT 618
 
 @interface BGFilterAreaViewController : UIViewController <UIScrollViewDelegate>{
-    
+    BOOL isPortrait;
 }
 
 @property (retain, nonatomic) UIImage *originalImage;
@@ -30,6 +30,7 @@
 @property (retain, nonatomic) UIImageView *specialBackLayer;
 
 - (void) setupViewsWithSourceImage: (UIImage*) srcImage;
+- (void) clearContents;
 - (UIImage*) screenshot;
 
 - (void) updateBackgroundPattern: (UIImage*) image;

@@ -19,7 +19,6 @@
 @end
 
 @implementation BGImageFilterViewController
-//@synthesize delegate, carousel=_carousel, iCarousel_ds=_iCarousel_ds, filterAreaViewController= _filterAreaViewController;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -38,50 +37,12 @@
     // set alert view style
     [AHAlertView applyCustomAlertAppearance];
     
-    selectedMenu=10;
-    self.sliderParameter.hidden = YES;
-    self.btnChoosePhoto.hidden = NO;
-    isEdited = NO;
+    // setup initial values and arrange slider position
+    [self setupInitialValues];
+    [self setupFilterSlider];
     
-    // contruct HM SideMenu
-    // item 1
-    UIView *itemBackPat = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnBackPat = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_bokeh_a" ImagePressed:@"btn_function_bokeh_c"];
-    btnBackPat.tag=kMenuBgPattern;
-    [itemBackPat addSubview:btnBackPat];
-    // item 2
-    UIView *itemFrame = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnFrame = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_border_a" ImagePressed:@"btn_function_border_c"];
-    btnFrame.tag=kMenuPhotoFrame;
-    [itemFrame addSubview:btnFrame];
-    // item 3
-    UIView *itemFilter = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnFilter = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_color_a" ImagePressed:@"btn_function_color_c"];
-    btnFilter.tag=kMenuPhotoFilter;
-    [itemFilter addSubview:btnFilter];
-    // item 4
-    UIView *itemSpecial = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnSpecial = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_stylize_a" ImagePressed:@"btn_function_stylize_c"];
-    btnSpecial.tag=kMenuSpecial;
-    [itemSpecial addSubview:btnSpecial];
-    
-    // item 5
-    UIView *itemSave = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnSave = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(saveImageToPhotoAlbum:) Image:@"icon_save_photo" ImagePressed:@"icon_save_photo"];
-    [itemSave addSubview:btnSave];
-    // item 6
-    UIView *itemCancelAll = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 48, 48)] autorelease];
-    UIButton *btnCancelAll = [self createButtonWithFrame:CGRectMake(0, 0, 48, 48) Target:self Selector:@selector(clickCancelAll:) Image:@"btn_cancelAll" ImagePressed:@"btn_cancelAll"];
-    [itemCancelAll addSubview:btnCancelAll];
-
-    // placeholder
-    UIView *itemPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 50)] autorelease];
-    itemPlaceholder.backgroundColor = [UIColor clearColor];
-    
-    self.sideMenu = [[[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemCancelAll]] autorelease];
-    [self.sideMenu setItemSpacing:5.0f];
-    [self.view addSubview:self.sideMenu];
-
+    // setup side menu
+    [self setupSideMenuBar];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,10 +76,109 @@
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark Arrange Views
+- (void) setupInitialValues{
+    selectedMenu=10;
+    self.btnChoosePhoto.hidden = NO;
+    isEdited = NO;
+}
 
+- (void) setupFilterSlider{
+    // UISlider position
+    self.sliderParameter = [[UISlider alloc] init];
+    self.sliderParameter.frame = CGRectMake(200, 726, 480, 23);
+    self.sliderParameter.maximumValue = 1.0f;
+    self.sliderParameter.minimumValue = 0.0f;
+    self.sliderParameter.continuous = NO;
+    [self.sliderParameter addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    
+    if ([[BGGlobalData sharedData] isPortrait]) {
+        CGAffineTransform trans = CGAffineTransformMakeRotation(M_PI * -0.5);
+        self.sliderParameter.transform = trans;
+        self.sliderParameter.center = CGPointMake(80, self.sliderParameter.frame.size.height*0.5 + 100);
+    }
+    self.sliderParameter.hidden = YES;
+    [self.view addSubview:self.sliderParameter];
+}
+
+- (void) setupSideMenuBar{
+    // contruct HM SideMenu
+    // item 1
+    UIView *itemBackPat = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
+    UIButton *btnBackPat = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_bokeh_a" ImagePressed:@"btn_function_bokeh_c"];
+    btnBackPat.tag=kMenuBgPattern;
+    [itemBackPat addSubview:btnBackPat];
+    // item 2
+    UIView *itemFrame = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
+    UIButton *btnFrame = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_border_a" ImagePressed:@"btn_function_border_c"];
+    btnFrame.tag=kMenuPhotoFrame;
+    [itemFrame addSubview:btnFrame];
+    // item 3
+    UIView *itemFilter = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
+    UIButton *btnFilter = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_color_a" ImagePressed:@"btn_function_color_c"];
+    btnFilter.tag=kMenuPhotoFilter;
+    [itemFilter addSubview:btnFilter];
+    // item 4
+    UIView *itemSpecial = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
+    UIButton *btnSpecial = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_stylize_a" ImagePressed:@"btn_function_stylize_c"];
+    btnSpecial.tag=kMenuSpecial;
+    [itemSpecial addSubview:btnSpecial];
+    
+    // item 5
+    UIView *itemSave = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
+    UIButton *btnSave = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(saveImageToPhotoAlbum:) Image:@"icon_save_photo" ImagePressed:@"icon_save_photo"];
+    [itemSave addSubview:btnSave];
+    // item 6
+    UIView *itemCancelAll = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 48, 48)] autorelease];
+    UIButton *btnCancelAll = [self createButtonWithFrame:CGRectMake(0, 0, 48, 48) Target:self Selector:@selector(clickCancelAll:) Image:@"btn_cancelAll" ImagePressed:@"btn_cancelAll"];
+    [itemCancelAll addSubview:btnCancelAll];
+    
+    // placeholder
+    UIView *itemPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 50)] autorelease];
+    itemPlaceholder.backgroundColor = [UIColor clearColor];
+    
+    self.sideMenu = [[[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemCancelAll]] autorelease];
+    [self.sideMenu setItemSpacing:5.0f];
+    [self.view addSubview:self.sideMenu];
+}
+
+- (void) setupFilterArea: (UIImage*)image{
+    if (self.filterAreaViewController == nil) {
+        BGFilterAreaViewController *controller = [[BGFilterAreaViewController alloc] init];
+        self.filterAreaViewController = controller;
+        [controller release];
+    }
+    
+    [self.filterAreaViewController setupViewsWithSourceImage:image];
+    [self.view addSubview:self.filterAreaViewController.view];
+}
 
 #pragma mark -
 #pragma mark IBOutlet Actions
+// when landscape or portrait button is pressed
+- (IBAction) selectFilterAreaOrientation :(UIButton*)sender{
+    [self hideMoreOptionBar];
+    
+    // reset oritentation
+    BOOL check = ![[BGGlobalData sharedData] isPortrait];
+    [[BGGlobalData sharedData] setIsPortrait:check];
+    
+    // setp 1: set up  values and slider again
+    [self.sliderParameter removeFromSuperview]; self.sliderParameter = nil;
+    [self setupInitialValues];
+    [self setupFilterSlider];
+    // step 2: re-arrange Filter Area
+    UIImage *image = self.filterAreaViewController.originalImage;
+//    [self.filterAreaViewController clearContents];
+//        [self.filterAreaViewController setupViewsWithSourceImage:image];
+
+    // clean filter area view controller
+    [self.filterAreaViewController.view removeFromSuperview];
+    self.filterAreaViewController = nil;
+    // reasign
+    [self setupFilterArea:image];
+}
 
 // when side menu button is pressed
 - (IBAction) clickMenuButton:(UIButton*)sender{
@@ -464,13 +524,9 @@
             
             self.btnChoosePhoto.hidden = YES;
             isEdited=YES;
-            
-            if (self.filterAreaViewController == nil) {
-                self.filterAreaViewController = [[BGFilterAreaViewController alloc] init];
-            }
-            
-            [self.filterAreaViewController setupViewsWithSourceImage:image];
-            [self.view addSubview:self.filterAreaViewController.view];
+            // add filter area view controller
+            [self setupFilterArea:image];
+
             // dismiss HUD
             [SVProgressHUD dismiss];
             
