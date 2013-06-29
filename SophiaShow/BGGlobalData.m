@@ -209,8 +209,8 @@ static BGGlobalData *instance = nil;
     data.image = [UIImage imageWithContentsOfFile:resUri];
     data.alpha = [resArr[1] floatValue];
     data.layer = [resArr[2] intValue];
-    data.posLandscape = CGRectFromString(resArr[3]);
-    data.posPortrait = CGRectFromString(resArr[4]);
+    data.posPortrait = CGRectFromString(resArr[3]);
+    data.posLandscape = CGRectFromString(resArr[4]);
     
     return data;
 }

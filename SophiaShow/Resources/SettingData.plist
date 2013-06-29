@@ -99,8 +99,8 @@
 		<key>Specials</key>
 		<array>
 			<string>0</string>
-			<string>/Filters/special_butterfly_a.png|1.0|1|{{0,0},{350,285}}|{{0,0},{350,285}}&amp;/Filters/special_butterfly_b.png|1.0|1|{{650,334},{174,145}}|{{644,385},{174,145}}</string>
-			<string>/Filters/special_flower1_a.png|1.0|1|{{0,0},{415,215}}|{{0,0},{415,215}}&amp;/Filters/special_flower1_b.png|1.0|1|{{691,278},{133,340}}|{{685,60},{133,340}}</string>
+			<string>/Filters/special_butterfly_a.png|1.0|1|{{0,0},{350,285}}|{{0,0},{350,285}}&amp;/Filters/special_butterfly_b.png|1.0|1|{{467,445},{174,145}}|{{650,334},{174,145}}</string>
+			<string>/Filters/special_flower1_a.png|1.0|1|{{0,0},{415,215}}|{{0,0},{415,215}}&amp;/Filters/special_flower1_b.png|1.0|1|{{508,408},{133,340}}|{{691,278},{133,340}}</string>
 		</array>
 	</dict>
 </dict>

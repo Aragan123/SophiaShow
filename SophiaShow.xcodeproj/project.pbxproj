@@ -63,6 +63,7 @@
 		6D39E3EE174A1F2300CD82E5 /* about_text_en.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D39E3EC174A1F2300CD82E5 /* about_text_en.png */; };
 		6D3BB81C16FC91D20045546F /* BGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3BB81A16FC91D20045546F /* BGAboutViewController.m */; };
 		6D3BB81D16FC91D20045546F /* BGAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */; };
+		6D3E5AA2177EB1FD004A3133 /* screen_rotation.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3E5AA1177EB1FD004A3133 /* screen_rotation.png */; };
 		6D3EE3B317461C2100A56512 /* home_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D3EE3B217461C2100A56512 /* home_background.jpg */; };
 		6D3EE3B91746230000A56512 /* about_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D3EE3B81746230000A56512 /* about_background.jpg */; };
 		6D3EE3BB1746874E00A56512 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3EE3BA1746874E00A56512 /* Default-Landscape~ipad.png */; };
@@ -232,6 +233,7 @@
 		6D3BB81916FC91D20045546F /* BGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGAboutViewController.h; sourceTree = "<group>"; };
 		6D3BB81A16FC91D20045546F /* BGAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGAboutViewController.m; sourceTree = "<group>"; };
 		6D3BB81B16FC91D20045546F /* BGAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGAboutViewController.xib; sourceTree = "<group>"; };
+		6D3E5AA1177EB1FD004A3133 /* screen_rotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_rotation.png; sourceTree = "<group>"; };
 		6D3EE3B217461C2100A56512 /* home_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_background.jpg; sourceTree = "<group>"; };
 		6D3EE3B81746230000A56512 /* about_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = about_background.jpg; sourceTree = "<group>"; };
 		6D3EE3BA1746874E00A56512 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -678,6 +680,7 @@
 				6D4FD836177185C30022DBCA /* btn_function_stylize_c@2x.png */,
 				6DE1320217788FA0008A9BA4 /* icon_save_photo.png */,
 				6DE1320017788D9D008A9BA4 /* btn_closeOptionBar.png */,
+				6D3E5AA1177EB1FD004A3133 /* screen_rotation.png */,
 				6DE131F817783A7E008A9BA4 /* btn_home.png */,
 				6DE131F917783A7E008A9BA4 /* btn_cancelAll.png */,
 				6D4FD84D1771A11C0022DBCA /* btn_home_b.png */,
@@ -842,6 +845,7 @@
 				6DE131FB17783A7E008A9BA4 /* btn_cancelAll.png in Resources */,
 				6DE1320117788D9E008A9BA4 /* btn_closeOptionBar.png in Resources */,
 				6DE1320317788FA0008A9BA4 /* icon_save_photo.png in Resources */,
+				6D3E5AA2177EB1FD004A3133 /* screen_rotation.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

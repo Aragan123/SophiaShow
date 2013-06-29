@@ -335,9 +335,11 @@
     for (NSValue *value in dataArr) {
         BGSpecialData data;
         [value getValue:&data]; // convert value to expected struct data
-        
-        CGContextDrawImage(ctx, data.posLandscape, [data.image CGImage]);
-        
+        if (isPortrait) {
+            CGContextDrawImage(ctx, data.posPortrait, [data.image CGImage]);
+        }else{
+            CGContextDrawImage(ctx, data.posLandscape, [data.image CGImage]);
+        }
     }
     
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();

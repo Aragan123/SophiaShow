@@ -60,6 +60,7 @@
     
     [self setBtnChoosePhoto:nil];
     [self setSliderParameter:nil];
+    [self setBtnRotateFrame:nil];
     [super viewDidUnload];
 }
 
@@ -73,6 +74,7 @@
     
     [_btnChoosePhoto release];
     [_sliderParameter release];
+    [_btnRotateFrame release];
     [super dealloc];
 }
 
@@ -81,6 +83,7 @@
 - (void) setupInitialValues{
     selectedMenu=10;
     self.btnChoosePhoto.hidden = NO;
+    self.btnRotateFrame.hidden = YES;
     isEdited = NO;
 }
 
@@ -159,25 +162,43 @@
 // when landscape or portrait button is pressed
 - (IBAction) selectFilterAreaOrientation :(UIButton*)sender{
     [self hideMoreOptionBar];
+    BOOL check = [[BGGlobalData sharedData] isPortrait];
     
-    // reset oritentation
-    BOOL check = ![[BGGlobalData sharedData] isPortrait];
-    [[BGGlobalData sharedData] setIsPortrait:check];
+    NSString *title = @"改成横版相框";
+    if (!check) {
+        title = @"改成竖版相框";
+    }
     
-    // setp 1: set up  values and slider again
-    [self.sliderParameter removeFromSuperview]; self.sliderParameter = nil;
-    [self setupInitialValues];
-    [self setupFilterSlider];
-    // step 2: re-arrange Filter Area
-    UIImage *image = self.filterAreaViewController.originalImage;
-//    [self.filterAreaViewController clearContents];
-//        [self.filterAreaViewController setupViewsWithSourceImage:image];
+    AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:title message:@"注意：此操作将撤销照片所有未保存的操作！"] autorelease];
+    [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
+    [alert setCancelButtonTitle:NSLocalizedString(@"取消", nil) block:nil];
+    [alert addButtonWithTitle:NSLocalizedString(@"继续", nil) block:^{
+        // display HUD for half second
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [self performBlock:^{
+            // reset oritentation
+            [[BGGlobalData sharedData] setIsPortrait:!check];
+            
+            // setp 1: set up  values and slider again
+            [self.sliderParameter removeFromSuperview]; self.sliderParameter = nil;
+            [self setupInitialValues];
+            [self setupFilterSlider];
+            self.btnRotateFrame.hidden=NO; // need to show this button
+            // step 2: re-arrange Filter Area
+            UIImage *image = self.filterAreaViewController.originalImage;
+            //    [self.filterAreaViewController clearContents];
+            //        [self.filterAreaViewController setupViewsWithSourceImage:image];
+            
+            // clean filter area view controller
+            [self.filterAreaViewController.view removeFromSuperview];
+            self.filterAreaViewController = nil;
+            // reasign
+            [self setupFilterArea:image];
+            [SVProgressHUD dismiss]; // dismiss HUD
+        } afterDelay:0.5f];
 
-    // clean filter area view controller
-    [self.filterAreaViewController.view removeFromSuperview];
-    self.filterAreaViewController = nil;
-    // reasign
-    [self setupFilterArea:image];
+    }];
+    [alert show];
 }
 
 // when side menu button is pressed
@@ -301,6 +322,7 @@
     [self.sideMenu close];
     
     self.btnChoosePhoto.hidden=NO;
+    self.btnRotateFrame.hidden=YES;
     self.sliderParameter.hidden=YES;
     isEdited=NO;
 
@@ -523,6 +545,7 @@
             UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
             
             self.btnChoosePhoto.hidden = YES;
+            self.btnRotateFrame.hidden = NO;
             isEdited=YES;
             // add filter area view controller
             [self setupFilterArea:image];
