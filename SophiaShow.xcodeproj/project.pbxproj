@@ -119,9 +119,13 @@
 		6D61AED2173C943C0064F759 /* BGReflectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D61AED0173C943C0064F759 /* BGReflectionViewController.xib */; };
 		6D7529C81737849000B4BD96 /* BGGalleryHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */; };
 		6D7529C91737849000B4BD96 /* BGGalleryHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */; };
+		6D7D3A651782A43E0005681F /* special05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D7D3A641782A43E0005681F /* special05.jpg */; };
 		6DAC58D5173A93A00087EEC1 /* butterfly0.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D2173A93A00087EEC1 /* butterfly0.png */; };
 		6DAC58D6173A93A00087EEC1 /* butterfly1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D3173A93A00087EEC1 /* butterfly1.png */; };
 		6DAC58D7173A93A00087EEC1 /* butterfly2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DAC58D4173A93A00087EEC1 /* butterfly2.png */; };
+		6DB555901781D14100B1E104 /* special02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5558D1781D14100B1E104 /* special02.jpg */; };
+		6DB555911781D14100B1E104 /* special03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5558E1781D14100B1E104 /* special03.jpg */; };
+		6DB555921781D14100B1E104 /* special04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DB5558F1781D14100B1E104 /* special04.jpg */; };
 		6DC94617174265C50019FDA4 /* NSObject+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC94616174265C50019FDA4 /* NSObject+Blocks.m */; };
 		6DC94619174274730019FDA4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC94618174274730019FDA4 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6DD0C85F1744CF05003254C0 /* home_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD0C85E1744CF05003254C0 /* home_2.png */; };
@@ -301,9 +305,13 @@
 		6D7529C51737849000B4BD96 /* BGGalleryHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryHomeViewController.h; sourceTree = "<group>"; };
 		6D7529C61737849000B4BD96 /* BGGalleryHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryHomeViewController.m; sourceTree = "<group>"; };
 		6D7529C71737849000B4BD96 /* BGGalleryHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGGalleryHomeViewController.xib; sourceTree = "<group>"; };
+		6D7D3A641782A43E0005681F /* special05.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = special05.jpg; sourceTree = "<group>"; };
 		6DAC58D2173A93A00087EEC1 /* butterfly0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly0.png; sourceTree = "<group>"; };
 		6DAC58D3173A93A00087EEC1 /* butterfly1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly1.png; sourceTree = "<group>"; };
 		6DAC58D4173A93A00087EEC1 /* butterfly2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butterfly2.png; sourceTree = "<group>"; };
+		6DB5558D1781D14100B1E104 /* special02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = special02.jpg; sourceTree = "<group>"; };
+		6DB5558E1781D14100B1E104 /* special03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = special03.jpg; sourceTree = "<group>"; };
+		6DB5558F1781D14100B1E104 /* special04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = special04.jpg; sourceTree = "<group>"; };
 		6DC94615174265C50019FDA4 /* NSObject+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Blocks.h"; sourceTree = "<group>"; };
 		6DC94616174265C50019FDA4 /* NSObject+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Blocks.m"; sourceTree = "<group>"; };
 		6DC94618174274730019FDA4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -578,6 +586,11 @@
 				6DE49EF1176C46F800509B5F /* BGGalleryViewController.xib */,
 				6D41CE481737983100E1145C /* BGGalleryScrollViewController.h */,
 				6D41CE491737983100E1145C /* BGGalleryScrollViewController.m */,
+				6DE49EF3176C575800509B5F /* BGImageFilterViewController.h */,
+				6DE49EF4176C575800509B5F /* BGImageFilterViewController.m */,
+				6DE49EF5176C575800509B5F /* BGImageFilterViewController.xib */,
+				6DF5300E1773F0C5002FEFF4 /* BGFilterAreaViewController.h */,
+				6DF5300F1773F0C5002FEFF4 /* BGFilterAreaViewController.m */,
 				6D1539F616FB42A2001C0FAC /* Supporting Files */,
 				6D4C4AD1173A412A00302830 /* BGSplashViewController.h */,
 				6D4C4AD2173A412A00302830 /* BGSplashViewController.m */,
@@ -589,11 +602,6 @@
 				6D61AED0173C943C0064F759 /* BGReflectionViewController.xib */,
 				6D062416173E230600CD1402 /* UIView+BGReflection.h */,
 				6D062417173E230600CD1402 /* UIView+BGReflection.m */,
-				6DE49EF3176C575800509B5F /* BGImageFilterViewController.h */,
-				6DE49EF4176C575800509B5F /* BGImageFilterViewController.m */,
-				6DE49EF5176C575800509B5F /* BGImageFilterViewController.xib */,
-				6DF5300E1773F0C5002FEFF4 /* BGFilterAreaViewController.h */,
-				6DF5300F1773F0C5002FEFF4 /* BGFilterAreaViewController.m */,
 			);
 			path = SophiaShow;
 			sourceTree = "<group>";
@@ -664,6 +672,10 @@
 				6DE131F217782CB8008A9BA4 /* original.jpg */,
 				6DE131EE1777EBE7008A9BA4 /* special00.jpg */,
 				6DE131EF1777EBE7008A9BA4 /* special01.jpg */,
+				6DB5558D1781D14100B1E104 /* special02.jpg */,
+				6DB5558E1781D14100B1E104 /* special03.jpg */,
+				6DB5558F1781D14100B1E104 /* special04.jpg */,
+				6D7D3A641782A43E0005681F /* special05.jpg */,
 				6D4FD829177185C30022DBCA /* btn_function_bokeh_a.png */,
 				6D4FD82A177185C30022DBCA /* btn_function_bokeh_c@2x.png */,
 				6D4FD82B177185C30022DBCA /* btn_function_border_a.png */,
@@ -846,6 +858,10 @@
 				6DE1320117788D9E008A9BA4 /* btn_closeOptionBar.png in Resources */,
 				6DE1320317788FA0008A9BA4 /* icon_save_photo.png in Resources */,
 				6D3E5AA2177EB1FD004A3133 /* screen_rotation.png in Resources */,
+				6DB555901781D14100B1E104 /* special02.jpg in Resources */,
+				6DB555911781D14100B1E104 /* special03.jpg in Resources */,
+				6DB555921781D14100B1E104 /* special04.jpg in Resources */,
+				6D7D3A651782A43E0005681F /* special05.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

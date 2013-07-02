@@ -34,6 +34,10 @@
 			<string>filter_original.png</string>
 			<string>special00.jpg</string>
 			<string>special01.jpg</string>
+			<string>special02.jpg</string>
+			<string>special03.jpg</string>
+			<string>special04.jpg</string>
+			<string>special05.jpg</string>
 		</array>
 	</dict>
 	<key>GalleryBooks</key>
@@ -101,6 +105,10 @@
 			<string>0</string>
 			<string>/Filters/special_butterfly_a.png|1.0|1|{{0,0},{350,285}}|{{0,0},{350,285}}&amp;/Filters/special_butterfly_b.png|1.0|1|{{467,445},{174,145}}|{{650,334},{174,145}}</string>
 			<string>/Filters/special_flower1_a.png|1.0|1|{{0,0},{415,215}}|{{0,0},{415,215}}&amp;/Filters/special_flower1_b.png|1.0|1|{{508,408},{133,340}}|{{691,278},{133,340}}</string>
+			<string>/Filters/special_flower2_a.png|1.0|1|{{391,23},{250,725}}|{{574,0},{250,618}}&amp;/Filters/special_flower2_b.png|1.0|1|{{0,0},{175,355}}|{{0,0},{175,355}}</string>
+			<string>/Filters/special_flower3_a.png|1.0|1|{{0,0},{285,378}}|{{0,0},{285,378}}&amp;/Filters/special_flower3_b.png|1.0|1|{{491,0},{150,320}}|{{674,0},{150,320}}</string>
+			<string>/Filters/special_leaf_a.png|1.0|1|{{381,0},{260,618}}|{{564,0},{260,618}}</string>
+			<string>/Filters/special_flower4_a.png|1.0|1|{{0,0},{265,450}}|{{0,0},{265,450}}&amp;/Filters/special_flower4_b.png|1.0|1|{{441,0},{200,500}}|{{624,0},{200,500}}</string>
 		</array>
 	</dict>
 </dict>

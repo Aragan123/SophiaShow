@@ -37,7 +37,7 @@
         self.isOnlineData=online;
         self.dataSource = [[BGGlobalData sharedData] galleryImages];
         _currentArtIndex = 0;
-        _bottomBarHeight = 180.0f;
+        _bottomBarHeight = 200.0f;
         _isFullScreen = NO;
         
     }
@@ -161,7 +161,7 @@
 {    
     //create new view if no view is available for recycling
     if (view == nil){
-        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 180.0f, 180.0f)] autorelease];
+        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 180.0f)] autorelease];
         view.contentMode = UIViewContentModeCenter;
     }else{
         UIView *removeView = nil;
@@ -187,6 +187,16 @@
     }
     
     [view addSubview:imageView];
+    
+    // add lable
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 170.0f, 160.0f, 20.0f)];
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.backgroundColor = [UIColor clearColor];
+    lbl.textColor = [UIColor whiteColor];
+    lbl.text = [NSString stringWithFormat:@"%i", index+1];
+    [view addSubview:lbl];
+    [lbl release];
+    
     return view;
 }
 
@@ -271,10 +281,11 @@
     return newImage;
 }
 
+// set top bar
 - (void)updateNavBarTitle
 {
-    [self.navItem setTitle:[NSString stringWithFormat:@"%i of %i", _currentArtIndex+1, [self.dataSource count]]];
-    
+//    [self.navItem setTitle:[NSString stringWithFormat:@"%i of %i", _currentArtIndex+1, [self.dataSource count]]];
+    return;
 }
 
 - (UIImage *)resizeImageToSize: (UIImage*) sourceImage withSize: (CGSize)targetSize

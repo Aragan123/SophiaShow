@@ -163,6 +163,10 @@
     return [self.dataSource count];
 }
 
+- (NSUInteger) numberOfPlaceholdersInCarousel:(iCarousel *)carousel{
+    return 10;
+}
+
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
     if (view == nil) {
