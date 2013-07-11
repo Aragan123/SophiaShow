@@ -37,7 +37,7 @@
         self.isOnlineData=online;
         self.dataSource = [[BGGlobalData sharedData] galleryImages];
         _currentArtIndex = 0;
-        _bottomBarHeight = 200.0f;
+        _bottomBarHeight = 200.0f; //TODO: set proper value
         _isFullScreen = NO;
         
     }
@@ -49,8 +49,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
+//    UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"];
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
     
     // load image scroll paging view
     self.scrollViewController = [[BGGalleryScrollViewController alloc] init];
@@ -64,8 +64,8 @@
     self.topToolBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     [self.topToolBar setBarStyle:UIBarStyleBlackTranslucent];
     self.navItem = [[UINavigationItem alloc] init];
-    self.navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
-                                                                 style:UIBarButtonItemStyleBordered
+    self.navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" 返 回 "
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(clickGoHomeButton:)];
     [self.topToolBar setItems:[NSArray arrayWithObject:self.navItem]];
@@ -158,7 +158,9 @@
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
-{    
+{
+    //TODO: set proper size of each view and label
+    
     //create new view if no view is available for recycling
     if (view == nil){
         view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 180.0f)] autorelease];
@@ -189,13 +191,18 @@
     [view addSubview:imageView];
     
     // add lable
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 170.0f, 160.0f, 20.0f)];
-    lbl.textAlignment = NSTextAlignmentCenter;
-    lbl.backgroundColor = [UIColor clearColor];
-    lbl.textColor = [UIColor whiteColor];
-    lbl.text = [NSString stringWithFormat:@"%i", index+1];
-    [view addSubview:lbl];
-    [lbl release];
+    UIView *lbl = [view viewWithTag:kRemoveLabelTag];
+    if (lbl == nil) {
+        UILabel *lbl = [[[UILabel alloc] initWithFrame:CGRectMake(10.0f, 170.0f, 160.0f, 20.0f)] autorelease];
+        lbl.tag = kRemoveLabelTag;
+        lbl.textAlignment = NSTextAlignmentCenter;
+        lbl.backgroundColor = [UIColor clearColor];
+        lbl.textColor = [UIColor whiteColor];
+        lbl.text = [NSString stringWithFormat:@"%i", index+1];
+        [view addSubview:lbl];
+    }else{
+        ((UILabel*)lbl).text = [NSString stringWithFormat:@"%i", index+1];
+    }
     
     return view;
 }

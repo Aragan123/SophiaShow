@@ -44,33 +44,43 @@
 	<array>
 		<dict>
 			<key>GalleryDesc_ENG</key>
-			<string>Gallery 1</string>
+			<string>Beauty</string>
 			<key>GalleryDesc_CHN</key>
 			<string>作品集 1</string>
-			<key>GalleryImageNames</key>
-			<array>
-				<string>00.jpg</string>
-				<string>01.jpg</string>
-				<string>02.jpg</string>
-				<string>03.jpg</string>
-			</array>
 			<key>GalleryURI</key>
-			<string>Gallery0</string>
+			<string>Beauty</string>
+			<key>GalleryImageCount</key>
+			<integer>11</integer>
 		</dict>
 		<dict>
 			<key>GalleryDesc_ENG</key>
-			<string>Gallery 2</string>
+			<string>Fashion</string>
 			<key>GalleryDesc_CHN</key>
 			<string>作品集 2</string>
-			<key>GalleryImageNames</key>
-			<array>
-				<string>10.jpg</string>
-				<string>11.jpg</string>
-				<string>12.jpg</string>
-				<string>13.jpg</string>
-			</array>
 			<key>GalleryURI</key>
-			<string>Gallery1</string>
+			<string>Fashion</string>
+			<key>GalleryImageCount</key>
+			<integer>37</integer>
+		</dict>
+		<dict>
+			<key>GalleryDesc_ENG</key>
+			<string>Personal</string>
+			<key>GalleryDesc_CHN</key>
+			<string>作品集 3</string>
+			<key>GalleryURI</key>
+			<string>Personal</string>
+			<key>GalleryImageCount</key>
+			<integer>14</integer>
+		</dict>
+		<dict>
+			<key>GalleryDesc_ENG</key>
+			<string>Portrait</string>
+			<key>GalleryDesc_CHN</key>
+			<string>作品集 4</string>
+			<key>GalleryURI</key>
+			<string>Portrait</string>
+			<key>GalleryImageCount</key>
+			<integer>15</integer>
 		</dict>
 	</array>
 	<key>FilterResources</key>

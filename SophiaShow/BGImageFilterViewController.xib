@@ -47,7 +47,6 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">点击这里选择照片</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="336979365">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -59,6 +58,10 @@
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="706964767">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">background_selection.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
@@ -121,7 +124,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="706964767"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">screen_rotation.png</string>
+							<string key="NSResourceName">btn_rotation.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="477539768"/>
 						<reference key="IBUIFont" ref="741823338"/>
@@ -10072,9 +10075,9 @@ AAEAAQABA</bytes>
 						<int key="objectID">2</int>
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="741552120"/>
 							<reference ref="467328744"/>
 							<reference ref="993992347"/>
+							<reference ref="741552120"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -10119,9 +10122,7 @@ AAEAAQABA</bytes>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="clickCancelAll:">UIButton</string>
 						<string key="clickChoosePhoto:">UIButton</string>
-						<string key="clickMenuButton:">UIButton</string>
 						<string key="clickReturnButton:">id</string>
-						<string key="saveImageToPhotoAlbum:">id</string>
 						<string key="selectFilterAreaOrientation:">UIButton</string>
 						<string key="sliderValueChange:">UISlider</string>
 					</dictionary>
@@ -10134,16 +10135,8 @@ AAEAAQABA</bytes>
 							<string key="name">clickChoosePhoto:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBActionInfo" key="clickMenuButton:">
-							<string key="name">clickMenuButton:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
 						<object class="IBActionInfo" key="clickReturnButton:">
 							<string key="name">clickReturnButton:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveImageToPhotoAlbum:">
-							<string key="name">saveImageToPhotoAlbum:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectFilterAreaOrientation:">
@@ -10186,8 +10179,9 @@ AAEAAQABA</bytes>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="btn_home.png">{50, 50}</string>
-			<string key="screen_rotation.png">{50, 50}</string>
+			<string key="background_selection.png">{400, 400}</string>
+			<string key="btn_home.png">{100, 100}</string>
+			<string key="btn_rotation.png">{100, 100}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

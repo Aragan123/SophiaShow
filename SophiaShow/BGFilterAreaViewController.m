@@ -219,7 +219,6 @@
 #pragma mark Utility and Private Methods
 
 - (CGRect) calculateFilterAreaRect: (CGSize) imageSize{
-    // TODO: real calculation is required
     CGRect rect = CGRectZero;
     if (isPortrait)
         rect = CGRectMake(166.5, 10, 641, 748);

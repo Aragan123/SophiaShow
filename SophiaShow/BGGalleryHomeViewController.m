@@ -40,7 +40,7 @@
 //    [self.view addSubview:tableViewController.view];
     
     // add gallery carousel view
-    self.galleryCarousel.type = iCarouselTypeWheel;
+    self.galleryCarousel.type = iCarouselTypeCoverFlow;
     
     
     // add go home button
@@ -124,14 +124,14 @@
         return;
     }
     
-    NSDictionary *gallaryBook = [self.dataSource objectAtIndex:atIndex];
-    NSString *galleryURI = [gallaryBook objectForKey:@"GalleryURI"];
-    NSArray *galleryImageNames = [gallaryBook objectForKey:@"GalleryImageNames"];
-    NSMutableArray *galleryImageArray = [NSMutableArray arrayWithCapacity:[galleryImageNames count]];
+    NSDictionary *galleryBook = [self.dataSource objectAtIndex:atIndex];
+    NSString *galleryURI = [galleryBook objectForKey:@"GalleryURI"];
+    int galleryImageCount = [[galleryBook objectForKey:@"GalleryImageCount"] intValue];
+    NSMutableArray *galleryImageArray = [NSMutableArray arrayWithCapacity:galleryImageCount];
     
     // construct gallery image URI array
-    for (int i=0; i<galleryImageNames.count; i++) {
-        NSString *galleryImageName = [galleryImageNames objectAtIndex:i];
+    for (int i=0; i< galleryImageCount; i++) {
+        NSString *galleryImageName = [NSString stringWithFormat:@"%i.jpg", i];
         NSString *galleryImageURI;
         if (!self.isOnlineData) {
             // this is offline
@@ -161,10 +161,6 @@
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
     return [self.dataSource count];
-}
-
-- (NSUInteger) numberOfPlaceholdersInCarousel:(iCarousel *)carousel{
-    return 10;
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
@@ -208,7 +204,7 @@
         case iCarouselOptionWrap:
         {
             //normally you would hard-code this to YES or NO
-            return YES;
+            return NO;
         }
         case iCarouselOptionSpacing:
         {

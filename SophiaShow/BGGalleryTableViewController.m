@@ -77,7 +77,6 @@
 #pragma mark ATArrayViewDelegate methods
 - (NSInteger)numberOfItemsInArrayView:(ATArrayView *)arrayView {
     return [self.dataSource count];
-//    return 2;
 }
 
 - (UIView *)viewForItemInArrayView:(ATArrayView *)arrayView atIndex:(NSInteger)index {

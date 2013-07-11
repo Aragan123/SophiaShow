@@ -15,6 +15,10 @@
 #define kRemoveViewTag 118
 #endif
 
+#ifndef kRemoveLabelTag
+#define kRemoveLabelTag 119
+#endif
+
 @interface BGGalleryViewController : UIViewController <BGGalleryScrollViewControllerDelegate, iCarouselDataSource, iCarouselDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     // views

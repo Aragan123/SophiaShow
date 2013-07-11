@@ -107,38 +107,39 @@
 
 - (void) setupSideMenuBar{
     // contruct HM SideMenu
+    CGRect frame = CGRectMake(0.0f, 0.0f, 50.0f, 50.0f);
     // item 1
-    UIView *itemBackPat = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnBackPat = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_bokeh_a" ImagePressed:@"btn_function_bokeh_c"];
+    UIView *itemBackPat = [[[UIView alloc] initWithFrame:frame] autorelease];
+    UIButton *btnBackPat = [self createButtonWithFrame:frame Target:self Selector:@selector(clickMenuButton:) Image:@"btn_menu1" ImagePressed:@"btn_menu1"];
     btnBackPat.tag=kMenuBgPattern;
     [itemBackPat addSubview:btnBackPat];
     // item 2
-    UIView *itemFrame = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnFrame = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_border_a" ImagePressed:@"btn_function_border_c"];
+    UIView *itemFrame = [[[UIView alloc] initWithFrame:frame] autorelease];
+    UIButton *btnFrame = [self createButtonWithFrame:frame Target:self Selector:@selector(clickMenuButton:) Image:@"btn_menu2" ImagePressed:@"btn_menu2"];
     btnFrame.tag=kMenuPhotoFrame;
     [itemFrame addSubview:btnFrame];
     // item 3
-    UIView *itemFilter = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnFilter = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_color_a" ImagePressed:@"btn_function_color_c"];
+    UIView *itemFilter = [[[UIView alloc] initWithFrame:frame] autorelease];
+    UIButton *btnFilter = [self createButtonWithFrame:frame Target:self Selector:@selector(clickMenuButton:) Image:@"btn_menu3" ImagePressed:@"btn_menu3"];
     btnFilter.tag=kMenuPhotoFilter;
     [itemFilter addSubview:btnFilter];
     // item 4
-    UIView *itemSpecial = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnSpecial = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(clickMenuButton:) Image:@"btn_function_stylize_a" ImagePressed:@"btn_function_stylize_c"];
+    UIView *itemSpecial = [[[UIView alloc] initWithFrame:frame] autorelease];
+    UIButton *btnSpecial = [self createButtonWithFrame:frame Target:self Selector:@selector(clickMenuButton:) Image:@"btn_menu4" ImagePressed:@"btn_menu4"];
     btnSpecial.tag=kMenuSpecial;
     [itemSpecial addSubview:btnSpecial];
     
     // item 5
-    UIView *itemSave = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 48)] autorelease];
-    UIButton *btnSave = [self createButtonWithFrame:CGRectMake(0, 0, 44, 48) Target:self Selector:@selector(saveImageToPhotoAlbum:) Image:@"icon_save_photo" ImagePressed:@"icon_save_photo"];
+    UIView *itemSave = [[[UIView alloc] initWithFrame:frame] autorelease];
+    UIButton *btnSave = [self createButtonWithFrame:frame Target:self Selector:@selector(saveImageToPhotoAlbum:) Image:@"btn_save" ImagePressed:@"btn_save"];
     [itemSave addSubview:btnSave];
     // item 6
-    UIView *itemCancelAll = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 48, 48)] autorelease];
-    UIButton *btnCancelAll = [self createButtonWithFrame:CGRectMake(0, 0, 48, 48) Target:self Selector:@selector(clickCancelAll:) Image:@"btn_cancelAll" ImagePressed:@"btn_cancelAll"];
+    UIView *itemCancelAll = [[[UIView alloc] initWithFrame:frame] autorelease];
+    UIButton *btnCancelAll = [self createButtonWithFrame:frame Target:self Selector:@selector(clickCancelAll:) Image:@"btn_cancelAll" ImagePressed:@"btn_cancelAll"];
     [itemCancelAll addSubview:btnCancelAll];
     
     // placeholder
-    UIView *itemPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 45, 50)] autorelease];
+    UIView *itemPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 40.0f)] autorelease];
     itemPlaceholder.backgroundColor = [UIColor clearColor];
     
     self.sideMenu = [[[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemCancelAll]] autorelease];
