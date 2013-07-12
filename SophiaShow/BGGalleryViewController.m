@@ -17,27 +17,27 @@
 @implementation BGGalleryViewController
 @synthesize delegate;
 @synthesize scrollViewController, topToolBar, bottomToolBar, navItem, carousel;
-@synthesize dataSource, isOnlineData;
+@synthesize dataSource, galleryTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     // default is offline/local galleries
     return [self initWithNibName:nibNameOrNil
                           bundle:nibBundleOrNil
-                 isOnlineGallery:NO
+                    galleryTitle:[[BGGlobalData sharedData] getCurrentGalleryTitle]
             ];
     
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isOnlineGallery:(BOOL)online
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil galleryTitle:(NSString *)title
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.isOnlineData=online;
-        self.dataSource = [[BGGlobalData sharedData] galleryImages];
+        self.galleryTitle=title;
+        self.dataSource = [[BGGlobalData sharedData] getCurrentGalleryImageURIs];
         _currentArtIndex = 0;
-        _bottomBarHeight = 200.0f; //TODO: set proper value
+        _bottomBarHeight = 160.0f;
         _isFullScreen = NO;
         
     }
@@ -49,14 +49,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//    UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"];
-//    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
     
     // load image scroll paging view
     self.scrollViewController = [[BGGalleryScrollViewController alloc] init];
     self.scrollViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     self.scrollViewController.delegate = self;
-    self.scrollViewController.isOnlineData = self.isOnlineData;
+    self.scrollViewController.isOnlineData = NO; // always false
     self.scrollViewController.dataSource = self.dataSource;
     [self.view addSubview:self.scrollViewController.view];
     
@@ -118,6 +116,7 @@
     navItem=nil;
     carousel=nil;
     dataSource=nil;
+    galleryTitle=nil;
     
     [super viewDidUnload];
 }
@@ -129,6 +128,7 @@
     [bottomToolBar release];
     [navItem release];
     [carousel release];
+    [galleryTitle release];
     
     [dataSource release];
     
@@ -140,7 +140,7 @@
 - (void) scrollerPageViewChanged: (int) newPageIndex{
     // when scroller image is changed, need to change thumbnail bar
     _currentArtIndex = newPageIndex;
-    [self updateNavBarTitle];
+//    [self updateNavBarTitle];
     //update thumbnail view current image index
     [self.carousel scrollToItemAtIndex:newPageIndex animated:YES];
 }
@@ -158,12 +158,10 @@
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
-{
-    //TODO: set proper size of each view and label
-    
+{    
     //create new view if no view is available for recycling
     if (view == nil){
-        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 180.0f)] autorelease];
+        view = [[[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 160.0f, _bottomBarHeight)] autorelease];
         view.contentMode = UIViewContentModeCenter;
     }else{
         UIView *removeView = nil;
@@ -174,30 +172,24 @@
     }
 
     // add images
-    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(10,10, 160, 160)] autorelease];
+    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0.0f,10.0f, view.frame.size.width, 120.0f)] autorelease];
     imageView.tag = kRemoveViewTag;
     NSString *imageURI = [self.dataSource objectAtIndex:index];
-    
-    if (!isOnlineData){
-        // local gallery
-        UIImage *imageObj = [UIImage imageWithContentsOfFile:imageURI]; //get images
-//        imageView.image =[self imageScaledToSize:imageObj withSize:CGSizeMake(160.0f, 160.0f)];
-        imageView.image = [self resizeImageToSize:imageObj withSize:CGSizeMake(160.0f, 160.0f)];
-    }else{
-        // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
-    }
-    
+
+    UIImage *imageObj = [UIImage imageWithContentsOfFile:imageURI]; //get images
+//  imageView.image =[self imageScaledToSize:imageObj withSize:CGSizeMake(160.0f, 160.0f)];
+    imageView.image = [self resizeImageToSize:imageObj withSize:imageView.frame.size];
     [view addSubview:imageView];
     
     // add lable
     UIView *lbl = [view viewWithTag:kRemoveLabelTag];
     if (lbl == nil) {
-        UILabel *lbl = [[[UILabel alloc] initWithFrame:CGRectMake(10.0f, 170.0f, 160.0f, 20.0f)] autorelease];
+        UILabel *lbl = [[[UILabel alloc] initWithFrame:CGRectMake(0.0f, imageView.frame.size.height+15.0f, view.frame.size.width, 20.0f)] autorelease];
         lbl.tag = kRemoveLabelTag;
         lbl.textAlignment = NSTextAlignmentCenter;
         lbl.backgroundColor = [UIColor clearColor];
         lbl.textColor = [UIColor whiteColor];
+        lbl.font = [UIFont fontWithName:@"Verdana" size:12.0f];
         lbl.text = [NSString stringWithFormat:@"%i", index+1];
         [view addSubview:lbl];
     }else{
@@ -207,12 +199,30 @@
     return view;
 }
 
+- (CGFloat)carousel:(iCarousel *)_carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    //customize carousel display
+    switch (option){
+        case iCarouselOptionWrap:{
+            //normally you would hard-code this to YES or NO
+            return NO;
+        }
+        case iCarouselOptionSpacing:{
+            //add a bit of spacing between the item views
+            return value+0.1f;
+        }
+        default:{
+            return value;
+        }
+    }
+}
+
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
     // when thumbnail is selected and centred
     // update nav title and update scroller
     NSLog(@"select thumbnail: %i", index);
     _currentArtIndex = index;
-    [self updateNavBarTitle];
+//    [self updateNavBarTitle];
     [self.scrollViewController updateScrollerPagetoIndex:index];
 }
 
@@ -222,11 +232,7 @@
 // when go home button is clicked
 - (IBAction)clickGoHomeButton:(id)sender{
     if (nil != delegate) {
-        if (!isOnlineData) {
-            [delegate switchViewTo:kPageGalleryHome fromView:kPageGallery];
-        }else{
-            [delegate switchViewTo:kPageOnlineGalleryHome fromView:kPageOnlineGallery];
-        }
+        [delegate switchViewTo:kPageGalleryHome fromView:kPageGallery];
     }
 }
 
@@ -291,8 +297,7 @@
 // set top bar
 - (void)updateNavBarTitle
 {
-//    [self.navItem setTitle:[NSString stringWithFormat:@"%i of %i", _currentArtIndex+1, [self.dataSource count]]];
-    return;
+    [self.navItem setTitle:self.galleryTitle];
 }
 
 - (UIImage *)resizeImageToSize: (UIImage*) sourceImage withSize: (CGSize)targetSize
@@ -347,7 +352,7 @@
     UIGraphicsEndImageContext();
     
     if(newImage == nil)
-        NSLog(@"could not scale image");
+        NSLog(@"Error: could not scale image");
     
     return newImage ;
 }

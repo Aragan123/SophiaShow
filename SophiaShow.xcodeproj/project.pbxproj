@@ -41,6 +41,7 @@
 		6D064B7E177959A10067479E /* UIImage+BGAdditional.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D064B79177959A10067479E /* UIImage+BGAdditional.m */; };
 		6D064B7F177959A10067479E /* UIScrollView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D064B7B177959A10067479E /* UIScrollView+Screenshot.m */; };
 		6D064B80177959A10067479E /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D064B7D177959A10067479E /* UIView+Screenshot.m */; };
+		6D07EA73178FE87400D017AB /* galleryHome_bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D07EA72178FE87400D017AB /* galleryHome_bg2.png */; };
 		6D0DCD261744B8E9009AD3B1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0DCD251744B8E9009AD3B1 /* OpenGLES.framework */; };
 		6D1539F016FB42A2001C0FAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1539EF16FB42A2001C0FAC /* UIKit.framework */; };
 		6D1539F216FB42A2001C0FAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1539F116FB42A2001C0FAC /* Foundation.framework */; };
@@ -202,6 +203,7 @@
 		6D064B7B177959A10067479E /* UIScrollView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Screenshot.m"; sourceTree = "<group>"; };
 		6D064B7C177959A10067479E /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
 		6D064B7D177959A10067479E /* UIView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screenshot.m"; sourceTree = "<group>"; };
+		6D07EA72178FE87400D017AB /* galleryHome_bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = galleryHome_bg2.png; sourceTree = "<group>"; };
 		6D0DCD251744B8E9009AD3B1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		6D1539EC16FB42A2001C0FAC /* SophiaShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SophiaShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D1539EF16FB42A2001C0FAC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -490,6 +492,7 @@
 				6D39E3DC1749E43A00CD82E5 /* menu_button_2.png */,
 				6D39E3DD1749E43A00CD82E5 /* menu_button_3.png */,
 				6DD0C86617451DF9003254C0 /* galleryHome_background.jpg */,
+				6D07EA72178FE87400D017AB /* galleryHome_bg2.png */,
 				6DE747F41732156700A06939 /* SettingData.plist */,
 			);
 			path = Resources;
@@ -840,6 +843,7 @@
 				6D1774DF178EDBFA00C16277 /* Fashion in Resources */,
 				6D1774E0178EDBFA00C16277 /* Personal in Resources */,
 				6D1774E1178EDBFA00C16277 /* Portrait in Resources */,
+				6D07EA73178FE87400D017AB /* galleryHome_bg2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 static BGGlobalData *instance = nil;
 
 @implementation BGGlobalData
-@synthesize galleryImages, galleryBooks, onlineGalleryBooks, filterResourceIcons, filterResources, isPortrait;
+@synthesize galleryBooks, onlineGalleryBooks, filterResourceIcons, filterResources, isPortrait, currentGalleryIndex;
 
 #pragma mark -
 #pragma mark Data File Read & Write
@@ -68,6 +68,7 @@ static BGGlobalData *instance = nil;
 		[self loadSettingsDataFile];
         
         isPortrait = YES; // default value
+        currentGalleryIndex = 100; // default large value
 	}
 	return self;
 }
@@ -107,7 +108,6 @@ static BGGlobalData *instance = nil;
 	instance = nil;
 	[galleryBooks release];
     [onlineGalleryBooks release];
-    [galleryImages release];
     [filterResourceIcons release];
     [filterResources release];
     
@@ -133,6 +133,39 @@ static BGGlobalData *instance = nil;
     }
 
     return key;
+}
+
+- (NSString*) getCurrentGalleryTitle{
+    if (self.currentGalleryIndex > [self.galleryBooks count]){
+        return nil;
+    }
+    
+    NSDictionary *galleryBook = [self.galleryBooks objectAtIndex:self.currentGalleryIndex];
+    NSString *galleryTitle = [galleryBook objectForKey:@"GalleryDesc_ENG"];
+
+    return galleryTitle;
+}
+
+- (NSArray*) getCurrentGalleryImageURIs{
+    if (self.currentGalleryIndex > [self.galleryBooks count]){
+        return nil;
+    }
+    
+    NSDictionary *galleryBook = [self.galleryBooks objectAtIndex:self.currentGalleryIndex];
+    NSString *galleryURI = [galleryBook objectForKey:@"GalleryURI"];
+    int galleryImageCount = [[galleryBook objectForKey:@"GalleryImageCount"] intValue];
+    NSMutableArray *galleryImageArray = [NSMutableArray arrayWithCapacity:galleryImageCount];
+    
+    // construct gallery image URI array
+    for (int i=0; i< galleryImageCount; i++) {
+        NSString *galleryImageName = [NSString stringWithFormat:@"%i.jpg", i];
+        NSString *galleryImageURI;
+        galleryImageURI = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@/%@", galleryURI, galleryImageName];
+        
+        [galleryImageArray addObject:galleryImageURI];
+    }
+
+    return galleryImageArray;
 }
 
 - (NSString*) getFilterDataStringByIndex: (int) index andKeyIndex:(int) keyIndex{

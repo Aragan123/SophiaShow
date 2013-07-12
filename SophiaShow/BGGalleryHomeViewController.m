@@ -120,39 +120,11 @@
 #pragma mark -
 #pragma mark BGGalleryTable View Controller Delegate Methods
 - (void) itemCellSelected: (int) atIndex{
-    if (nil == delegate) {
-        return;
-    }
-    
-    NSDictionary *galleryBook = [self.dataSource objectAtIndex:atIndex];
-    NSString *galleryURI = [galleryBook objectForKey:@"GalleryURI"];
-    int galleryImageCount = [[galleryBook objectForKey:@"GalleryImageCount"] intValue];
-    NSMutableArray *galleryImageArray = [NSMutableArray arrayWithCapacity:galleryImageCount];
-    
-    // construct gallery image URI array
-    for (int i=0; i< galleryImageCount; i++) {
-        NSString *galleryImageName = [NSString stringWithFormat:@"%i.jpg", i];
-        NSString *galleryImageURI;
-        if (!self.isOnlineData) {
-            // this is offline
-            galleryImageURI = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@/%@", galleryURI, galleryImageName];
-        }else{
-            // this is online
-            galleryImageURI = [NSString stringWithFormat:@"%@/%@", galleryURI, galleryImageName];
-        }
-        
-        [galleryImageArray addObject:galleryImageURI];
-    }
-    // persistent
-    [[BGGlobalData sharedData] setGalleryImages:[galleryImageArray copy]];
-    
-    // re-direct to gallery art page
-    if (!self.isOnlineData) {
-        // this is offline
+    if (nil != delegate) {
+        // assign index value
+        [[BGGlobalData sharedData] setCurrentGalleryIndex:atIndex];
+        // re-direct to gallery art page
         [delegate switchViewTo:kPageGallery fromView:kPageGalleryHome];
-    }else{
-        // this is online
-        [delegate switchViewTo:kPageOnlineGallery fromView:kPageOnlineGalleryHome];
     }
 }
 
@@ -167,7 +139,7 @@
 {
     if (view == nil) {
         // create new view
-        view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)] autorelease];
+        view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 400, 300)] autorelease];
         [view setBackgroundColor:[UIColor clearColor]];
     }else{
         UIView *removeView = nil;
@@ -209,7 +181,7 @@
         case iCarouselOptionSpacing:
         {
             //add a bit of spacing between the item views
-            return value * 2.0f;
+            return value+0.3f;
         }
         default:
         {

@@ -194,7 +194,7 @@
         NSLog(@"toPage = Gallery Page");
         
         if (self.galleryPageViewController.view.superview == nil) {
-            BGGalleryViewController *controller = [[BGGalleryViewController alloc] initWithNibName:@"BGGalleryViewController" bundle:nil isOnlineGallery:NO];
+            BGGalleryViewController *controller = [[BGGalleryViewController alloc] initWithNibName:@"BGGalleryViewController" bundle:nil];
             self.galleryPageViewController = controller;
             [controller release];
         }

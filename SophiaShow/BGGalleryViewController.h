@@ -29,7 +29,7 @@
     iCarousel *carousel;
     
     // data
-    BOOL isOnlineData;
+    NSString *galleryTitle;
     NSArray *dataSource;
     
     int _currentArtIndex;
@@ -44,9 +44,9 @@
 @property (nonatomic, retain) UINavigationItem *navItem;
 @property (nonatomic, retain) iCarousel *carousel;
 
-@property (nonatomic, assign) BOOL isOnlineData;
+@property (nonatomic, copy) NSString *galleryTitle;
 @property (nonatomic, retain) NSArray *dataSource;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isOnlineGallery:(BOOL)online;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil galleryTitle:(NSString*)title;
 
 @end

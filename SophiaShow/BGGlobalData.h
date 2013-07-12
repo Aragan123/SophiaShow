@@ -41,7 +41,7 @@ typedef struct{
 @interface BGGlobalData : NSObject{
     NSArray *galleryBooks;
     NSArray *onlineGalleryBooks;
-    NSArray *galleryImages;
+    int currentGalleryIndex;
     NSDictionary *filterResourceIcons;
     NSDictionary *filterResources;
     
@@ -51,16 +51,19 @@ typedef struct{
 
 @property (nonatomic, retain) NSArray *galleryBooks;
 @property (nonatomic, retain) NSArray *onlineGalleryBooks;
-@property (nonatomic, retain) NSArray *galleryImages;
 @property (nonatomic, retain) NSDictionary *filterResourceIcons;
 @property (nonatomic, retain) NSDictionary *filterResources;
 @property (nonatomic, assign) BOOL isPortrait;
+@property (nonatomic, assign) int currentGalleryIndex;
 
 
 + (BGGlobalData *) sharedData;
 -(void) loadSettingsDataFile;
 -(void) writeToSettingsDataFile;
 -(NSString *) settingsDataFilePath;
+
+- (NSArray*) getCurrentGalleryImageURIs;
+- (NSString*) getCurrentGalleryTitle;
 
 -(NSString*) getFilterKeyStringByKeyIndex: (int) keyIndex;
 -(UIImage*) getFilterResourceByIndex: (int) index andKeyIndex:(int)keyIndex;
