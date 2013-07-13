@@ -73,12 +73,12 @@
     UIColor *bgPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pat009.jpg"]]; // default pattern
     self.view.backgroundColor = bgPattern;
     // default back special layer - UIImageView
-    self.specialBackLayer = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)];
+    self.specialBackLayer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)] autorelease];
     [self.specialBackLayer setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.specialBackLayer];
 
     // default frame view
-    self.frameView = [[UIImageView alloc] initWithFrame:[self calculateFrameViewRect:self.view.frame]];
+    self.frameView = [[[UIImageView alloc] initWithFrame:[self calculateFrameViewRect:self.view.frame]] autorelease];
     NSString *defaultFrameURI = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/Filters/009.png"];
     UIImage *defaultFrame = [UIImage imageWithContentsOfFile:defaultFrameURI];
     self.frameView.image = [self drawPhotoFrame:defaultFrame withOffsize:13.0f];
@@ -90,7 +90,7 @@
     [self.view addSubview:self.frameView];
     
     // default photo scroll views
-    self.scrollView = [[UIScrollView alloc] initWithFrame:[self calculatePhotoViewRect:self.view.frame]];
+    self.scrollView = [[[UIScrollView alloc] initWithFrame:[self calculatePhotoViewRect:self.view.frame]] autorelease];
     [self.scrollView setBackgroundColor:[UIColor whiteColor]];
     [self.scrollView setDelegate:self];
     [self.scrollView setBounces:NO];
@@ -103,7 +103,7 @@
     CGFloat imageHeight = CGImageGetHeight(srcImage.CGImage);
     NSLog(@"Source image Size: w=%f, h=%f", imageWidth, imageHeight);
     // default photo view
-    self.photoView = [[UIImageView alloc] initWithImage:srcImage];
+    self.photoView = [[[UIImageView alloc] initWithImage:srcImage] autorelease];
     self.photoView.backgroundColor = [UIColor clearColor];
     [self.scrollView addSubview:self.photoView]; // add views
     
@@ -113,13 +113,13 @@
     [self.scrollView setMaximumZoomScale:[self calculateScrollerMaxZoom:self.scrollView.frame.size andPhotoSize:CGSizeMake(imageWidth, imageHeight)]];
     
     // default result image view
-    self.resultFilterView = [[UIImageView alloc] initWithFrame:self.scrollView.frame];
+    self.resultFilterView = [[[UIImageView alloc] initWithFrame:self.scrollView.frame] autorelease];
     [self.resultFilterView setBackgroundColor:[UIColor clearColor]];
     [self.resultFilterView setContentMode:UIViewContentModeCenter];
     [self.view addSubview:self.resultFilterView];
     
     // default special layer UIImageView
-    self.specialForeLayer = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)];
+    self.specialForeLayer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)] autorelease];
     [self.specialForeLayer setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.specialForeLayer];
     

@@ -89,7 +89,7 @@
 
 - (void) setupFilterSlider{
     // UISlider position
-    self.sliderParameter = [[UISlider alloc] init];
+    self.sliderParameter = [[[UISlider alloc] init] autorelease];
     self.sliderParameter.frame = CGRectMake(200, 726, 480, 23);
     self.sliderParameter.maximumValue = 1.0f;
     self.sliderParameter.minimumValue = 0.0f;
