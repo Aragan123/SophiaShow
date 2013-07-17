@@ -15,6 +15,7 @@
 #import "BGGalleryViewController.h"
 #import "BGReflectionViewController.h"
 #import "BGImageFilterViewController.h"
+#import "SVProgressHUD.h"
 
 @interface BGSwitchViewController ()
 
@@ -93,66 +94,78 @@
 #pragma mark -
 #pragma mark PageSwitcher delegate Functons
 -(void) switchViewTo: (int)toPage fromView:(int)fromPage  {
-    [self prepareViewController:toPage fromView:fromPage];
-    
-    // special transitions
-    if (fromPage == kPageUI || toPage == kPageUI) {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDuration:0.55f];
-        if (toPage > fromPage) {
-            [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:NO];
-        }else{
-            [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:NO];
-        }
+    // show HUD first, has to use like this to be async, rest works has to start after HUD is displayed
+    [UIView animateWithDuration:0.0f animations:^{
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    } completion:^(BOOL finished) {
         
-        UIViewController *fromViewController = [self getSwitchViewController:fromPage];
-        UIViewController *toViewController = [self getSwitchViewController:toPage];
-        // show views
-        [fromViewController	viewWillDisappear:YES];
-        [toViewController viewWillAppear:YES];
-        
-        [fromViewController.view removeFromSuperview];
-        [self.view insertSubview:toViewController.view atIndex:0];
-        
-        [fromViewController viewDidDisappear:YES];
-        [toViewController viewDidAppear:YES];
-        
-        [UIView commitAnimations];
-        return;
-    }
-    else{
-        // others use general transition
-        CATransition *animation = [CATransition animation];
-        [animation setDuration:0.55f];
-        [animation setType:kCATransitionReveal];
-        [animation setFillMode:kCAFillModeForwards];
-        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        
-        // set different transition types
-        if (toPage > fromPage) {
-            [animation setSubtype:kCATransitionFromTop];
-        }else {
-            [animation setSubtype:kCATransitionFromBottom];
-        }
-        
+        /*
+          Perform transition between view controllers
+         */
+        [self prepareViewController:toPage fromView:fromPage];
         // get from and to view controller
         UIViewController *fromViewController = [self getSwitchViewController:fromPage];
         UIViewController *toViewController = [self getSwitchViewController:toPage];
+
+        // special transitions
+        if (fromPage == kPageUI || toPage == kPageUI) {
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            [UIView setAnimationDuration:0.55f];
+            if (toPage > fromPage) {
+                [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:NO];
+            }else{
+                [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:NO];
+            }
+            
+            // show views
+            [fromViewController	viewWillDisappear:YES];
+            [toViewController viewWillAppear:YES];
+            
+            [fromViewController.view removeFromSuperview];
+            [self.view insertSubview:toViewController.view atIndex:0];
+            
+            [fromViewController viewDidDisappear:YES];
+            [toViewController viewDidAppear:YES];
+            
+            [UIView commitAnimations];
+            [SVProgressHUD dismiss];
+            return;
+        }
+        else{
+            
+            // others use general transition
+            CATransition *animation = [CATransition animation];
+            [animation setDuration:0.55f];
+            [animation setType:kCATransitionReveal];
+            [animation setFillMode:kCAFillModeForwards];
+            [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+                    
+            // set different transition types
+            if (toPage > fromPage) {
+                [animation setSubtype:kCATransitionFromTop];
+            }else {
+                [animation setSubtype:kCATransitionFromBottom];
+            }
+                    
+            // show views
+            [fromViewController	viewWillDisappear:YES];
+            [toViewController viewWillAppear:YES];
+            
+            [fromViewController.view removeFromSuperview];
+            [self.view insertSubview:toViewController.view atIndex:0];
+            
+    //        [fromViewController viewDidDisappear:YES];
+    //        [toViewController viewDidAppear:YES];
+
+            // commit animation
+            [self.view.layer addAnimation:animation forKey:@"Switch View Animation"];
+
+        }
         
-        // show views
-        [fromViewController	viewWillDisappear:YES];
-        [toViewController viewWillAppear:YES];
-        
-        [fromViewController.view removeFromSuperview];
-        [self.view insertSubview:toViewController.view atIndex:0];
-        
-        [fromViewController viewDidDisappear:YES];
-        [toViewController viewDidAppear:YES];
-        
-        // commit animation
-        [self.view.layer addAnimation:animation forKey:@"Switch View Animation"];
-    }
+        // finally dismiss HUD
+        [SVProgressHUD dismiss];
+    }];
 }
 
 #pragma mark -
