@@ -7,7 +7,6 @@
 //
 
 #import "BGViewController.h"
-#import "BGSplashViewController.h"
 
 @interface BGViewController ()
 
@@ -21,11 +20,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-//    self.splashVc = [[BGSplashViewController alloc] initWithNibName:@"BGSplashViewController" bundle:nil];
-//    self.splashVc.view.frame = self.view.frame;
-//    [self.view addSubview:self.splashVc.view];
-//    [self.view bringSubviewToFront:self.splashVc.view];
     [self.view setUserInteractionEnabled:NO]; // disable user interaction till all animations complete
     
     self.btn_about.center = CGPointMake(0-self.btn_about.frame.size.width*0.5, 0-self.btn_about.frame.size.height*0.5);

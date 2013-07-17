@@ -7,7 +7,7 @@
 //
 
 #import "BGGalleryViewController.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImage+BGAdditional.h"
 #import "BGGlobalData.h"
 
 @interface BGGalleryViewController ()
@@ -48,34 +48,41 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self disableApp];
     // load image scroll paging view
-    self.scrollViewController = [[BGGalleryScrollViewController alloc] init];
-    self.scrollViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    BGGalleryScrollViewController *scrollView = [[BGGalleryScrollViewController alloc] init];
+    scrollView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.scrollViewController = scrollView;
+    [scrollView release];
+    
     self.scrollViewController.delegate = self;
-    self.scrollViewController.isOnlineData = NO; // always false
     self.scrollViewController.dataSource = self.dataSource;
     [self.view addSubview:self.scrollViewController.view];
     
     // top navigation bar
-    self.topToolBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-    [self.topToolBar setBarStyle:UIBarStyleBlackTranslucent];
-    self.navItem = [[UINavigationItem alloc] init];
-    self.navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" 返 回 "
+    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    [navBar setBarStyle:UIBarStyleBlackTranslucent];
+    self.topToolBar = navBar;
+    [navBar release];
+    self.navItem = [[[UINavigationItem alloc] init] autorelease];
+    self.navItem.title = self.galleryTitle; // set title
+    self.navItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@" 返 回 "
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:self
-                                                                action:@selector(clickGoHomeButton:)];
+                                                                action:@selector(clickGoHomeButton:)] autorelease];
     [self.topToolBar setItems:[NSArray arrayWithObject:self.navItem]];
     [self.view addSubview:self.topToolBar];
-    [self updateNavBarTitle]; // set title
     
     // bottom tool bar
-    self.bottomToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - _bottomBarHeight,
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - _bottomBarHeight,
                                                                     self.view.frame.size.width, _bottomBarHeight)];
-    [self.bottomToolBar setBarStyle:UIBarStyleBlackTranslucent];
+    [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+    self.bottomToolBar = toolbar;
+    [toolbar release];
     // add thumbnail tool - iCarousel
-    self.carousel = [[iCarousel alloc] initWithFrame:self.bottomToolBar.frame];
+    self.carousel = [[[iCarousel alloc] initWithFrame:self.bottomToolBar.frame] autorelease];
     self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.carousel.type = iCarouselTypeLinear;
     self.carousel.delegate = self;
@@ -86,6 +93,8 @@
     [self.bottomToolBar setItems:barItems animated:YES];
     
     [self.view addSubview:self.bottomToolBar];
+    
+    [self enableApp];
 }
 
 
@@ -140,7 +149,6 @@
 - (void) scrollerPageViewChanged: (int) newPageIndex{
     // when scroller image is changed, need to change thumbnail bar
     _currentArtIndex = newPageIndex;
-//    [self updateNavBarTitle];
     //update thumbnail view current image index
     [self.carousel scrollToItemAtIndex:newPageIndex animated:YES];
 }
@@ -163,38 +171,31 @@
     if (view == nil){
         view = [[[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 160.0f, _bottomBarHeight)] autorelease];
         view.contentMode = UIViewContentModeCenter;
-    }else{
-        UIView *removeView = nil;
-        removeView = [view viewWithTag:kRemoveViewTag];
-        if (removeView) {
-            [removeView removeFromSuperview];
-        }
-    }
-
-    // add images
-    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0.0f,10.0f, view.frame.size.width, 120.0f)] autorelease];
-    imageView.tag = kRemoveViewTag;
-    NSString *imageURI = [self.dataSource objectAtIndex:index];
-
-    UIImage *imageObj = [UIImage imageWithContentsOfFile:imageURI]; //get images
-//  imageView.image =[self imageScaledToSize:imageObj withSize:CGSizeMake(160.0f, 160.0f)];
-    imageView.image = [self resizeImageToSize:imageObj withSize:imageView.frame.size];
-    [view addSubview:imageView];
-    
-    // add lable
-    UIView *lbl = [view viewWithTag:kRemoveLabelTag];
-    if (lbl == nil) {
+        view.backgroundColor = [UIColor clearColor];
+        // image view
+        UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0.0f,10.0f, view.frame.size.width, 120.0f)] autorelease];
+        imageView.tag = kRemoveViewTag;
+        [view addSubview:imageView];
+        
+        // label view
         UILabel *lbl = [[[UILabel alloc] initWithFrame:CGRectMake(0.0f, imageView.frame.size.height+15.0f, view.frame.size.width, 20.0f)] autorelease];
         lbl.tag = kRemoveLabelTag;
         lbl.textAlignment = NSTextAlignmentCenter;
         lbl.backgroundColor = [UIColor clearColor];
         lbl.textColor = [UIColor whiteColor];
         lbl.font = [UIFont fontWithName:@"Verdana" size:12.0f];
-        lbl.text = [NSString stringWithFormat:@"%i", index+1];
         [view addSubview:lbl];
-    }else{
-        ((UILabel*)lbl).text = [NSString stringWithFormat:@"%i", index+1];
     }
+    
+    // add image
+    UIImageView *imageView = (UIImageView*)[view viewWithTag:kRemoveViewTag];    
+    NSString *imageURI = [self.dataSource objectAtIndex:index];
+    UIImage *imageObj = [UIImage imageWithContentsOfFile:imageURI]; //get images
+    imageView.image = [imageObj resizeImageToSize:imageView.frame.size]; // and resize it
+    
+    // add lable
+    UILabel *lbl = (UILabel*)[view viewWithTag:kRemoveLabelTag];
+    lbl.text = [NSString stringWithFormat:@"%i", index+1];
     
     return view;
 }
@@ -222,7 +223,6 @@
     // update nav title and update scroller
     NSLog(@"select thumbnail: %i", index);
     _currentArtIndex = index;
-//    [self updateNavBarTitle];
     [self.scrollViewController updateScrollerPagetoIndex:index];
 }
 
@@ -282,79 +282,6 @@
 - (void)disableApp
 {
 	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-}
-
-// for image thumbnail creation
-- (UIImage*) imageScaledToSize: (UIImage*) image withSize: (CGSize) newSize{
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect: CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
-// set top bar
-- (void)updateNavBarTitle
-{
-    [self.navItem setTitle:self.galleryTitle];
-}
-
-- (UIImage *)resizeImageToSize: (UIImage*) sourceImage withSize: (CGSize)targetSize
-{
-    UIImage *newImage = nil;
-    
-    CGSize imageSize = sourceImage.size;
-    CGFloat width = imageSize.width;
-    CGFloat height = imageSize.height;
-    
-    CGFloat targetWidth = targetSize.width;
-    CGFloat targetHeight = targetSize.height;
-    
-    CGFloat scaleFactor = 0.0;
-    CGFloat scaledWidth = targetWidth;
-    CGFloat scaledHeight = targetHeight;
-    
-    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
-    
-    if (CGSizeEqualToSize(imageSize, targetSize) == NO) {
-        
-        CGFloat widthFactor = targetWidth / width;
-        CGFloat heightFactor = targetHeight / height;
-        
-        if (widthFactor < heightFactor)
-            scaleFactor = widthFactor;
-        else
-            scaleFactor = heightFactor;
-        
-        scaledWidth  = width * scaleFactor;
-        scaledHeight = height * scaleFactor;
-        
-        // make image center aligned
-        if (widthFactor < heightFactor)
-        {
-            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
-        }
-        else if (widthFactor > heightFactor)
-        {
-            thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
-        }
-    }
-    
-    UIGraphicsBeginImageContext(targetSize);
-    CGRect thumbnailRect = CGRectZero;
-    thumbnailRect.origin = thumbnailPoint;
-    thumbnailRect.size.width  = scaledWidth;
-    thumbnailRect.size.height = scaledHeight;
-    
-    [sourceImage drawInRect:thumbnailRect];
-    newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    if(newImage == nil)
-        NSLog(@"Error: could not scale image");
-    
-    return newImage ;
 }
 
 

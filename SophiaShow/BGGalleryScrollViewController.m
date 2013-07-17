@@ -7,16 +7,14 @@
 //
 
 #import "BGGalleryScrollViewController.h"
-#import "UIImageView+AFNetworking.h"
 #import "SPXFrameScroller.h"
-#import "JMWhenTapped.h"
 
 @interface BGGalleryScrollViewController ()
 
 @end
 
 @implementation BGGalleryScrollViewController
-@synthesize delegate, dataSource, isOnlineData;
+@synthesize delegate, dataSource;
 
 - (void)viewDidLoad
 {
@@ -53,9 +51,16 @@
 }
 
 #pragma mark -
-#pragma mark Public Methods
+#pragma mark Public Methods & Actions
 - (void) updateScrollerPagetoIndex: (int) index{
     self.pagingView.currentPageIndex = index;
+}
+
+// when image is tapped
+- (void) scrollerPageIsTapped{
+    if (nil != delegate) {
+        [delegate scrollerPageIsSingleTapped];
+    }
 }
 
 #pragma mark -
@@ -65,22 +70,7 @@
 }
 
 - (UIView *)viewForPageInPagingView:(ATPagingView *)pagingView atIndex:(NSInteger)index {
-    // get imageview to be displayed
-    UIImageView *imageView = [[[UIImageView alloc] initWithFrame: self.view.frame] autorelease];
-    [imageView setContentMode:UIViewContentModeScaleAspectFit]; // very important
-    imageView.tag = kRemoveViewTag;
-    NSString *imageURI = [self.dataSource objectAtIndex:index];
-    NSLog(@"loadng imagURI: %@", imageURI);
     
-    if (!self.isOnlineData){
-        // local gallery
-        imageView.image = [UIImage imageWithContentsOfFile:imageURI];
-    }else{
-        // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading_b.png"]];
-    }
-    
-    // construct view to display
     SPXFrameScroller *view = (SPXFrameScroller*)[pagingView dequeueReusablePage]; // get a reusable item
     if (view == nil) {
         view = [[[SPXFrameScroller alloc] initWithFrame:self.view.frame] autorelease];
@@ -88,23 +78,25 @@
         view.backgroundColor = [UIColor clearColor];
         view.maximumZoomScale = 2.0f;
         view.minimumZoomScale = 1.0f;
-    }else{
-        UIView *removeView = nil;
-        removeView = [view viewWithTag:kRemoveViewTag];
-        if (removeView) {
-            [removeView removeFromSuperview];
-        }
+        view.contentSize = self.view.frame.size; // set view content size
+
+        // add imageview
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame: self.view.frame];
+        [imageView setContentMode:UIViewContentModeScaleAspectFit]; // very important
+        imageView.tag = kRemoveViewTag;
+        [view addSubview:imageView];
+        [imageView release];
+
+        // when single tap
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollerPageIsTapped)];
+        [view addGestureRecognizer:tap];
+        [tap release];
     }
     
-    view.contentSize = self.view.frame.size; // must put over here, not in initialization block above
-    [view addSubview:imageView];
-    
-    // when single tap
-    [view whenTapped:^{
-        if (nil != delegate) {
-            [delegate scrollerPageIsSingleTapped];
-        }
-    }];
+    UIImageView *imageView = (UIImageView*)[view viewWithTag:kRemoveViewTag];
+    NSString *imageURI = [self.dataSource objectAtIndex:index];
+    NSLog(@"loadng imagURI: %@", imageURI);
+    imageView.image = [UIImage imageWithContentsOfFile:imageURI];
     
     return view;
 }

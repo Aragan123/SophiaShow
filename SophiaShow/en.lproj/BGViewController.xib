@@ -48,7 +48,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">home_background.jpg</string>
+							<string key="NSResourceName">background_home.jpg</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="385679211">
@@ -362,7 +362,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="home_background.jpg">{1024, 768}</string>
+			<string key="background_home.jpg">{1024, 768}</string>
 			<string key="menu_button_1.png">{500, 419}</string>
 			<string key="menu_button_2.png">{430, 360}</string>
 			<string key="menu_button_3.png">{500, 380}</string>

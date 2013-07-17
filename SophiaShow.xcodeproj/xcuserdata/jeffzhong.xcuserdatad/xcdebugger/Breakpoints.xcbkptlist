@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SophiaShow/BGFilterAreaViewController.m"
-         timestampString = "394017015.01959"
+         timestampString = "395731187.277977"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "204"
-         endingLineNumber = "204"
+         startingLineNumber = "207"
+         endingLineNumber = "207"
          landmarkName = "-updatePhotoSpecials:"
          landmarkType = "5">
       </FileBreakpoint>

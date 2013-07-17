@@ -7,12 +7,12 @@
 //
 
 #import "BGImageFilterViewController.h"
+#import "BGFilterAreaViewController.h"
 #import "HMSideMenu.h"
 #import "SVProgressHUD.h"
 #import "AHAlertView.h"
 #import "NSObject+Blocks.h"
 #import "BGGlobalData.h"
-#import "JMWhenTapped.h"
 
 @interface BGImageFilterViewController ()
 
@@ -110,41 +110,43 @@
     CGRect frame = CGRectMake(0.0f, 0.0f, 50.0f, 50.0f);
     // item 1
     UIView *itemBackPat = [[[UIView alloc] initWithFrame:frame] autorelease];
-    UIButton *btnBackPat = [self createButtonWithFrame:frame Target:self Selector:@selector(clickMenuButton:) Image:@"btn_menu1" ImagePressed:@"btn_menu1"];
+    UIButton *btnBackPat = [self createButtonWithFrame:frame Target:self Selector:@selector(showMoreOptionsBar:) pngImage:@"btn_menu1"];
     btnBackPat.tag=kMenuBgPattern;
     [itemBackPat addSubview:btnBackPat];
     // item 2
     UIView *itemFrame = [[[UIView alloc] initWithFrame:frame] autorelease];
-    UIButton *btnFrame = [self createButtonWithFrame:frame Target:self Selector:@selector(clickMenuButton:) Image:@"btn_menu2" ImagePressed:@"btn_menu2"];
+    UIButton *btnFrame = [self createButtonWithFrame:frame Target:self Selector:@selector(showMoreOptionsBar:) pngImage:@"btn_menu2"];
     btnFrame.tag=kMenuPhotoFrame;
     [itemFrame addSubview:btnFrame];
     // item 3
     UIView *itemFilter = [[[UIView alloc] initWithFrame:frame] autorelease];
-    UIButton *btnFilter = [self createButtonWithFrame:frame Target:self Selector:@selector(clickMenuButton:) Image:@"btn_menu3" ImagePressed:@"btn_menu3"];
+    UIButton *btnFilter = [self createButtonWithFrame:frame Target:self Selector:@selector(showMoreOptionsBar:) pngImage:@"btn_menu3"];
     btnFilter.tag=kMenuPhotoFilter;
     [itemFilter addSubview:btnFilter];
     // item 4
     UIView *itemSpecial = [[[UIView alloc] initWithFrame:frame] autorelease];
-    UIButton *btnSpecial = [self createButtonWithFrame:frame Target:self Selector:@selector(clickMenuButton:) Image:@"btn_menu4" ImagePressed:@"btn_menu4"];
+    UIButton *btnSpecial = [self createButtonWithFrame:frame Target:self Selector:@selector(showMoreOptionsBar:) pngImage:@"btn_menu4"];
     btnSpecial.tag=kMenuSpecial;
     [itemSpecial addSubview:btnSpecial];
     
     // item 5
     UIView *itemSave = [[[UIView alloc] initWithFrame:frame] autorelease];
-    UIButton *btnSave = [self createButtonWithFrame:frame Target:self Selector:@selector(saveImageToPhotoAlbum:) Image:@"btn_save" ImagePressed:@"btn_save"];
+    UIButton *btnSave = [self createButtonWithFrame:frame Target:self Selector:@selector(saveImageToPhotoAlbum:) pngImage:@"btn_save"];
     [itemSave addSubview:btnSave];
     // item 6
     UIView *itemCancelAll = [[[UIView alloc] initWithFrame:frame] autorelease];
-    UIButton *btnCancelAll = [self createButtonWithFrame:frame Target:self Selector:@selector(clickCancelAll:) Image:@"btn_cancelAll" ImagePressed:@"btn_cancelAll"];
+    UIButton *btnCancelAll = [self createButtonWithFrame:frame Target:self Selector:@selector(clickCancelAll:) pngImage:@"btn_cancelAll"];
     [itemCancelAll addSubview:btnCancelAll];
     
     // placeholder
     UIView *itemPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 40.0f)] autorelease];
     itemPlaceholder.backgroundColor = [UIColor clearColor];
     
-    self.sideMenu = [[[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemCancelAll]] autorelease];
-    [self.sideMenu setItemSpacing:5.0f];
+    HMSideMenu *menus = [[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemCancelAll]];
+    [menus setItemSpacing:5.0f];
+    self.sideMenu = menus;
     [self.view addSubview:self.sideMenu];
+    [menus release];
 }
 
 - (void) setupFilterArea: (UIImage*)image{
@@ -203,19 +205,41 @@
 }
 
 // when side menu button is pressed
-- (IBAction) clickMenuButton:(UIButton*)sender{
-    int tag = sender.tag;
-    NSLog(@"Menu button is clicked at tag=%i", tag);
+- (IBAction) showMoreOptionsBar: (UIButton*) sender{
+    int tag = sender.tag; // get tag
+    if (selectedMenu == tag) return;
     
-    switch (tag) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-            [self showMoreOptionsBar:tag];
-            break;
-        default:
-            break;
+    // get correct data source first
+    selectedMenu = tag;
+    NSDictionary *res = [[BGGlobalData sharedData] filterResourceIcons];
+    NSString* key = [[BGGlobalData sharedData] getFilterKeyStringByKeyIndex:tag];
+    self.iCarousel_ds = [res objectForKey:key];
+    
+    // construct carousel
+    if (self.carousel == nil) {
+        // first time to run
+        self.carousel = [[iCarousel alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, 110, self.view.frame.size.height)];
+        self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.carousel.type = iCarouselTypeLinear;
+        self.carousel.bounces= NO;
+        self.carousel.vertical = YES;
+        self.carousel.centerItemWhenSelected = NO;
+        self.carousel.backgroundColor = [UIColor clearColor];
+        self.carousel.delegate = self;
+        self.carousel.dataSource = self;
+        self.carousel.currentItemIndex = 2;
+        self.carousel.scrollToItemBoundary = NO;
+        [self.view addSubview:self.carousel];
+        [self displayMoreOptionBar];
+    } else if (self.carousel.superview != nil) {
+        // is currently displayed, so firstly hide it
+        [self hideThenDisplayMoreOptionBar];
+    } else {
+        // is currently hiding
+        [self.carousel reloadData];
+        self.carousel.currentItemIndex = 2;
+        [self.view addSubview:self.carousel];
+        [self displayMoreOptionBar];
     }
     
 }
@@ -337,55 +361,16 @@
 
 #pragma mark -
 #pragma mark Utility and Private Methods
-- (UIButton*) createButtonWithFrame: (CGRect) frame Target:(id)target Selector:(SEL)selector Image:(NSString *)image ImagePressed:(NSString *)imagePressed
+- (UIButton*) createButtonWithFrame: (CGRect) frame Target:(id)target Selector:(SEL)selector pngImage:(NSString *)imageName
 {
+    NSString *path = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
+    UIImage *image = [UIImage imageWithContentsOfFile:path];
+    
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:frame];
-    UIImage *newImage = [UIImage imageNamed: image];
-    [button setBackgroundImage:newImage forState:UIControlStateNormal];
-    UIImage *newPressedImage = [UIImage imageNamed: imagePressed];
-    [button setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
+    [button setBackgroundImage:image forState:UIControlStateNormal];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     return button;
-}
-
-
-- (void) showMoreOptionsBar: (int) tag{
-    if (selectedMenu == tag) return;
-    
-    // get correct data source first
-    selectedMenu = tag;
-    NSDictionary *res = [[BGGlobalData sharedData] filterResourceIcons];
-    NSString* key = [[BGGlobalData sharedData] getFilterKeyStringByKeyIndex:tag];
-    self.iCarousel_ds = [res objectForKey:key];
-    
-    // construct carousel
-    if (self.carousel == nil) {
-        // first time to run
-        self.carousel = [[iCarousel alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, 110, self.view.frame.size.height)];
-        self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.carousel.type = iCarouselTypeLinear;
-        self.carousel.bounces= NO;
-        self.carousel.vertical = YES;
-        self.carousel.centerItemWhenSelected = NO;
-        self.carousel.backgroundColor = [UIColor clearColor];
-        self.carousel.delegate = self;
-        self.carousel.dataSource = self;
-        self.carousel.currentItemIndex = 2;
-        self.carousel.scrollToItemBoundary = NO;
-        [self.view addSubview:self.carousel];
-        [self displayMoreOptionBar];
-    } else if (self.carousel.superview != nil) {
-        // is currently displayed, so firstly hide it
-        [self hideThenDisplayMoreOptionBar];
-    } else {
-        // is currently hiding
-        [self.carousel reloadData];
-        self.carousel.currentItemIndex = 2;
-        [self.view addSubview:self.carousel];
-        [self displayMoreOptionBar];
-    }
-    
 }
 
 - (void) displayMoreOptionBar{
@@ -436,19 +421,15 @@
         view.frame = CGRectMake(0.0f, 0.0f, 110.0f, 110.0f);
         view.contentMode = UIViewContentModeCenter;
         [view setBackgroundColor:[UIColor clearColor]];
-    }else{
-        UIView *removeView = nil;
-        removeView = [view viewWithTag:kRemoveViewTag];
-        if (removeView) {
-            [removeView removeFromSuperview];
-        }
+        // add image view
+        UIImageView *imageView = [[[UIImageView alloc] init] autorelease];
+        imageView.backgroundColor = [UIColor clearColor];
+        imageView.tag = kRemoveViewTag;
+        [view addSubview:imageView];
     }
     
+    UIImageView *imageView = (UIImageView*)[view viewWithTag:kRemoveViewTag];
     // add items
-    UIImageView *imageView = [[[UIImageView alloc] init] autorelease];
-    imageView.backgroundColor = [UIColor clearColor];
-    imageView.tag = kRemoveViewTag;
-    
     if (index == 0) {
         // first one is alwasy close button
         imageView.frame = CGRectMake(50.0f, 50.0f, 60.0f, 60.0f);
@@ -461,8 +442,6 @@
         imageView.image = [UIImage imageNamed:imageURI]; //get images
     }
 
-    [view addSubview:imageView];
-        
     return view;
 }
 

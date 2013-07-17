@@ -23,12 +23,6 @@ static BGGlobalData *instance = nil;
 #endif
 		//get data dictionary and set values
 		NSDictionary *settings = [[NSDictionary alloc] initWithContentsOfFile:filePath];
-//		self.pregDay = [settings objectForKey:@"DateOfPregnancy"];
-//		self.birthDay = [settings objectForKey:@"DateOfBirth"];
-//		self.cardDay = [settings objectForKey:@"DateOfCard"];
-//		self.hasPregdaySet = [[settings objectForKey:@"HasPregdaySet"] boolValue];
-//		self.hasBirthdaySet = [[settings objectForKey:@"HasBirthdaySet"] boolValue];
-//		self.hasCarddaySet = [[settings objectForKey:@"HasCarddaySet"] boolValue];
 		self.galleryBooks = [settings objectForKey:@"GalleryBooks"];
         self.filterResourceIcons = [settings objectForKey:@"FilterResourceIcons"];
         self.filterResources = [settings objectForKey:@"FilterResources"];
@@ -40,12 +34,6 @@ static BGGlobalData *instance = nil;
 - (void) writeToSettingsDataFile {
 	NSMutableDictionary *settings = [[NSMutableDictionary alloc] init];
 	// set values
-//	[settings setValue:self.pregDay forKey:@"DateOfPregnancy"];
-//	[settings setValue:self.birthDay forKey:@"DateOfBirth"];
-//	[settings setValue:self.cardDay forKey:@"DateOfCard"];
-//	[settings setValue:[NSNumber numberWithBool:self.hasPregdaySet] forKey:@"HasPregdaySet"];
-//	[settings setValue:[NSNumber numberWithBool:self.hasBirthdaySet] forKey:@"HasBirthdaySet"];
-//	[settings setValue:[NSNumber numberWithBool:self.hasCarddaySet] forKey:@"HasCarddaySet"];
 	[settings setValue:self.galleryBooks forKey:@"GalleryBooks"];
     
 	// write to file

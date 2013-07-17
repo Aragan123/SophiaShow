@@ -10,6 +10,7 @@
 #import "BGPageSwitcherDelegate.h"
 
 @class BGViewController;
+@class BGHomeViewController;
 @class BGAboutViewController;
 @class BGGalleryHomeViewController;
 @class BGGalleryViewController;
@@ -17,7 +18,8 @@
 @class BGImageFilterViewController;
 
 @interface BGSwitchViewController : UIViewController <BGPageSwitcherDelegate> {
-    BGViewController *homeageViewController;
+    BGViewController *homePageViewController;
+//    BGHomeViewController *homePageViewController;
     BGAboutViewController *aboutPageViewController;
     BGGalleryHomeViewController *galleryHomePageViewController;
     BGGalleryViewController *galleryPageViewController;
@@ -26,6 +28,7 @@
 }
 
 @property (nonatomic, retain) BGViewController *homePageViewController;
+//@property (nonatomic, retain) BGHomeViewController *homePageViewController;
 @property (nonatomic, retain) BGAboutViewController *aboutPageViewController;
 @property (nonatomic, retain) BGGalleryHomeViewController *galleryHomePageViewController;
 @property (nonatomic, retain) BGGalleryViewController *galleryPageViewController;

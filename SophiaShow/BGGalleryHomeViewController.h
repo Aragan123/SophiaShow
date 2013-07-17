@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
-#import "BGGalleryTableViewController.h"
 #import "iCarousel.h"
 
 #ifndef kRemoveViewTag
 #define kRemoveViewTag 118
 #endif
 
-@interface BGGalleryHomeViewController : UIViewController <BGGalleryTableViewControllerDelegate, iCarouselDataSource, iCarouselDelegate>{
+@interface BGGalleryHomeViewController : UIViewController <iCarouselDataSource, iCarouselDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     
     iCarousel *galleryCarousel;

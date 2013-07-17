@@ -19,6 +19,7 @@
 
 
 // jeff defined
+- (UIImage *)resizeImageToSize: (CGSize)targetSize;
 - (UIImage*) imageScaledToSize: (CGSize) newSize;
 
 @end

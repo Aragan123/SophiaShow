@@ -11,6 +11,7 @@
 #import "UIImage+BGAdditional.h"
 #import "UIScrollView+Screenshot.h"
 #import "UIView+Screenshot.h"
+#import "UIScreen+SSToolkitAdditions.h"
 
 
 @interface BGFilterAreaViewController ()
@@ -168,9 +169,11 @@
             [self.scrollView removeFromSuperview]; // remove scroll view
             
             if (self.resultFilterView == nil) {
-                self.resultFilterView = [[UIImageView alloc] initWithFrame:self.scrollView.frame];
-                [self.resultFilterView setBackgroundColor:[UIColor clearColor]];
-                [self.resultFilterView.layer setCornerRadius:4.0f];
+                UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.scrollView.frame];
+                [imageView setBackgroundColor:[UIColor clearColor]];
+                [imageView.layer setCornerRadius:4.0f];
+                self.resultFilterView = imageView;
+                [imageView release];
             }
             [self.view insertSubview:self.resultFilterView aboveSubview:self.frameView];
 
@@ -247,7 +250,11 @@
 }
 
 - (float) calculateScrollerMaxZoom: (CGSize) scrollerSize andPhotoSize:(CGSize) photoSize{
-    return 2.0f;
+    if ([[UIScreen mainScreen] isRetinaDisplay]) {
+        return 1.5f;
+    }else{
+        return 2.0f;
+    }
 }
 
 #pragma mark -

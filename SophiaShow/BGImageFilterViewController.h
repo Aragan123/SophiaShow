@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
 #import "iCarousel.h"
-#import "BGFilterAreaViewController.h"
 
+@class BGFilterAreaViewController;
 @class HMSideMenu;
 
 #ifndef kRemoveViewTag

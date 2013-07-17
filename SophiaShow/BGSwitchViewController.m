@@ -9,6 +9,7 @@
 #import "BGSwitchViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BGViewController.h"
+#import "BGHomeViewController.h"
 #import "BGAboutViewController.h"
 #import "BGGalleryHomeViewController.h"
 #import "BGGalleryViewController.h"
@@ -28,6 +29,8 @@
 	// Do any additional setup after loading the view.
     
     BGViewController *mainview = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
+
+//    BGHomeViewController *mainview = [[BGHomeViewController alloc] init];
     self.homePageViewController = mainview;
     self.homePageViewController.delegate=self;
     [mainview release];
@@ -90,7 +93,7 @@
 #pragma mark -
 #pragma mark PageSwitcher delegate Functons
 -(void) switchViewTo: (int)toPage fromView:(int)fromPage  {
-    [self prepareViewController:toPage];
+    [self prepareViewController:toPage fromView:fromPage];
     
     // special transitions
     if (fromPage == kPageUI || toPage == kPageUI) {
@@ -154,12 +157,14 @@
 
 #pragma mark -
 #pragma mark Methods
-- (void) prepareViewController: (int) toPage{
+- (void) prepareViewController: (int) toPage fromView:(int)fromePage{
     if (toPage == kPageMain) {
         NSLog(@"toPage = MainPage");
         
         if (self.homePageViewController == nil) {
             BGViewController *controller = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
+//            BGHomeViewController *controller = [[BGHomeViewController alloc] initFromScene:fromePage];
+
             self.homePageViewController = controller;
             [controller release];
         }

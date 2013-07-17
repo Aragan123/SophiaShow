@@ -7,7 +7,6 @@
 //
 
 #import "BGAppDelegate.h"
-
 #import "BGSwitchViewController.h"
 
 @implementation BGAppDelegate
