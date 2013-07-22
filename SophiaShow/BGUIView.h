@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BGUIView : UIView
+
 @property (nonatomic, assign) CGPoint fromLocation;
 @property (nonatomic, assign) CGPoint toLocation;
+@property (nonatomic, assign) float rotation;
 
 @end

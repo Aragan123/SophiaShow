@@ -29,7 +29,7 @@
 @property (nonatomic, retain) HMSideMenu *sideMenu;
 @property (nonatomic, retain) iCarousel *carousel;
 @property (nonatomic, retain) NSArray *iCarousel_ds;
-@property (retain, nonatomic) IBOutlet UIButton *btnChoosePhoto;
+@property (retain, nonatomic) IBOutlet UIView *btnChoosePhoto;
 @property (retain, nonatomic) IBOutlet UISlider *sliderParameter;
 @property (retain, nonatomic) IBOutlet UIButton *btnRotateFrame;
 @property (retain, nonatomic) UIPopoverController *popover;

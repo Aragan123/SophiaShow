@@ -12,6 +12,8 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
+    #define DegreesToRadians(x) (M_PI * (x) / 180.0)
+
     #define ccp(__X__,__Y__) CGPointMake(__X__,__Y__)
 
     static inline CGPoint

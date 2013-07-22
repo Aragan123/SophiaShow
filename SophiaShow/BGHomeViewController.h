@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
 
-#ifndef kTagParticleHome1
+#ifndef kTagHomeButton
 
 #define kTagHomeButton      88
 #define kTagHomeParticle1   89
@@ -20,7 +20,7 @@
 #define kTagHomeMenuAbout   93
 #define kTagHomeMenuFunc    94
 
-#define kTagAboutPhoto      95
+#define kTagAboutBook      95
 #define kTagAboutTextEn     96
 #define kTagAboutTextCn     97
 
@@ -32,12 +32,15 @@
 #endif
 
 
-@interface BGHomeViewController : UIViewController{
+@interface BGHomeViewController : UIViewController {
     id<BGPageSwitcherDelegate> delegate;
     int scene;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic, retain) UITapGestureRecognizer *singleTap;
+@property (nonatomic, retain) NSArray *arrayHome;
+@property (nonatomic, retain) NSArray *arrayGallery;
 
 
 - (id)initFromScene:(int)num;

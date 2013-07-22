@@ -244,7 +244,7 @@
     if (isPortrait) {
         rect = CGRectMake(85, 60, 471, 628);
     }else
-        rect =  CGRectMake(70, 70, 684, 478);
+        rect =  CGRectMake(98, 73, 628, 471);
     
     return rect;
 }

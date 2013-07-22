@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define DegreesToRadians(x) (M_PI * (x) / 180.0)
-
 @interface UIImage (BGAdditional)
 
 - (UIImage *)imageRotatedByDegrees:(CGFloat)degrees;

@@ -29,9 +29,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    BGViewController *mainview = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
-
-//    BGHomeViewController *mainview = [[BGHomeViewController alloc] init];
+//    BGViewController *mainview = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
+    BGHomeViewController *mainview = [[BGHomeViewController alloc] initFromScene:kPageMain];
+    
     self.homePageViewController = mainview;
     self.homePageViewController.delegate=self;
     [mainview release];
@@ -129,8 +129,6 @@
             [toViewController viewDidAppear:YES];
             
             [UIView commitAnimations];
-            [SVProgressHUD dismiss];
-            return;
         }
         else{
             
@@ -155,8 +153,8 @@
             [fromViewController.view removeFromSuperview];
             [self.view insertSubview:toViewController.view atIndex:0];
             
-    //        [fromViewController viewDidDisappear:YES];
-    //        [toViewController viewDidAppear:YES];
+            [fromViewController viewDidDisappear:YES];
+//            [toViewController viewDidAppear:YES];
 
             // commit animation
             [self.view.layer addAnimation:animation forKey:@"Switch View Animation"];
@@ -171,12 +169,12 @@
 #pragma mark -
 #pragma mark Methods
 - (void) prepareViewController: (int) toPage fromView:(int)fromePage{
-    if (toPage == kPageMain) {
+    if (toPage == kPageMain || toPage == kPageGalleryHome) {
         NSLog(@"toPage = MainPage");
         
         if (self.homePageViewController == nil) {
-            BGViewController *controller = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
-//            BGHomeViewController *controller = [[BGHomeViewController alloc] initFromScene:fromePage];
+//            BGViewController *controller = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
+            BGHomeViewController *controller = [[BGHomeViewController alloc] initFromScene:fromePage];
 
             self.homePageViewController = controller;
             [controller release];
@@ -195,19 +193,19 @@
         self.aboutPageViewController.delegate = self;
     }
     
-    else if (toPage == kPageGalleryHome) {
-        NSLog(@"toPage = GalleryHomePage");
-        
-        if (self.galleryHomePageViewController == nil) {
-            BGGalleryHomeViewController *controller = [[BGGalleryHomeViewController alloc] initWithNibName:@"BGGalleryHomeViewController" bundle:nil];
-            self.galleryHomePageViewController = controller;
-            [controller release];
-        }
-        
-        self.galleryHomePageViewController.delegate = self;
-        [self.galleryHomePageViewController loadDataSource:NO];
-    }
-    
+//    else if (toPage == kPageGalleryHome) {
+//        NSLog(@"toPage = GalleryHomePage");
+//        
+//        if (self.galleryHomePageViewController == nil) {
+//            BGGalleryHomeViewController *controller = [[BGGalleryHomeViewController alloc] initWithNibName:@"BGGalleryHomeViewController" bundle:nil];
+//            self.galleryHomePageViewController = controller;
+//            [controller release];
+//        }
+//        
+//        self.galleryHomePageViewController.delegate = self;
+//        [self.galleryHomePageViewController loadDataSource:NO];
+//    }
+//    
     else if (toPage == kPageGallery) {
         NSLog(@"toPage = Gallery Page");
         
@@ -244,13 +242,14 @@
 -(UIViewController *) getSwitchViewController: (int) pageNum{
 	switch (pageNum) {
 		case kPageMain:
+        case kPageGalleryHome:
 			return self.homePageViewController;
 			break;
 			
-		case kPageGalleryHome:
-        case kPageOnlineGalleryHome:
-			return self.galleryHomePageViewController;
-			break;
+//		case kPageGalleryHome:
+//        case kPageOnlineGalleryHome:
+//			return self.galleryHomePageViewController;
+//			break;
             
 		case kPageGallery:
         case kPageOnlineGallery:

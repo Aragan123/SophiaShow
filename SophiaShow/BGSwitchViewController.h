@@ -18,8 +18,8 @@
 @class BGImageFilterViewController;
 
 @interface BGSwitchViewController : UIViewController <BGPageSwitcherDelegate> {
-    BGViewController *homePageViewController;
-//    BGHomeViewController *homePageViewController;
+//    BGViewController *homePageViewController;
+    BGHomeViewController *homePageViewController;
     BGAboutViewController *aboutPageViewController;
     BGGalleryHomeViewController *galleryHomePageViewController;
     BGGalleryViewController *galleryPageViewController;
@@ -27,8 +27,8 @@
     BGImageFilterViewController *imageFilterViewController;
 }
 
-@property (nonatomic, retain) BGViewController *homePageViewController;
-//@property (nonatomic, retain) BGHomeViewController *homePageViewController;
+//@property (nonatomic, retain) BGViewController *homePageViewController;
+@property (nonatomic, retain) BGHomeViewController *homePageViewController;
 @property (nonatomic, retain) BGAboutViewController *aboutPageViewController;
 @property (nonatomic, retain) BGGalleryHomeViewController *galleryHomePageViewController;
 @property (nonatomic, retain) BGGalleryViewController *galleryPageViewController;
