@@ -27,6 +27,8 @@ typedef struct{
     UIColor *color;
     float alpha;
     int blendMode;
+    float brightness;
+    float contrast;
 } BGFilterData;
 
 typedef struct{

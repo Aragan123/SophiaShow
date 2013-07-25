@@ -150,7 +150,9 @@
     // when scroller image is changed, need to change thumbnail bar
     _currentArtIndex = newPageIndex;
     //update thumbnail view current image index
-    [self.carousel scrollToItemAtIndex:newPageIndex animated:YES];
+    if (!_isFullScreen) {
+        [self.carousel scrollToItemAtIndex:newPageIndex animated:YES];
+    }
 }
 
 - (void) scrollerPageIsSingleTapped{
@@ -245,6 +247,7 @@
 		[self enterFullscreen];
 	}
 	else {
+        [self.carousel scrollToItemAtIndex:_currentArtIndex animated:NO];
 		[self exitFullscreen];
 	}
 }

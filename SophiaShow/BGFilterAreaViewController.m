@@ -13,6 +13,7 @@
 #import "UIView+Screenshot.h"
 #import "UIScreen+SSToolkitAdditions.h"
 
+#import "UIImage+Filter.h"
 
 @interface BGFilterAreaViewController ()
 
@@ -180,8 +181,20 @@
         }
         
         // resize filter image and blend it to cropped image
-        UIImage *resizedImage = [data.image imageScaledToSize:self.cropedImage.size];
-        UIImage *result = [self.cropedImage imageBlendedWithImage:resizedImage blendMode:(CGBlendMode)data.blendMode alpha:data.alpha];
+//        UIImage *resizedImage = [data.image imageScaledToSize:self.cropedImage.size];
+        UIImage *resizedImage = [data.image resizeImageFromSize:data.image.size toSize:self.cropedImage.size orientation:isPortrait];
+        UIImage *filterImage = self.cropedImage;
+        NSLog(@"update photo filer brightness=%f, contrast=%f", data.brightness, data.contrast);
+        
+        if (data.brightness != 0.0f) { // change brightness
+            filterImage = [filterImage brightness:data.brightness];
+        }
+        if (data.contrast != 0.0f) { // change contrast
+            filterImage = [filterImage contrast:data.contrast];
+        }
+
+        // Finally add blending
+        UIImage *result = [filterImage imageBlendedWithImage:resizedImage blendMode:(CGBlendMode)data.blendMode alpha:data.alpha];
         self.resultFilterView.image = result;
     }
 }

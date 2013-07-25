@@ -30,7 +30,7 @@
 	// Do any additional setup after loading the view.
     
 //    BGViewController *mainview = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
-    BGHomeViewController *mainview = [[BGHomeViewController alloc] initFromScene:kPageMain];
+    BGHomeViewController *mainview = [[BGHomeViewController alloc] initWithNibName:@"BGHomeViewController" bundle:nil fromScene:kPageMain];
     
     self.homePageViewController = mainview;
     self.homePageViewController.delegate=self;
@@ -174,7 +174,7 @@
         
         if (self.homePageViewController == nil) {
 //            BGViewController *controller = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
-            BGHomeViewController *controller = [[BGHomeViewController alloc] initFromScene:fromePage];
+            BGHomeViewController *controller = [[BGHomeViewController alloc] initWithNibName:@"BGViewController" bundle:nil fromScene:fromePage];
 
             self.homePageViewController = controller;
             [controller release];

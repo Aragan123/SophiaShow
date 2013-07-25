@@ -7,6 +7,7 @@
 //
 
 #import "UIImage+BGAdditional.h"
+#import <CoreImage/CoreImage.h>
 
 @implementation UIImage (BGAdditional)
 
@@ -140,6 +141,40 @@
     [self drawInRect: CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+// rotate first if not portrait
+- (UIImage*) resizeImageFromSize: (CGSize)fromSize toSize:(CGSize)toSize orientation:(BOOL)isPortrait{
+//    UIImage *result;
+    if (!isPortrait) {
+        // langscape, need to rotate 90degree
+        NSLog(@"rotate filter image by 90 degree");
+        self = [self imageRotatedByDegrees:90.0f];
+    }//else result = self;
+    
+    if (fromSize.width != toSize.width || fromSize.height != toSize.height) { //need resize
+        self = [self imageScaledToSize:toSize];
+    }
+    
+    return self;
+}
+
+- (UIImage*) imageWithBrightness:(float)b andContrast:(float)c{
+    CIContext *ctx = [CIContext contextWithOptions:nil];
+    CIImage *image = [CIImage imageWithCGImage:self.CGImage];
+
+    CIFilter *cif = [CIFilter filterWithName:@"CIColorControls"];
+    [cif setValue:image forKey:kCIInputImageKey];
+    [cif setValue:[NSNumber numberWithFloat:b] forKey:@"inputBrightness"];
+    [cif setValue:[NSNumber numberWithFloat:c] forKey:@"inputContrast"];
+    image = cif.outputImage;
+    CGImageRef cgImage = [ctx createCGImage:image fromRect:[image extent]];
+    
+    UIImage *newImage = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    ctx = nil;
     
     return newImage;
 }

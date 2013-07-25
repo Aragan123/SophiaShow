@@ -12,9 +12,10 @@
 #ifndef kTagHomeButton
 
 #define kTagHomeButton      88
+#define kTagHomeButton1     90
 #define kTagHomeParticle1   89
-#define kTagHomeParticle2   90
-#define kTagHomeParticle3   91
+//#define kTagHomeParticle2   90
+//#define kTagHomeParticle3   91
 
 #define kTagHomeMenuGallery 92
 #define kTagHomeMenuAbout   93
@@ -35,6 +36,7 @@
 @interface BGHomeViewController : UIViewController {
     id<BGPageSwitcherDelegate> delegate;
     int scene;
+    BOOL isCn;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
@@ -43,5 +45,5 @@
 @property (nonatomic, retain) NSArray *arrayGallery;
 
 
-- (id)initFromScene:(int)num;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil fromScene:(int)sceneNum;
 @end

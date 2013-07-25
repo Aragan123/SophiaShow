@@ -181,6 +181,8 @@ static BGGlobalData *instance = nil;
     filterData.type = [resArr[0] intValue];
     filterData.alpha = [resArr[2] floatValue];
     filterData.blendMode = [resArr[3] intValue];
+    filterData.brightness = [resArr[4] floatValue];
+    filterData.contrast = [resArr[5] floatValue];
     
     if (filterData.type == 0) {
         // this is file

@@ -14,6 +14,7 @@
 		<array>
 			<string>filter_original.png</string>
 			<string>filter_mx_0.png</string>
+			<string>filter_mx_0.png</string>
 			<string>filter_mx_1.png</string>
 			<string>filter_mx_2.png</string>
 			<string>filter_mx_3.png</string>
@@ -50,7 +51,7 @@
 			<key>GalleryURI</key>
 			<string>Beauty</string>
 			<key>GalleryImageCount</key>
-			<integer>11</integer>
+			<integer>36</integer>
 		</dict>
 		<dict>
 			<key>GalleryDesc_ENG</key>
@@ -60,7 +61,7 @@
 			<key>GalleryURI</key>
 			<string>Fashion</string>
 			<key>GalleryImageCount</key>
-			<integer>37</integer>
+			<integer>35</integer>
 		</dict>
 		<dict>
 			<key>GalleryDesc_ENG</key>
@@ -70,7 +71,7 @@
 			<key>GalleryURI</key>
 			<string>Personal</string>
 			<key>GalleryImageCount</key>
-			<integer>14</integer>
+			<integer>15</integer>
 		</dict>
 		<dict>
 			<key>GalleryDesc_ENG</key>
@@ -80,7 +81,7 @@
 			<key>GalleryURI</key>
 			<string>Portrait</string>
 			<key>GalleryImageCount</key>
-			<integer>15</integer>
+			<integer>18</integer>
 		</dict>
 	</array>
 	<key>FilterResources</key>
@@ -94,11 +95,12 @@
 		<key>PhotoFilter</key>
 		<array>
 			<string>0</string>
-			<string>0|/Filters/mtxx_lomo0.jpg|1.0|14</string>
-			<string>0|/Filters/mtxx_lomo1.jpg|0.75|3</string>
-			<string>0|/Filters/mtxx_lomo2.jpg|0.75|3</string>
-			<string>0|/Filters/mtxx_lomo3.jpg|1.0|14</string>
-			<string>0|/Filters/mtxx_lomo4.jpg|1.0|3</string>
+			<string>0|/Filters/filter1.jpg|1.0|8|1.1|1.2</string>
+			<string>0|/Filters/filter2.jpg|0.35|4|1.1|1.5</string>
+			<string>0|/Filters/filter3.jpg|0.37|3|1.2|2.0</string>
+			<string>0|/Filters/filter4.jpg|0.27|10|1.5|1.8</string>
+			<string>0|/Filters/filter5.jpg|1.0|2|0.0|1.1</string>
+			<string>0|/Filters/filter6.jpg|1.0|5|0.0|1.1</string>
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
