@@ -20,5 +20,5 @@
 - (UIImage *)resizeImageToSize: (CGSize)targetSize;
 - (UIImage*) imageScaledToSize: (CGSize) newSize;
 - (UIImage*) resizeImageFromSize: (CGSize)fromSize toSize:(CGSize)toSize orientation:(BOOL)isPortrait;
-- (UIImage*) imageWithBrightness:(float)b andContrast:(float)c;
+//- (UIImage*) imageWithBrightness:(float)b andContrast:(float)c;
 @end

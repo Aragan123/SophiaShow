@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+BGAdditional.h"
-#import <CoreImage/CoreImage.h>
+//#import <CoreImage/CoreImage.h>
 
 @implementation UIImage (BGAdditional)
 
@@ -161,22 +161,22 @@
     return self;
 }
 
-- (UIImage*) imageWithBrightness:(float)b andContrast:(float)c{
-    CIContext *ctx = [CIContext contextWithOptions:nil];
-    CIImage *image = [CIImage imageWithCGImage:self.CGImage];
-
-    CIFilter *cif = [CIFilter filterWithName:@"CIColorControls"];
-    [cif setValue:image forKey:kCIInputImageKey];
-    [cif setValue:[NSNumber numberWithFloat:b] forKey:@"inputBrightness"];
-    [cif setValue:[NSNumber numberWithFloat:c] forKey:@"inputContrast"];
-    image = cif.outputImage;
-    CGImageRef cgImage = [ctx createCGImage:image fromRect:[image extent]];
-    
-    UIImage *newImage = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    ctx = nil;
-    
-    return newImage;
-}
+//- (UIImage*) imageWithBrightness:(float)b andContrast:(float)c{
+//    CIContext *ctx = [CIContext contextWithOptions:nil];
+//    CIImage *image = [CIImage imageWithCGImage:self.CGImage];
+//
+//    CIFilter *cif = [CIFilter filterWithName:@"CIColorControls"];
+//    [cif setValue:image forKey:kCIInputImageKey];
+//    [cif setValue:[NSNumber numberWithFloat:b] forKey:@"inputBrightness"];
+//    [cif setValue:[NSNumber numberWithFloat:c] forKey:@"inputContrast"];
+//    image = cif.outputImage;
+//    CGImageRef cgImage = [ctx createCGImage:image fromRect:[image extent]];
+//    
+//    UIImage *newImage = [UIImage imageWithCGImage:cgImage];
+//    CGImageRelease(cgImage);
+//    ctx = nil;
+//    
+//    return newImage;
+//}
 
 @end
