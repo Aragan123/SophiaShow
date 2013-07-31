@@ -29,9 +29,9 @@
                         [NSNumber numberWithInt:kTagHomeMenuFunc],
                         [NSNumber numberWithInt:kTagHomeMenuGallery],
                         nil];
-        self.arrayGallery = [NSArray arrayWithObjects:[NSNumber numberWithInt:kTagGalleryBeauty],
-                        [NSNumber numberWithInt:kTagGalleryFasion],
+        self.arrayGallery = [NSArray arrayWithObjects:[NSNumber numberWithInt:kTagGalleryFasion],
                         [NSNumber numberWithInt:kTagGalleryPersonal],
+                        [NSNumber numberWithInt:kTagGalleryBeauty],
                         [NSNumber numberWithInt:kTagGalleryPortrait],
                         [NSNumber numberWithInt:kTagHomeButton],
                         nil];
@@ -212,53 +212,53 @@
             case kTagHomeMenuAbout:{
                 view = [self bgViewWithImageFile:@"homemenu_about" ofType:@"png"];
                 view.fromLocation = ccp(0.0f, self.view.frame.size.height+60.0f);
-                view.toLocation = ccp(181.0f, 639.0f);
+                view.toLocation = ccp(190.0f, 640.0f);
             } break;
             case kTagHomeMenuGallery:{
                 view = [self bgViewWithImageFile:@"homemenu_gallery" ofType:@"png"];
                 view.fromLocation = ccp(self.view.frame.size.width+180.0f, self.view.frame.size.height*0.5f);
-                view.toLocation = ccp(724.0f, 523.0f);
+                view.toLocation = ccp(740.0f, 520.0f);
                 view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(10.0f));
             } break;
             case kTagHomeMenuFunc:{
                 view = [self bgViewWithImageFile:@"homemenu_filter" ofType:@"png"];
                 view.fromLocation = ccp(self.view.frame.size.width-100.0f, -100.0f);
-                view.toLocation = ccp(407.0f, 257.0f);
+                view.toLocation = ccp(390.0f, 260.0f);
                 view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(-16.0f));
             } break;
             /* Gallery Page
              */
             case kTagGalleryBeauty:{
                 view = [self bgViewWithImageFile:@"gallerymenu_beauty" ofType:@"png"];
-                view.fromLocation = ccp(-200.0f, 557.0f);
-                view.toLocation = ccp(230.0f, 557.0f);
-                view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(-16.0f));
+                view.fromLocation = ccp(self.view.frame.size.width+200.0f, 199.0f);
+                view.toLocation = ccp(840.0f, 200.0f);
+                view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(6.0f));
             } break;
             case kTagGalleryFasion:{
-                view = [self bgViewWithImageFile:@"gallerymenu_fasion" ofType:@"png"];
-                view.fromLocation = ccp(-200.0f, 268.0f);
-                view.toLocation = ccp(435.0f, 268.0f);
-                view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(-17.0f));
+                view = [self bgViewWithImageFile:@"gallerymenu_fasion" ofType:@"png"];                
+                view.fromLocation = ccp(-200.0f, 557.0f);
+                view.toLocation = ccp(230.0f, 560.0f);
+                view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(-16.0f));
             } break;
             case kTagGalleryPersonal:{
                 view = [self bgViewWithImageFile:@"gallerymenu_personal" ofType:@"png"];
-                view.fromLocation = ccp(self.view.frame.size.width+200.0f, 199.0f);
-                view.toLocation = ccp(884.0f, 199.0f);
-                view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(6.0f));
+                view.fromLocation = ccp(-200.0f, 268.0f);
+                view.toLocation = ccp(435.0f, 270.0f);
+                view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(-17.0f));
             } break;
             case kTagGalleryPortrait:{
                 view = [self bgViewWithImageFile:@"gallerymenu_portrait" ofType:@"png"];
                 view.fromLocation = ccp(self.view.frame.size.width+200.0f, 534.0f);
-                view.toLocation = ccp(618.0f, 540.0f);
+                view.toLocation = ccp(620.0f, 530.0f);
                 view.transform =  CGAffineTransformMakeRotation(DegreesToRadians(2.0f));
             } break;
                
             /* About Page
              */
             case kTagAboutBook:{
-                BGUIView *bgView = [[[BGUIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 800.0f, 600.0f)] autorelease];
-                bgView.fromLocation = ccp(-400.0f, 413.0f);
-                bgView.toLocation = ccp(530.0f, 413.0f);
+                BGUIView *bgView = [[[BGUIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 890.0f, 580.0f)] autorelease];
+                bgView.fromLocation = ccp(-450.0f, 415.0f);
+                bgView.toLocation = ccp(530.0f, 415.0f);
                 // add book image
                 NSString *path = [[NSBundle mainBundle] pathForResource:@"about_book" ofType:@"png"];
                 UIImage * image = [UIImage imageWithContentsOfFile:path];
@@ -267,11 +267,11 @@
                 [bgView addSubview:iv];
                 [iv release];
                 // add language button
-                NSString *cnpath = [[NSBundle mainBundle] pathForResource:@"about_en" ofType:@"png"];
-                UIImage * cnimage = [UIImage imageWithContentsOfFile:cnpath];
+                NSString *langpath = [[NSBundle mainBundle] pathForResource:@"about_en" ofType:@"png"];
+                UIImage * langimage = [UIImage imageWithContentsOfFile:langpath];
                 UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-                btn.frame = CGRectMake(663.0f, 354.0f, 89.0f, 72.0f);
-                [btn setBackgroundImage:cnimage forState:UIControlStateNormal];
+                btn.frame = CGRectMake(754.0f, 170.0f, langimage.size.width, langimage.size.height);
+                [btn setBackgroundImage:langimage forState:UIControlStateNormal];
                 [btn addTarget:self action:@selector(toggleButton:) forControlEvents:UIControlEventTouchUpInside];
                 [bgView addSubview:btn];
                 // assign to view

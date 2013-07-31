@@ -39,7 +39,7 @@
     
     // setup initial values and arrange slider position
     [self setupInitialValues];
-    [self setupFilterSlider];
+//    [self setupFilterSlider]; // drop it
     
     // setup side menu
     [self setupSideMenuBar];
@@ -183,14 +183,12 @@
             [[BGGlobalData sharedData] setIsPortrait:!check];
             
             // setp 1: set up  values and slider again
-            [self.sliderParameter removeFromSuperview]; self.sliderParameter = nil;
+//            [self.sliderParameter removeFromSuperview]; self.sliderParameter = nil;
             [self setupInitialValues];
-            [self setupFilterSlider];
+//            [self setupFilterSlider];
             self.btnRotateFrame.hidden=NO; // need to show this button
             // step 2: re-arrange Filter Area
             UIImage *image = self.filterAreaViewController.originalImage;
-            //    [self.filterAreaViewController clearContents];
-            //        [self.filterAreaViewController setupViewsWithSourceImage:image];
             
             // clean filter area view controller
             [self.filterAreaViewController.view removeFromSuperview];
@@ -348,7 +346,7 @@
     
     self.btnChoosePhoto.hidden=NO;
     self.btnRotateFrame.hidden=YES;
-    self.sliderParameter.hidden=YES;
+//    self.sliderParameter.hidden=YES; // drop it
     isEdited=NO;
 
 }
@@ -433,11 +431,11 @@
     if (index == 0) {
         // first one is alwasy close button
         imageView.frame = CGRectMake(50.0f, 50.0f, 60.0f, 60.0f);
-        imageView.image = [UIImage imageNamed:@"btn_closeOptionBar.png"];
+        imageView.image = [UIImage imageNamed:@"optionbar_close.png"];
         
     }else{
         // add options' images
-        imageView.frame = CGRectMake(5.0f,5.0f, 100.0f, 100.0f);
+        imageView.frame = CGRectMake(10.0f,10.0f, 90.0f, 90.0f);
         NSString *imageURI = [self.iCarousel_ds objectAtIndex:(index-1)];
         imageView.image = [UIImage imageNamed:imageURI]; //get images
     }
@@ -474,7 +472,7 @@
         if (index == 0) { // this is option to remove filters
             BGFilterData data = {0, nil, nil, 0.0f, 1};
             [self.filterAreaViewController updatePhotoFilter:data];
-            self.sliderParameter.hidden = YES;
+//            self.sliderParameter.hidden = YES;
         }else{
             // display HUD
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
@@ -483,9 +481,9 @@
                 BGFilterData data = [[BGGlobalData sharedData] getFilterDataByIndex:index];
                 [self.filterAreaViewController updatePhotoFilter:data];
                 // show slider
-                self.sliderParameter.hidden = NO;
-                self.sliderParameter.maximumValue = data.alpha;
-                self.sliderParameter.value = data.alpha;
+//                self.sliderParameter.hidden = NO;
+//                self.sliderParameter.maximumValue = data.alpha;
+//                self.sliderParameter.value = data.alpha;
                 [SVProgressHUD dismiss]; // dismiss HUD
             } afterDelay:0.5f];
         }
