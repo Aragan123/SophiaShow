@@ -14,16 +14,16 @@
 #define kTagHomeButton      88
 #define kTagHomeButton1     90
 #define kTagHomeParticle1   89
-//#define kTagHomeParticle2   90
-//#define kTagHomeParticle3   91
 
 #define kTagHomeMenuGallery 92
 #define kTagHomeMenuAbout   93
 #define kTagHomeMenuFunc    94
 
 #define kTagAboutBook      95
-#define kTagAboutTextEn     96
-#define kTagAboutTextCn     97
+#define kTagAboutText     96
+//#define kTagAboutTextCn     97
+//#define kTagAboutBtnEn      98
+//#define kTagAboutBtnCn      99
 
 #define kTagGalleryBeauty   87
 #define kTagGalleryFasion   86

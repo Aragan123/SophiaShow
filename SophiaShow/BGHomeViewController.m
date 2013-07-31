@@ -86,7 +86,7 @@
 - (void) dismissBgViews:(NSArray*) viewArray{
     for (NSNumber *tagNumber in viewArray){
         int tag = [tagNumber integerValue];
-        BGUIView *view = [self imageViewWithTag:tag];
+        BGUIView *view = [self bgViewWithTag:tag];
         [UIView animateWithDuration:0.2f delay:0.1f options:UIViewAnimationOptionCurveEaseIn animations:^{
             view.center = view.fromLocation;
         } completion:^(BOOL complete){
@@ -101,7 +101,7 @@
 - (void) showBgViews:(NSArray*) viewArray delay:(float) delay withInterval:(float) interval{
     for (int i=0; i<viewArray.count; i++){
         NSNumber *tag = [viewArray objectAtIndex:i];
-        BGUIView *view = [self imageViewWithTag:[tag integerValue]];
+        BGUIView *view = [self bgViewWithTag:[tag integerValue]];
         view.center = view.fromLocation;
         [self.view addSubview:view]; // add to homeview
         
@@ -171,7 +171,7 @@
 
 #pragma mark --
 #pragma mark Utilities
-- (BGUIView*) imageViewWithTag:(NSInteger) tag{
+- (BGUIView*) bgViewWithTag:(NSInteger) tag{
     BGUIView *view = (BGUIView*)[self.view viewWithTag:tag];
     
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(menuButtonPressed:)];
@@ -266,6 +266,15 @@
                 iv.image = image;
                 [bgView addSubview:iv];
                 [iv release];
+                // add CN text
+                NSString *textpath = [[NSBundle mainBundle] pathForResource:@"about_text_cn" ofType:@"png"];
+                UIImage *textimage = [UIImage imageWithContentsOfFile:textpath];
+                UIImageView *textiv = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, textimage.size.width, textimage.size.height)];
+                textiv.image = textimage;
+                textiv.tag = kTagAboutText;
+                [bgView addSubview:textiv];
+                [textiv release];
+                
                 // add language button
                 NSString *langpath = [[NSBundle mainBundle] pathForResource:@"about_en" ofType:@"png"];
                 UIImage * langimage = [UIImage imageWithContentsOfFile:langpath];
@@ -364,15 +373,35 @@
 // used by about page toggle EN and CN
 - (void) toggleButton: (UIButton *) button{
     isCn = !isCn;
+    NSString *imageName = @"about_text_cn";
+    NSString *btnImageName = @"about_cn";
+    
+    // switch button
     if (!isCn){
-        [button setBackgroundImage:[UIImage imageNamed:@"about_cn.png"] forState:UIControlStateNormal];
-//        [button setBackgroundImage:altGreen forState:UIControlStateHighlighted];
+        imageName = @"about_text_en";
         NSLog(@"change to EN");
     }else{
-        [button setBackgroundImage:[UIImage imageNamed:@"about_en.png"] forState:UIControlStateNormal];
-//        [button setBackgroundImage:altRed forState:UIControlStateHighlighted];
+        btnImageName = @"about_en";
         NSLog(@"change to CN");
     }
+    
+    // switch button
+    NSString *btnpath = [[NSBundle mainBundle] pathForResource:btnImageName ofType:@"png"];
+    UIImage *btnimage = [UIImage imageWithContentsOfFile:btnpath];
+    [button setBackgroundImage:btnimage forState:UIControlStateNormal];
+
+    
+    // switch text 
+    BGUIView *bookview = [self bgViewWithTag:kTagAboutBook];
+    UIImageView *iv = (UIImageView*)[bookview viewWithTag:kTagAboutText];
+    NSString *textpath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
+    UIImage *textimage = [UIImage imageWithContentsOfFile:textpath];
+    [UIView animateWithDuration:1.5f animations:^{
+        iv.alpha = 0.0f;
+        iv.image = textimage;
+        iv.alpha = 1.0f;
+    }];
+
 }
 
 @end
