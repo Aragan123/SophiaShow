@@ -913,6 +913,8 @@
 		6D153A1016FB42A2001C0FAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gang Jin (8N639DRN6P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gang Jin (8N639DRN6P)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
 				INFOPLIST_FILE = "SophiaShow/SophiaShow-Info.plist";
@@ -922,6 +924,8 @@
 					"\"$(SRCROOT)/Library/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -929,6 +933,8 @@
 		6D153A1116FB42A2001C0FAC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gang Jin (8N639DRN6P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gang Jin (8N639DRN6P)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
 				INFOPLIST_FILE = "SophiaShow/SophiaShow-Info.plist";
@@ -938,6 +944,8 @@
 					"\"$(SRCROOT)/Library/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
