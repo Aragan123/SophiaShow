@@ -24,6 +24,7 @@
     if (self) {
         // Custom initialization
         scene = sceneNum;
+        homeDismissed = NO;
         isCn = YES;
         self.arrayHome =[NSArray arrayWithObjects:[NSNumber numberWithInt:kTagHomeMenuAbout],
                         [NSNumber numberWithInt:kTagHomeMenuFunc],
@@ -115,18 +116,21 @@
 - (void) transitionFromHomeToGallery{
     NSLog(@"transition from home to gallery");
     [self dismissBgViews:self.arrayHome];
+    homeDismissed=YES;
     [self showBgViews:self.arrayGallery delay:0.2f withInterval:0.1f];
 }
 
 - (void) transitionFromGalleryToHome{
     NSLog(@"transition from gallery back to home");
     [self dismissBgViews:self.arrayGallery];
+    homeDismissed=NO;
     [self showBgViews:self.arrayHome delay:0.2f withInterval:0.1f];
 }
 
 - (void) transitionFromHomeToAbout{
     //TODO:
     [self dismissBgViews:self.arrayHome];
+    homeDismissed=YES;
     [self showBgViews:[NSArray arrayWithObjects:
                        [NSNumber numberWithInt:kTagAboutBook],
                        [NSNumber numberWithInt:kTagHomeButton1], nil] delay:0.2f withInterval:0.1f];
@@ -137,6 +141,7 @@
     [self dismissBgViews:[NSArray arrayWithObjects:
                           [NSNumber numberWithInt:kTagAboutBook],
                           [NSNumber numberWithInt:kTagHomeButton1], nil] ];
+    homeDismissed=NO;
     [self showBgViews:self.arrayHome delay:0.2f withInterval:0.1f];
 }
 
@@ -333,16 +338,17 @@
 
 #pragma mark -
 #pragma mark Action Methods
-- (void)menuButtonPressed:(UITapGestureRecognizer*)sender{
-    int tag = [sender.view tag];
-    NSLog(@"pressed menu button tag: %i", tag);
-    
-    [self menuPressed:tag];
-    
-}
+//- (void)menuButtonPressed:(UITapGestureRecognizer*)sender{
+//    int tag = [sender.view tag];
+//    NSLog(@"pressed menu button tag: %i", tag);
+//    
+//    [self menuPressed:tag];
+//    
+//}
 
 - (void) menuPressed:(int)tag{
     NSLog(@"pressed menu tag: %i", tag);
+    
     switch (tag) {
         case kTagHomeButton:
             [self transitionFromGalleryToHome];
@@ -351,14 +357,14 @@
             [self transitionFromAboutToHome];
             break;
         case kTagHomeMenuGallery:{
-            NSLog(@"lalllala");
-            [self transitionFromHomeToGallery];
-        }
-            break;
-        case kTagHomeMenuFunc:
-            [self transitionFromHomeToFilter]; break;
-        case kTagHomeMenuAbout:
-            [self transitionFromHomeToAbout]; break;
+            if (!homeDismissed) { [self transitionFromHomeToGallery]; }
+        } break;
+        case kTagHomeMenuFunc:{
+            if (!homeDismissed) { [self transitionFromHomeToFilter]; }
+        } break;
+        case kTagHomeMenuAbout:{
+            if (!homeDismissed) { [self transitionFromHomeToAbout]; }
+        } break;
         case kTagGalleryBeauty:
         case kTagGalleryFasion:
         case kTagGalleryPersonal:

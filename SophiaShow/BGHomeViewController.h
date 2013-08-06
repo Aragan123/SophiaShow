@@ -36,6 +36,7 @@
 @interface BGHomeViewController : UIViewController {
     id<BGPageSwitcherDelegate> delegate;
     int scene;
+    BOOL homeDismissed;
     BOOL isCn;
 }
 
