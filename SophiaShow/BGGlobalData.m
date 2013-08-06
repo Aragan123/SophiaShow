@@ -173,6 +173,18 @@ static BGGlobalData *instance = nil;
     return img;
 }
 
+-(BGPhotoFrameData) getPhotoFrameByIndex: (int) index{
+    NSString *resStr =  [self getFilterDataStringByIndex:index andKeyIndex:kMenuPhotoFrame];
+    NSArray *resArr = [resStr componentsSeparatedByString:@"|"];
+
+    BGPhotoFrameData frameData;
+    NSString *resUri = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:resArr[0]];
+    frameData.image = [UIImage imageWithContentsOfFile:resUri];
+    frameData.offsize = [resArr[1] floatValue];
+    
+    return frameData;
+}
+
 - (BGFilterData) getFilterDataByIndex: (int) index{
     NSString *resStr =  [self getFilterDataStringByIndex:index andKeyIndex:kMenuPhotoFilter];
     

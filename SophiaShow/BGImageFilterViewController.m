@@ -85,6 +85,7 @@
     self.btnChoosePhoto.hidden = NO;
     self.btnRotateFrame.hidden = YES;
     isEdited = NO;
+    newImage = NO;
 }
 
 - (void) setupFilterSlider{
@@ -298,20 +299,21 @@
 
 // act when select photo button is pressed
 - (IBAction)clickChoosePhoto:(UIButton *)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.delegate = self;
-        [imagePicker setAllowsEditing:NO];
-        //                imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *) kUTTypeImage, nil];
-        self.popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
-        [self.popover presentPopoverFromRect:CGRectMake(0, 0, 400, 500) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        [imagePicker release];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"错误：无法正常进入你的照片集!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        // display an action sheet 
+        UIActionSheet* actionSheet = [[UIActionSheet alloc]
+                                      initWithTitle:@"请选择文件来源"
+                                      delegate:self
+                                      cancelButtonTitle:@"取消"
+                                      destructiveButtonTitle:nil
+                                      otherButtonTitles:@"照相机",@"本地相簿",nil];
+        [actionSheet showInView:self.view];
+        [actionSheet release];
+    }else{
+        // if no camera, then select from photo album directly
+        [self selectImageFromPhotoAlbum];
     }
+
 }
 
 // act when cancel all actions
@@ -488,30 +490,94 @@
             } afterDelay:0.5f];
         }
     }
-    else{
-        // for Photo Frames and Background Patterns
+    else if (selectedMenu == kMenuPhotoFrame){
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [self performBlock:^{
+            BGPhotoFrameData data = [[BGGlobalData sharedData] getPhotoFrameByIndex:index];
+            [self.filterAreaViewController updatePhotoFrame:data];
+            
+            [SVProgressHUD dismiss]; // dismiss HUD
+        } afterDelay:0.4f];
+        
+    } else{
+        // kMenuBgPattern: for Background Patterns
         UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:index andKeyIndex:selectedMenu];
-        switch (selectedMenu) {
-            case kMenuBgPattern:{
-                [self.filterAreaViewController updateBackgroundPattern:data];
-                break;}
-            case kMenuPhotoFrame:{
-                [self.filterAreaViewController updatePhotoFrame:data];
-                break;}
-            default:
-                break;
-        }
+        [self.filterAreaViewController updateBackgroundPattern:data];
+
     }
 }
+
+#pragma mark -
+#pragma UIActionSheet Delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+//    NSLog(@"buttonIndex = [%d]",buttonIndex);
+    switch (buttonIndex) {
+        case 0:// camera selected
+            [self selectImageFromCamera];
+            break;
+        case 1: // local photo album
+            [self selectImageFromPhotoAlbum];
+            break;
+        default:
+            break;
+    }
+}
+
+// Utility to select image from photo album
+- (void) selectImageFromPhotoAlbum{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        newImage = NO;
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        [self performBlock:^{
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.delegate = self;
+            [imagePicker setAllowsEditing:NO];
+            //                imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *) kUTTypeImage, nil];
+            self.popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+            [self.popover presentPopoverFromRect:CGRectMake(0, 0, 400, 500) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            [imagePicker release];
+            [SVProgressHUD dismiss]; // dismiss HUD
+        } afterDelay:0.3f];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"错误：无法正常进入你的照片集!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+}
+
+// Utility to select image from camera
+- (void) selectImageFromCamera{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        newImage=YES;
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = NO;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+        [imagePicker release];
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"你的设备无法使用摄像头!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+}
+
 
 #pragma mark -
 #pragma UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    // dismiss photo library
-    [self.popover dismissPopoverAnimated:YES];
-    [self.popover release];
-
+    if (newImage) {
+        // from camera
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        // dismiss photo library
+        [self.popover dismissPopoverAnimated:YES];
+        [self.popover release];
+    }
+    
     // display HUD
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     
@@ -548,9 +614,14 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    if (newImage) {
+        // from camera
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
         // from photo library
-    [self.popover dismissPopoverAnimated:YES];
-    [self.popover release];
+        [self.popover dismissPopoverAnimated:YES];
+        [self.popover release];
+    }
 }
 
 

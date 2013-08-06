@@ -19,10 +19,11 @@
 
 
 
-@interface BGImageFilterViewController : UIViewController <iCarouselDataSource, iCarouselDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+@interface BGImageFilterViewController : UIViewController <iCarouselDataSource, iCarouselDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     int selectedMenu;
     BOOL isEdited;
+    BOOL newImage;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;

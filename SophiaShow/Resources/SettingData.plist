@@ -6,9 +6,10 @@
 	<dict>
 		<key>PhotoFrame</key>
 		<array>
-			<string>PzlBorder2.png</string>
-			<string>PzlBorder5.png</string>
-			<string>PzlBorder9.png</string>
+			<string>borderImage01.png</string>
+			<string>borderImage02.png</string>
+			<string>borderImage03.png</string>
+			<string>borderImage04.png</string>
 		</array>
 		<key>PhotoFilter</key>
 		<array>
@@ -22,13 +23,13 @@
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
-			<string>pat000.jpg</string>
 			<string>pat001.jpg</string>
 			<string>pat002.jpg</string>
 			<string>pat005.jpg</string>
 			<string>pat007.jpg</string>
 			<string>pat008.jpg</string>
 			<string>pat009.jpg</string>
+			<string>pattern04.jpg</string>
 		</array>
 		<key>Specials</key>
 		<array>
@@ -88,9 +89,10 @@
 	<dict>
 		<key>PhotoFrame</key>
 		<array>
-			<string>/Filters/002.png</string>
-			<string>/Filters/005.png</string>
-			<string>/Filters/009.png</string>
+			<string>/Filters/border01.png|13.0f</string>
+			<string>/Filters/border02.png|13.0f</string>
+			<string>/Filters/border03.png|13.0f</string>
+			<string>/Filters/border04.png|30.0f</string>
 		</array>
 		<key>PhotoFilter</key>
 		<array>
@@ -104,13 +106,13 @@
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
-			<string>/Filters/pat000.jpg</string>
 			<string>/Filters/pat001.jpg</string>
 			<string>/Filters/pat002.jpg</string>
 			<string>/Filters/pat005.jpg</string>
 			<string>/Filters/pat007.jpg</string>
 			<string>/Filters/pat008.jpg</string>
 			<string>/Filters/pat009.jpg</string>
+			<string>/pattern04@2x.jpg</string>
 		</array>
 		<key>Specials</key>
 		<array>

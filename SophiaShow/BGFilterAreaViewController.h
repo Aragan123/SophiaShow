@@ -34,7 +34,7 @@
 - (UIImage*) screenshot;
 
 - (void) updateBackgroundPattern: (UIImage*) image;
-- (void) updatePhotoFrame: (UIImage*) image;
+- (void) updatePhotoFrame: (BGPhotoFrameData) data;
 - (void) updatePhotoFilter: (BGFilterData) data;
 - (void) updateFilterOpacity: (float) value;
 - (void) updatePhotoSpecials: (NSDictionary*) dataDict;

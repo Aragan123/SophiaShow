@@ -81,7 +81,7 @@
 
     // default frame view
     self.frameView = [[[UIImageView alloc] initWithFrame:[self calculateFrameViewRect:self.view.frame]] autorelease];
-    NSString *defaultFrameURI = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/Filters/009.png"];
+    NSString *defaultFrameURI = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/Filters/border01.png"];
     UIImage *defaultFrame = [UIImage imageWithContentsOfFile:defaultFrameURI];
     self.frameView.image = [self drawPhotoFrame:defaultFrame withOffsize:13.0f];
     // shadowing
@@ -142,8 +142,8 @@
     self.view.backgroundColor = bgColor;
 }
 
-- (void) updatePhotoFrame: (UIImage*) image{
-    self.frameView.image = [self drawPhotoFrame:image withOffsize:13.0f];
+- (void) updatePhotoFrame: (BGPhotoFrameData) data{
+    self.frameView.image = [self drawPhotoFrame:data.image withOffsize:data.offsize];
 }
 
 - (void) updatePhotoFilter: (BGFilterData) data{

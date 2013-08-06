@@ -39,6 +39,12 @@ typedef struct{
     CGRect posPortrait;
 } BGSpecialData;
 
+typedef struct{
+//     int type;
+    UIImage *image;
+    float offsize;
+} BGPhotoFrameData;
+
 
 @interface BGGlobalData : NSObject{
     NSArray *galleryBooks;
@@ -68,6 +74,7 @@ typedef struct{
 - (NSString*) getCurrentGalleryTitle;
 
 -(NSString*) getFilterKeyStringByKeyIndex: (int) keyIndex;
+-(BGPhotoFrameData) getPhotoFrameByIndex: (int) index;
 -(UIImage*) getFilterResourceByIndex: (int) index andKeyIndex:(int)keyIndex;
 - (BGFilterData) getFilterDataByIndex: (int) index;
 - (NSDictionary*) getSpecialDataByIndex: (int) index;
