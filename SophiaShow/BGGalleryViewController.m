@@ -39,7 +39,7 @@
         _currentArtIndex = 0;
         _bottomBarHeight = 160.0f;
         _isFullScreen = NO;
-        
+        _fromBottomBar=YES;
     }
     return self;
 }
@@ -150,8 +150,12 @@
     // when scroller image is changed, need to change thumbnail bar
     _currentArtIndex = newPageIndex;
     //update thumbnail view current image index
-    if (!_isFullScreen) {
-        [self.carousel scrollToItemAtIndex:newPageIndex animated:YES];
+    if (!_isFullScreen && !_fromBottomBar) {
+//        [self.carousel scrollToItemAtIndex:newPageIndex animated:YES];
+        [self enterFullscreen];
+        
+    }else if (!_isFullScreen){
+        _fromBottomBar=NO;
     }
 }
 
@@ -225,6 +229,7 @@
     // update nav title and update scroller
     NSLog(@"select thumbnail: %i", index);
     _currentArtIndex = index;
+    _fromBottomBar = YES;
     [self.scrollViewController updateScrollerPagetoIndex:index];
 }
 

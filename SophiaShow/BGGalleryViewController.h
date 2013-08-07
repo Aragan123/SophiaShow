@@ -34,6 +34,7 @@
     
     int _currentArtIndex;
     BOOL _isFullScreen;
+    BOOL _fromBottomBar;
     float _bottomBarHeight;
 }
 
