@@ -173,7 +173,7 @@
         title = @"改成竖版相框";
     }
     
-    AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:title message:@"注意：此操作将撤销照片所有未保存的操作！"] autorelease];
+    AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:title message:@"注意：此操作将撤销所有对照片的操作！"] autorelease];
     [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
     [alert setCancelButtonTitle:NSLocalizedString(@"取消", nil) block:nil];
     [alert addButtonWithTitle:NSLocalizedString(@"继续", nil) block:^{
@@ -246,7 +246,7 @@
 // act when return button in side menu is pressed
 - (IBAction)clickReturnButton:(id)sender{
     if (nil != delegate && isEdited) {
-        AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"确定要返回主页面？" message:@"此操作将撤销照片所有未保存的操作"] autorelease];
+        AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"确定要返回主页面？" message:@"此操作将撤销所有对照片的操作"] autorelease];
         [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
         [alert setCancelButtonTitle:NSLocalizedString(@"取消", nil) block:nil];
         [alert addButtonWithTitle:NSLocalizedString(@"确定", nil) block:^{
@@ -306,7 +306,7 @@
                                       delegate:self
                                       cancelButtonTitle:@"取消"
                                       destructiveButtonTitle:nil
-                                      otherButtonTitles:@"照相机",@"本地相簿",nil];
+                                      otherButtonTitles:@"本地相簿",@"照相机",nil];
         [actionSheet showInView:self.view];
         [actionSheet release];
     }else{
@@ -513,11 +513,11 @@
 {
 //    NSLog(@"buttonIndex = [%d]",buttonIndex);
     switch (buttonIndex) {
-        case 0:// camera selected
-            [self selectImageFromCamera];
-            break;
-        case 1: // local photo album
+        case 0: // local photo album
             [self selectImageFromPhotoAlbum];
+            break;
+        case 1:// camera selected
+            [self selectImageFromCamera];
             break;
         default:
             break;

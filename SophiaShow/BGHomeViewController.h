@@ -21,6 +21,7 @@
 
 #define kTagAboutBook      95
 #define kTagAboutText     96
+#define kTagAboutYee    97
 //#define kTagAboutTextCn     97
 //#define kTagAboutBtnEn      98
 //#define kTagAboutBtnCn      99

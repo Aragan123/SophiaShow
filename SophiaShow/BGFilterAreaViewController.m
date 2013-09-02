@@ -72,8 +72,8 @@
     CGSize areaSize = self.view.frame.size;
 
     // default color pattern
-    UIColor *bgPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pat009.jpg"]]; // default pattern
-    self.view.backgroundColor = bgPattern;
+    UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:5 andKeyIndex:kMenuBgPattern];
+    [self updateBackgroundPattern:data];
     // default back special layer - UIImageView
     self.specialBackLayer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)] autorelease];
     [self.specialBackLayer setBackgroundColor:[UIColor clearColor]];

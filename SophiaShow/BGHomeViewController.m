@@ -62,6 +62,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    for (UIView *view in [self.view subviews]) {
+        if (view.superview == nil) {
+            view = nil;
+        }
+    }
 }
 
 - (void) viewDidUnload{
@@ -288,9 +293,19 @@
                 [btn setBackgroundImage:langimage forState:UIControlStateNormal];
                 [btn addTarget:self action:@selector(toggleButton:) forControlEvents:UIControlEventTouchUpInside];
                 [bgView addSubview:btn];
+                
+                // add yeephoto button
+                NSString *yeePath = [[NSBundle mainBundle] pathForResource:@"about_yee_cn" ofType:@"png"];
+                UIImage * yeeImage = [UIImage imageWithContentsOfFile:yeePath];
+                UIButton *yeebtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                yeebtn.frame = CGRectMake(460.0f, 460.0f, yeeImage.size.width, yeeImage.size.height);
+                [yeebtn setBackgroundImage:yeeImage forState:UIControlStateNormal];
+                [yeebtn addTarget:self action:@selector(yeePhotoButton:) forControlEvents:UIControlEventTouchUpInside];
+                yeebtn.tag = kTagAboutYee;
+                [bgView addSubview:yeebtn];
+                
                 // assign to view
                 view = bgView;
-//                [bgView release];
 
             }
             default:
@@ -381,10 +396,12 @@
     isCn = !isCn;
     NSString *imageName = @"about_text_cn";
     NSString *btnImageName = @"about_cn";
+    NSString *yeeBtnImageName = @"about_yee_cn";
     
     // switch button
     if (!isCn){
         imageName = @"about_text_en";
+        yeeBtnImageName = @"about_yee_en";
         NSLog(@"change to EN");
     }else{
         btnImageName = @"about_en";
@@ -395,18 +412,35 @@
     NSString *btnpath = [[NSBundle mainBundle] pathForResource:btnImageName ofType:@"png"];
     UIImage *btnimage = [UIImage imageWithContentsOfFile:btnpath];
     [button setBackgroundImage:btnimage forState:UIControlStateNormal];
-
     
     // switch text 
     BGUIView *bookview = [self bgViewWithTag:kTagAboutBook];
     UIImageView *iv = (UIImageView*)[bookview viewWithTag:kTagAboutText];
     NSString *textpath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
     UIImage *textimage = [UIImage imageWithContentsOfFile:textpath];
+    // switch yeeButton
+    NSString *yeebtnpath = [[NSBundle mainBundle] pathForResource:yeeBtnImageName ofType:@"png"];
+    UIImage *yeebtnimage = [UIImage imageWithContentsOfFile:yeebtnpath];
+    UIButton *yeeButton = (UIButton*)[bookview viewWithTag:kTagAboutYee];
+    
+    // run display animation
     [UIView animateWithDuration:1.5f animations:^{
         iv.alpha = 0.0f;
+        yeeButton.alpha = 0.0f;
         iv.image = textimage;
+        [yeeButton setBackgroundImage:yeebtnimage forState:UIControlStateNormal];
         iv.alpha = 1.0f;
+        yeeButton.alpha = 1.0f;
     }];
+
+
+
+}
+
+// used by about page to open yeephoto.com
+- (void) yeePhotoButton: (UIButton*) sender{
+    NSString* launchUrl = @"http://yeephoto.com/";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: launchUrl]];
 
 }
 

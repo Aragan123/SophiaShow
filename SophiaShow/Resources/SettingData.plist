@@ -19,17 +19,20 @@
 			<string>filter_mx_1.png</string>
 			<string>filter_mx_2.png</string>
 			<string>filter_mx_3.png</string>
+			<string>filter_mx_3.png</string>
+			<string>filter_mx_4.png</string>
+			<string>filter_mx_4.png</string>
 			<string>filter_mx_4.png</string>
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
-			<string>pat001.jpg</string>
-			<string>pat002.jpg</string>
-			<string>pat005.jpg</string>
-			<string>pat007.jpg</string>
-			<string>pat008.jpg</string>
-			<string>pat009.jpg</string>
-			<string>pattern04.jpg</string>
+			<string>icon_pat0.jpg</string>
+			<string>icon_pat1.jpg</string>
+			<string>icon_pat2.jpg</string>
+			<string>icon_pat3.jpg</string>
+			<string>icon_pat4.jpg</string>
+			<string>icon_pat5.jpg</string>
+			<string>icon_pat6.jpg</string>
 		</array>
 		<key>Specials</key>
 		<array>
@@ -103,16 +106,19 @@
 			<string>0|/Filters/filter4.jpg|0.27|10|1.25|1.2</string>
 			<string>0|/Filters/filter5.jpg|1.0|2|0.0|1.1</string>
 			<string>0|/Filters/filter6.jpg|1.0|5|0.0|1.1</string>
+			<string>0|/Filters/filter7.jpg|1.0|3|0.0|1.1</string>
+			<string>0|/Filters/filter8.jpg|1.0|10|0.0|1.1</string>
+			<string>0|/Filters/filter9.jpg|1.0|8|0.0|1.1</string>
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
-			<string>/Filters/pat001.jpg</string>
-			<string>/Filters/pat002.jpg</string>
-			<string>/Filters/pat005.jpg</string>
-			<string>/Filters/pat007.jpg</string>
-			<string>/Filters/pat008.jpg</string>
-			<string>/Filters/pat009.jpg</string>
-			<string>/pattern04@2x.jpg</string>
+			<string>/Filters/pat0.jpg</string>
+			<string>/Filters/pat1.jpg</string>
+			<string>/Filters/pat2.jpg</string>
+			<string>/Filters/pat3.jpg</string>
+			<string>/Filters/fullpat0.jpg</string>
+			<string>/Filters/fullpat1.jpg</string>
+			<string>/Filters/fullpat2.jpg</string>
 		</array>
 		<key>Specials</key>
 		<array>
