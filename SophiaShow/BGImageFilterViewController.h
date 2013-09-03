@@ -17,13 +17,19 @@
 #define kRemoveViewTag 118
 #endif
 
-
+typedef struct{
+    int background;
+    int frame;
+    int filter;
+    int special;
+} SelectionData;
 
 @interface BGImageFilterViewController : UIViewController <iCarouselDataSource, iCarouselDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     int selectedMenu;
     BOOL isEdited;
     BOOL newImage;
+    SelectionData selectionData;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;

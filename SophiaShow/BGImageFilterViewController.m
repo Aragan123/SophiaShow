@@ -86,6 +86,8 @@
     self.btnRotateFrame.hidden = YES;
     isEdited = NO;
     newImage = NO;
+    SelectionData data = {5,0,0,0};
+    selectionData = data;
 }
 
 - (void) setupFilterSlider{
@@ -213,7 +215,7 @@
     NSDictionary *res = [[BGGlobalData sharedData] filterResourceIcons];
     NSString* key = [[BGGlobalData sharedData] getFilterKeyStringByKeyIndex:tag];
     self.iCarousel_ds = [res objectForKey:key];
-    
+
     // construct carousel
     if (self.carousel == nil) {
         // first time to run
@@ -457,6 +459,8 @@
     }
     
     if (selectedMenu == kMenuSpecial) {
+        selectionData.special = index;
+        
         if (index == 0) { // this is option to remove all specials
             [self.filterAreaViewController updatePhotoSpecials:nil];
         }else{
@@ -470,6 +474,8 @@
         }
     }
     else if (selectedMenu == kMenuPhotoFilter){
+        selectionData.filter = index;
+        
         // for Photo filters
         if (index == 0) { // this is option to remove filters
             BGFilterData data = {0, nil, nil, 0.0f, 1};
@@ -491,6 +497,8 @@
         }
     }
     else if (selectedMenu == kMenuPhotoFrame){
+        selectionData.frame = index;
+        
         if (index==0) {
             BGPhotoFrameData data = {nil,0.0f,CGSizeZero};
             [self.filterAreaViewController updatePhotoFrame:data];
@@ -505,10 +513,13 @@
         }
     } else{
         // kMenuBgPattern: for Background Patterns
+        selectionData.background = index;
         UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:index andKeyIndex:selectedMenu];
         [self.filterAreaViewController updateBackgroundPattern:data];
 
     }
+    
+//    [self.carousel reloadData];
 }
 
 #pragma mark -

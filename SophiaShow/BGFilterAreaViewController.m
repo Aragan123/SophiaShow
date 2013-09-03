@@ -75,23 +75,11 @@
     // default color pattern
     UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:5 andKeyIndex:kMenuBgPattern];
     [self updateBackgroundPattern:data];
+    
     // default back special layer - UIImageView
     self.specialBackLayer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)] autorelease];
     [self.specialBackLayer setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.specialBackLayer];
-
-    // default frame view = no default one, just put empty image view
-    self.frameView = [[[UIImageView alloc] initWithFrame:[self calculateFrameViewRect:self.view.frame]] autorelease];
-    self.frameView.center = areaCentre;
-//    NSString *defaultFrameURI = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/Filters/border01.png"];
-//    UIImage *defaultFrame = [UIImage imageWithContentsOfFile:defaultFrameURI];
-//    self.frameView.image = [self drawPhotoFrame:defaultFrame withOffsize:13.0f];
-    // shadowing
-//    self.frameView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-//    self.frameView.layer.shadowOffset = CGSizeMake(4, 4);
-//    self.frameView.layer.shadowOpacity = 1;
-//    self.frameView.layer.shadowRadius = 4.0;
-    [self.view addSubview:self.frameView];
     
     // default photo scroll views
     self.scrollView = [[[UIScrollView alloc] initWithFrame:[self calculatePhotoViewRect:self.view.frame]] autorelease];
@@ -101,7 +89,6 @@
     [self.scrollView setBounces:NO];
     [self.scrollView setShowsHorizontalScrollIndicator:NO];
     [self.scrollView setShowsVerticalScrollIndicator:NO];
-//    [self.scrollView.layer setCornerRadius:4.0f];
     [self.view addSubview:self.scrollView];
     
     CGFloat imageWidth = CGImageGetWidth(srcImage.CGImage);
@@ -122,6 +109,11 @@
     [self.resultFilterView setBackgroundColor:[UIColor clearColor]];
     [self.resultFilterView setContentMode:UIViewContentModeScaleAspectFill];
     [self.view addSubview:self.resultFilterView];
+    
+    // default frame view = no default one, just put empty image view
+    self.frameView = [[[UIImageView alloc] initWithFrame:[self calculateFrameViewRect:self.view.frame]] autorelease];
+    self.frameView.center = areaCentre;
+    [self.view addSubview:self.frameView];
     
     // default special layer UIImageView
     self.specialForeLayer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)] autorelease];
@@ -146,57 +138,52 @@
 }
 
 - (void) updatePhotoFrame: (BGPhotoFrameData) data{
-//    self.frameView.image = [self drawPhotoFrame:data.image withOffsize:data.offsize];
+    CGPoint posCentre = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height*0.5);
+    CGRect scrollFrame = CGRectZero;
     
+    // check if has any filter effects, if so, remove it and replace with scrollview and original image
+    if (self.cropedImage != nil) {
+        self.cropedImage = nil; // set it to nil
+        [self.resultFilterView removeFromSuperview];
+        self.resultFilterView = nil;
+        [self.view insertSubview:self.scrollView belowSubview:self.frameView];
+    }
+    
+    // handle selections
     if (data.image == nil) {
         // first index is clicked to remove all frames
-        if (self.cropedImage == nil) {
-            return; // do nothing, this happends when 1st button is clicked but no frame added yet
-        }else{
-            self.cropedImage = nil;
-            [self.resultFilterView removeFromSuperview];
-            self.resultFilterView=nil;
-            [self.view insertSubview:self.scrollView aboveSubview:self.frameView];
-            // remove frame image
-            self.frameView.image = nil;
-        }
+        scrollFrame= [self calculatePhotoViewRect:self.view.frame];
+        self.frameView.image = nil;  // remove frame image
+
     }else{
         // rest index button is clcked to actually ADD a frame image
-        if (self.cropedImage == nil) { // first time
-            self.cropedImage = [self.scrollView imageByRenderingCurrentVisibleRect]; // get cropped image
-            [self.scrollView removeFromSuperview]; // remove scroll view
-            
-            if (self.resultFilterView == nil) {
-                UIImageView *imageView = [[UIImageView alloc] init];
-                [imageView setBackgroundColor:[UIColor clearColor]];
-                self.resultFilterView = imageView;
-                self.resultFilterView.contentMode = UIViewContentModeScaleAspectFill;
-                [imageView release];
-            }
-            self.resultFilterView.image = self.cropedImage; // set image
-            [self.view insertSubview:self.resultFilterView aboveSubview:self.frameView];
-            
-        }
-        // TODO: set frame base on different frame
-        CGRect frame = CGRectZero;
-        if (isPortrait) frame.size = data.size;
-        else {frame.size.width = data.size.height; frame.size.height= data.size.width;}
-        self.resultFilterView.frame = frame;
-        self.resultFilterView.center = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height*0.5); // in centre
+        if (isPortrait) scrollFrame.size = data.size;
+        else {scrollFrame.size.width = data.size.height; scrollFrame.size.height= data.size.width;}
         
         // set frame image
-//        if (isPortrait) {
-//            self.frameView.image = data.image;
-//        }else{
-//            UIImage *rotation = [data.image imageRotatedByDegrees:90.0f];
-//            self.frameView.image = rotation;
-//        }
+        if (isPortrait) {
+            self.frameView.image = data.image;
+        }else{
+            UIImage *rotation = [data.image imageRotatedByDegrees:-90.0f];
+            self.frameView.image = rotation;
+        }
         
-        self.frameView.image = [self drawPhotoFrame:data.image withOffsize:data.offsize];
+//        self.frameView.image = [self drawPhotoFrame:data.image withOffsize:data.offsize]; 
 
     }
     
-    
+    // reset scroll view frame;
+    self.scrollView.frame = scrollFrame;
+    self.scrollView.center = posCentre; // in centre
+    // refresh minimal scale
+    CGFloat imageWidth = CGImageGetWidth(self.originalImage.CGImage);
+    CGFloat imageHeight = CGImageGetHeight(self.originalImage.CGImage);
+    [self.scrollView setMinimumZoomScale:MIN((self.scrollView.frame.size.width / imageWidth), (self.scrollView.frame.size.height / imageHeight)) ];
+    if (self.scrollView.zoomScale < self.scrollView.minimumZoomScale) {
+        self.scrollView.zoomScale = self.scrollView.minimumZoomScale;
+    }
+    // reset result filter view frame = scroll view frame
+    self.resultFilterView.frame = self.scrollView.frame;
 }
 
 - (void) updatePhotoFilter: (BGFilterData) data{
@@ -213,7 +200,7 @@
             self.cropedImage = nil; // set it to nil
             [self.resultFilterView removeFromSuperview];
             self.resultFilterView = nil;
-            [self.view insertSubview:self.scrollView aboveSubview:self.frameView];
+            [self.view insertSubview:self.scrollView belowSubview:self.frameView];
         }
         
     }else{
@@ -229,7 +216,7 @@
                 self.resultFilterView = imageView;
                 [imageView release];
             }
-            [self.view insertSubview:self.resultFilterView aboveSubview:self.frameView];
+            [self.view insertSubview:self.resultFilterView belowSubview:self.frameView];
 
         }
         
@@ -290,8 +277,8 @@
 - (CGRect) calculateFilterAreaRect: (CGSize) imageSize{
     CGRect rect = CGRectZero;
     if (isPortrait)
-        rect = CGRectMake(166.5, 10, 650, 750);
-    else rect = CGRectMake(50, 60, 750, 650);
+        rect = CGRectMake(50, 10, 800, 748);
+    else rect = CGRectMake(50, 10, 800, 748);
 
     return rect;
 }
