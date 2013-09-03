@@ -491,14 +491,18 @@
         }
     }
     else if (selectedMenu == kMenuPhotoFrame){
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-        [self performBlock:^{
-            BGPhotoFrameData data = [[BGGlobalData sharedData] getPhotoFrameByIndex:index];
+        if (index==0) {
+            BGPhotoFrameData data = {nil,0.0f,CGSizeZero};
             [self.filterAreaViewController updatePhotoFrame:data];
-            
-            [SVProgressHUD dismiss]; // dismiss HUD
-        } afterDelay:0.4f];
-        
+        }else{
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+            [self performBlock:^{
+                BGPhotoFrameData data = [[BGGlobalData sharedData] getPhotoFrameByIndex:index];
+                [self.filterAreaViewController updatePhotoFrame:data];
+                
+                [SVProgressHUD dismiss]; // dismiss HUD
+            } afterDelay:0.4f];
+        }
     } else{
         // kMenuBgPattern: for Background Patterns
         UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:index andKeyIndex:selectedMenu];

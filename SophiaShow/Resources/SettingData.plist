@@ -6,6 +6,7 @@
 	<dict>
 		<key>PhotoFrame</key>
 		<array>
+			<string>filter_original.png</string>
 			<string>borderImage01.png</string>
 			<string>borderImage02.png</string>
 			<string>borderImage03.png</string>
@@ -92,10 +93,11 @@
 	<dict>
 		<key>PhotoFrame</key>
 		<array>
-			<string>/Filters/border01.png|13.0f</string>
-			<string>/Filters/border02.png|13.0f</string>
-			<string>/Filters/border03.png|13.0f</string>
-			<string>/Filters/border04.png|30.0f</string>
+			<string>0</string>
+			<string>/Filters/border01.png|13.0f|{300,400}</string>
+			<string>/Filters/border02.png|13.0f|{400, 500}</string>
+			<string>/Filters/border03.png|13.0f|{350,450}</string>
+			<string>/Filters/border04.png|30.0f|{450,550}</string>
 		</array>
 		<key>PhotoFilter</key>
 		<array>

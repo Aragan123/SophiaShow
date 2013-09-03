@@ -181,6 +181,7 @@ static BGGlobalData *instance = nil;
     NSString *resUri = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:resArr[0]];
     frameData.image = [UIImage imageWithContentsOfFile:resUri];
     frameData.offsize = [resArr[1] floatValue];
+    frameData.size = CGSizeFromString(resArr[2]);
     
     return frameData;
 }

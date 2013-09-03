@@ -43,6 +43,7 @@ typedef struct{
 //     int type;
     UIImage *image;
     float offsize;
+    CGSize size;
 } BGPhotoFrameData;
 
 
