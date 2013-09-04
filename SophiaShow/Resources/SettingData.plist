@@ -7,10 +7,14 @@
 		<key>PhotoFrame</key>
 		<array>
 			<string>filter_original.png</string>
-			<string>borderImage01.png</string>
-			<string>borderImage02.png</string>
-			<string>borderImage03.png</string>
-			<string>borderImage04.png</string>
+			<string>icon_frame0.png</string>
+			<string>icon_frame1.png</string>
+			<string>icon_frame2.png</string>
+			<string>icon_frame3.png</string>
+			<string>icon_frame4.png</string>
+			<string>icon_frame5.png</string>
+			<string>icon_frame6.png</string>
+			<string>icon_frame7.png</string>
 		</array>
 		<key>PhotoFilter</key>
 		<array>
@@ -27,13 +31,13 @@
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
-			<string>icon_pat0.jpg</string>
-			<string>icon_pat1.jpg</string>
-			<string>icon_pat2.jpg</string>
-			<string>icon_pat3.jpg</string>
-			<string>icon_pat4.jpg</string>
-			<string>icon_pat5.jpg</string>
-			<string>icon_pat6.jpg</string>
+			<string>icon_pat0.png</string>
+			<string>icon_pat1.png</string>
+			<string>icon_pat2.png</string>
+			<string>icon_pat3.png</string>
+			<string>icon_pat4.png</string>
+			<string>icon_pat5.png</string>
+			<string>icon_pat6.png</string>
 		</array>
 		<key>Specials</key>
 		<array>
@@ -94,10 +98,14 @@
 		<key>PhotoFrame</key>
 		<array>
 			<string>0</string>
-			<string>/Filters/frame0.png|13.0f|{486,622}</string>
-			<string>/Filters/frame1.png|13.0f|{213,336}</string>
-			<string>/Filters/frame2.png|13.0f|{273,419}</string>
-			<string>/Filters/frame3.png|30.0f|{296,439}</string>
+			<string>/Filters/frame0.png|13.0f|{478,626}</string>
+			<string>/Filters/frame1.png|13.0f|{270,415}</string>
+			<string>/Filters/frame2.png|13.0f|{297,441}</string>
+			<string>/Filters/frame3.png|30.0f|{262,398}</string>
+			<string>/Filters/frame4.png|30.0f|{216,342}</string>
+			<string>/Filters/frame5.png|30.0f|{236,371}</string>
+			<string>/Filters/frame6.png|30.0f|{262,404}</string>
+			<string>/Filters/frame7.png|30.0f|{386,511}</string>
 		</array>
 		<key>PhotoFilter</key>
 		<array>

@@ -277,8 +277,8 @@
 - (CGRect) calculateFilterAreaRect: (CGSize) imageSize{
     CGRect rect = CGRectZero;
     if (isPortrait)
-        rect = CGRectMake(50, 10, 800, 748);
-    else rect = CGRectMake(50, 10, 800, 748);
+        rect = CGRectMake(50, 8, 800, 750);
+    else rect = CGRectMake(50, 8, 800, 750);
 
     return rect;
 }
