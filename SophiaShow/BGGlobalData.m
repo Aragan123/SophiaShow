@@ -197,7 +197,7 @@ static BGGlobalData *instance = nil;
     filterData.brightness = [resArr[4] floatValue];
     filterData.contrast = [resArr[5] floatValue];
     
-    if (filterData.type == 0) {
+    if (filterData.type == 0 || filterData.type==1) {
         // this is file
         NSString *resUri = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:resArr[1]];
         filterData.image = [UIImage imageWithContentsOfFile:resUri];

@@ -84,7 +84,7 @@
     // default photo scroll views
     self.scrollView = [[[UIScrollView alloc] initWithFrame:[self calculatePhotoViewRect:self.view.frame]] autorelease];
     self.scrollView.center = areaCentre;
-    [self.scrollView setBackgroundColor:[UIColor whiteColor]];
+    [self.scrollView setBackgroundColor:[UIColor colorWithRed:255.0/255 green:253.0/255 blue:250.0f/255 alpha:0.5f]];
     [self.scrollView setDelegate:self];
     [self.scrollView setBounces:NO];
     [self.scrollView setShowsHorizontalScrollIndicator:NO];
@@ -97,12 +97,12 @@
     // default photo view
     self.photoView = [[[UIImageView alloc] initWithImage:srcImage] autorelease];
     self.photoView.backgroundColor = [UIColor clearColor];
+//    self.scrollView.tileContainerView = self.photoView;
     [self.scrollView addSubview:self.photoView]; // add views
-    
     [self.scrollView setContentSize:CGSizeMake(imageWidth, imageHeight)];
     [self.scrollView setMinimumZoomScale:MIN((self.scrollView.frame.size.width / imageWidth), (self.scrollView.frame.size.height / imageHeight)) ];
-    [self.scrollView setZoomScale:[self.scrollView minimumZoomScale]];
     [self.scrollView setMaximumZoomScale:[self calculateScrollerMaxZoom:self.scrollView.frame.size andPhotoSize:CGSizeMake(imageWidth, imageHeight)]];
+    [self.scrollView setZoomScale:[self.scrollView minimumZoomScale]];
     
     // default result image view
     self.resultFilterView = [[[UIImageView alloc] initWithFrame:self.scrollView.frame] autorelease];
@@ -119,7 +119,6 @@
     self.specialForeLayer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)] autorelease];
     [self.specialForeLayer setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.specialForeLayer];
-    
 }
 
 - (void) clearContents{
@@ -224,18 +223,31 @@
 //        UIImage *resizedImage = [data.image imageScaledToSize:self.cropedImage.size];
         UIImage *resizedImage = [data.image resizeImageFromSize:data.image.size toSize:self.cropedImage.size orientation:isPortrait];
         UIImage *filterImage = self.cropedImage;
-        NSLog(@"update photo filer brightness=%f, contrast=%f", data.brightness, data.contrast);
-        
-        if (data.brightness != 0.0f) { // change brightness
-            filterImage = [filterImage brightness:data.brightness];
-        }
-        if (data.contrast != 0.0f) { // change contrast
-            filterImage = [filterImage contrast:data.contrast];
-        }
 
+        if (data.type == 1) { // add Differences Blending Mode of blue image with alpha 0.22
+            NSLog(@"Add Blue Filter");
+            NSString *blueImagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/Filters/filter_type1.jpg"];
+            UIImage *blueImage = [UIImage imageWithContentsOfFile:blueImagePath];
+            UIImage *resizedBlueImage = [blueImage resizeImageFromSize:blueImage.size toSize:self.cropedImage.size orientation:isPortrait];
+            filterImage = [filterImage imageBlendedWithImage:resizedBlueImage blendMode:kCGBlendModeDifference alpha:0.22f];
+            
+//            self.resultFilterView.image = resizedBlueImage;
+        }
+        
         // Finally add blending
         UIImage *result = [filterImage imageBlendedWithImage:resizedImage blendMode:(CGBlendMode)data.blendMode alpha:data.alpha];
+        
+        // then add contrast and brightness to result image
+        NSLog(@"update photo filer brightness=%f, contrast=%f", data.brightness, data.contrast);
+        if (data.brightness != 0.0f) { // change brightness
+            result = [result brightness:data.brightness];
+        }
+        if (data.contrast != 0.0f) { // change contrast
+            result = [result contrast:data.contrast];
+        }
+        
         self.resultFilterView.image = result;
+
     }
 }
 
@@ -426,5 +438,35 @@
     
     subView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
 }
+
+//-(void)scrollViewDidZoom:(UIScrollView *)pScrollView {
+//    UIView *imageView = [pScrollView.subviews objectAtIndex:0];
+//
+//    CGRect innerFrame = imageView.frame;
+//    CGRect scrollerBounds = pScrollView.bounds;
+//    
+//    if ( ( innerFrame.size.width < scrollerBounds.size.width ) || ( innerFrame.size.height < scrollerBounds.size.height ) )
+//    {
+//        CGFloat tempx = imageView.center.x - ( scrollerBounds.size.width / 2 );
+//        CGFloat tempy = imageView.center.y - ( scrollerBounds.size.height / 2 );
+//        CGPoint myScrollViewOffset = CGPointMake( tempx, tempy);
+//        
+//        pScrollView.contentOffset = myScrollViewOffset;
+//        
+//    }
+//    
+//    UIEdgeInsets anEdgeInset = { 0, 0, 0, 0};
+//    if ( scrollerBounds.size.width > innerFrame.size.width )
+//    {
+//        anEdgeInset.left = (scrollerBounds.size.width - innerFrame.size.width) / 2;
+//        anEdgeInset.right = -anEdgeInset.left;  // I don't know why this needs to be negative, but that's what works
+//    }
+//    if ( scrollerBounds.size.height > innerFrame.size.height )
+//    {
+//        anEdgeInset.top = (scrollerBounds.size.height - innerFrame.size.height) / 2;
+//        anEdgeInset.bottom = -anEdgeInset.top;  // I don't know why this needs to be negative, but that's what works
+//    }
+//    pScrollView.contentInset = anEdgeInset;
+//}
 
 @end

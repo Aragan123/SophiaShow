@@ -80,7 +80,7 @@
 			<key>GalleryURI</key>
 			<string>Personal</string>
 			<key>GalleryImageCount</key>
-			<integer>15</integer>
+			<integer>14</integer>
 		</dict>
 		<dict>
 			<key>GalleryDesc_ENG</key>
@@ -116,9 +116,9 @@
 			<string>0|/Filters/filter4.jpg|0.27|10|1.25|1.2</string>
 			<string>0|/Filters/filter5.jpg|1.0|2|0.0|1.1</string>
 			<string>0|/Filters/filter6.jpg|1.0|5|0.0|1.1</string>
-			<string>0|/Filters/filter7.jpg|1.0|3|0.0|1.1</string>
-			<string>0|/Filters/filter8.jpg|1.0|10|0.0|1.1</string>
-			<string>0|/Filters/filter9.jpg|1.0|8|0.0|1.1</string>
+			<string>1|/Filters/filter7.jpg|0.58|8|0.0|1.1</string>
+			<string>1|/Filters/filter8.jpg|0.42|2|0.0|1.1</string>
+			<string>1|/Filters/filter9.jpg|1.0|8|0.0|1.1</string>
 		</array>
 		<key>BackgroundPattern</key>
 		<array>

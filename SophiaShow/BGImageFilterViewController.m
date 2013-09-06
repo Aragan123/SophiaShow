@@ -13,6 +13,7 @@
 #import "AHAlertView.h"
 #import "NSObject+Blocks.h"
 #import "BGGlobalData.h"
+#import <Social/Social.h>
 
 @interface BGImageFilterViewController ()
 
@@ -293,7 +294,11 @@
         isEdited=NO;
         AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"保存成功" message:@"照片已经保存到你的相册"] autorelease];
         [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
-        [alert setCancelButtonTitle:NSLocalizedString(@"我知道了", nil) block:nil];
+        [alert addButtonWithTitle:NSLocalizedString(@"分享到新浪微博", nil) block:^{
+            [alert dismiss]; // dismiss alert first
+            [self shareToWeibo:image]; // share to weibo
+        }];
+        [alert setCancelButtonTitle:NSLocalizedString(@"返  回", nil) block:nil];
         [SVProgressHUD dismiss];
         [alert show];
     }
@@ -407,6 +412,64 @@
     }
 }
 
+// share to Sina Weibo
+- (void)shareToWeibo: (UIImage*) savedImage{
+    [SVProgressHUD show]; // display HUD
+    
+    [self performBlock:^{
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]){
+            // > iOS 6, sharing is available
+            SLComposeViewController *socialVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
+            // add handler
+            SLComposeViewControllerCompletionHandler socialHandler = ^(SLComposeViewControllerResult result) {
+                NSString *output;
+                BOOL cancelled = NO;
+                switch (result) {
+                    case SLComposeViewControllerResultCancelled:
+                        output = NSLocalizedString(@"分享过程被终止", nil);
+                        cancelled = YES;
+                        break;
+                    case SLComposeViewControllerResultDone:
+                        output = NSLocalizedString(@"已经成功分享到新浪微博", nil);
+                        break;
+                    default:
+                        break;
+                }
+                
+                [socialVC dismissViewControllerAnimated:YES completion:^(void){
+                    if (!cancelled) {
+                        AHAlertView *alert = [[AHAlertView alloc] initWithTitle:output message:nil];
+                        [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+                        [alert setCancelButtonTitle:NSLocalizedString(@"确  定", nil) block:^{
+                            [self.view endEditing:YES];
+                        }];
+                        [alert show];
+                        [alert release];
+                    }
+                }];
+            };
+            
+            socialVC.completionHandler = socialHandler;
+            [socialVC setInitialText:@"#Yeephoto#"];
+            [socialVC addImage:savedImage];
+            [socialVC addURL:[NSURL URLWithString:@"http://www.yeephoto.com/"]];
+            
+            // finally display social view controller
+            [SVProgressHUD dismiss];
+            [self presentViewController:socialVC animated:YES completion:nil];
+        
+        }else{
+            // < iOS 6, sharing is not available
+            [SVProgressHUD dismiss];
+            AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"无法分享" message:@"请升级您的设备系统到iOS 6.0或以上版本"];
+            [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
+            [alert setCancelButtonTitle:NSLocalizedString(@"返  回", nil) block:nil];
+            [alert show];
+            [alert release];
+        }
+    } afterDelay:0.2f];
+
+}
 
 #pragma mark -
 #pragma mark iCarousel delegate and its DataSrouce delegate methods

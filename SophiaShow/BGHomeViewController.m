@@ -298,7 +298,7 @@
                 NSString *yeePath = [[NSBundle mainBundle] pathForResource:@"about_yee_cn" ofType:@"png"];
                 UIImage * yeeImage = [UIImage imageWithContentsOfFile:yeePath];
                 UIButton *yeebtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                yeebtn.frame = CGRectMake(460.0f, 460.0f, yeeImage.size.width, yeeImage.size.height);
+                yeebtn.frame = CGRectMake(450.0f, 442.0f, yeeImage.size.width, yeeImage.size.height);
                 [yeebtn setBackgroundImage:yeeImage forState:UIControlStateNormal];
                 [yeebtn addTarget:self action:@selector(yeePhotoButton:) forControlEvents:UIControlEventTouchUpInside];
                 yeebtn.tag = kTagAboutYee;
