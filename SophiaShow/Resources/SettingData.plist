@@ -20,14 +20,14 @@
 		<array>
 			<string>filter_original.png</string>
 			<string>filter_mx_0.png</string>
-			<string>filter_mx_0.png</string>
 			<string>filter_mx_1.png</string>
 			<string>filter_mx_2.png</string>
 			<string>filter_mx_3.png</string>
-			<string>filter_mx_3.png</string>
 			<string>filter_mx_4.png</string>
-			<string>filter_mx_4.png</string>
-			<string>filter_mx_4.png</string>
+			<string>filter_mx_5.png</string>
+			<string>filter_mx_6.png</string>
+			<string>filter_mx_7.png</string>
+			<string>filter_mx_8.png</string>
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
@@ -110,15 +110,15 @@
 		<key>PhotoFilter</key>
 		<array>
 			<string>0</string>
+			<string>1|/Filters/filter0.jpg|1.0|8|0.0|1.1</string>
 			<string>0|/Filters/filter1.jpg|1.0|8|1.2|1.1</string>
-			<string>0|/Filters/filter2.jpg|0.35|4|1.15|1.2</string>
+			<string>1|/Filters/filter2.jpg|0.42|2|0.0|1.1</string>
 			<string>0|/Filters/filter3.jpg|0.37|3|1.17|1.2</string>
-			<string>0|/Filters/filter4.jpg|0.27|10|1.25|1.2</string>
-			<string>0|/Filters/filter5.jpg|1.0|2|0.0|1.1</string>
-			<string>0|/Filters/filter6.jpg|1.0|5|0.0|1.1</string>
-			<string>1|/Filters/filter7.jpg|0.58|8|0.0|1.1</string>
-			<string>1|/Filters/filter8.jpg|0.42|2|0.0|1.1</string>
-			<string>1|/Filters/filter9.jpg|1.0|8|0.0|1.1</string>
+			<string>1|/Filters/filter4.jpg|0.58|8|0.0|1.1</string>
+			<string>0|/Filters/filter5.jpg|0.27|10|1.25|1.2</string>
+			<string>0|/Filters/filter6.jpg|0.35|4|1.15|1.2</string>
+			<string>0|/Filters/filter7.jpg|1.0|2|0.0|1.1</string>
+			<string>0|/Filters/filter8.jpg|1.0|5|0.0|1.1</string>
 		</array>
 		<key>BackgroundPattern</key>
 		<array>
