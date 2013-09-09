@@ -73,8 +73,9 @@
     CGPoint areaCentre = CGPointMake(areaSize.width*0.5, areaSize.height*0.5);
 
     // default color pattern
-    UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:5 andKeyIndex:kMenuBgPattern];
-    [self updateBackgroundPattern:data];
+//    UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:5 andKeyIndex:kMenuBgPattern];
+//    [self updateBackgroundPattern:data];
+    [self updateBackgroundPattern:nil patternLine:NO];
     
     // default back special layer - UIImageView
     self.specialBackLayer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, areaSize.width, areaSize.height)] autorelease];
@@ -131,9 +132,21 @@
 
 #pragma mark -
 #pragma mark Public Methods
-- (void) updateBackgroundPattern: (UIImage*) image{
-    UIColor *bgColor = [UIColor colorWithPatternImage:image];
-    self.view.backgroundColor = bgColor;
+- (void) updateBackgroundPattern: (UIImage*) image patternLine:(BOOL)line{
+    if (image==nil && line) {
+        NSString *linePatternPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/Filters/pat_line.png"];
+        UIImage *image = [UIImage imageWithContentsOfFile:linePatternPath];
+        if (!isPortrait) {
+            image = [image imageRotatedByDegrees:90.0f];
+        }
+        UIColor *bgColor = [UIColor colorWithPatternImage:image];
+        self.view.backgroundColor = bgColor;
+    }else if (image==nil){
+        self.view.backgroundColor = [UIColor clearColor];
+    }else{
+        UIColor *bgColor = [UIColor colorWithPatternImage:image];
+        self.view.backgroundColor = bgColor;
+    }
 }
 
 - (void) updatePhotoFrame: (BGPhotoFrameData) data{
@@ -289,8 +302,8 @@
 - (CGRect) calculateFilterAreaRect: (CGSize) imageSize{
     CGRect rect = CGRectZero;
     if (isPortrait)
-        rect = CGRectMake(50, 8, 800, 750);
-    else rect = CGRectMake(50, 8, 800, 750);
+        rect = CGRectMake(125, 8, 650, 750);
+    else rect = CGRectMake(75, 58, 750, 650);
 
     return rect;
 }

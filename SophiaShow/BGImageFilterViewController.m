@@ -62,6 +62,8 @@
     [self setBtnChoosePhoto:nil];
     [self setSliderParameter:nil];
     [self setBtnRotateFrame:nil];
+    [self setMainBackPhoto:nil];
+    [self setMainChooseBtn:nil];
     [super viewDidUnload];
 }
 
@@ -76,6 +78,8 @@
     [_btnChoosePhoto release];
     [_sliderParameter release];
     [_btnRotateFrame release];
+    [_mainBackPhoto release];
+    [_mainChooseBtn release];
     [super dealloc];
 }
 
@@ -87,7 +91,7 @@
     self.btnRotateFrame.hidden = YES;
     isEdited = NO;
     newImage = NO;
-    SelectionData data = {5,0,0,0};
+    SelectionData data = {0,0,0,0};
     selectionData = data;
 }
 
@@ -146,7 +150,7 @@
     UIView *itemPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 40.0f)] autorelease];
     itemPlaceholder.backgroundColor = [UIColor clearColor];
     
-    HMSideMenu *menus = [[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemFilter, itemSpecial, itemPlaceholder, itemSave, itemCancelAll]];
+    HMSideMenu *menus = [[HMSideMenu alloc] initWithItems:@[itemBackPat, itemFrame, itemSpecial, itemFilter, itemPlaceholder, itemSave, itemCancelAll]];
     [menus setItemSpacing:5.0f];
     self.sideMenu = menus;
     [self.view addSubview:self.sideMenu];
@@ -328,6 +332,8 @@
     if (!isEdited) {
         // if not edited, do cancel all actions right away
         [self cancelAllActions];
+        self.mainChooseBtn.hidden=NO;
+        self.mainBackPhoto.hidden=NO;
     }else{
         // otherwise, need to show a warning alert to user to input 
         AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"确定要取消对照片的所有操作？" message:nil] autorelease];
@@ -335,6 +341,8 @@
         [alert setCancelButtonTitle:NSLocalizedString(@"返回", nil) block:nil];
         [alert addButtonWithTitle:NSLocalizedString(@"确定", nil) block:^{        
             [self cancelAllActions];
+            self.mainChooseBtn.hidden=NO;
+            self.mainBackPhoto.hidden=NO;
             [alert dismiss]; // dismiss alert view
         }];
         [alert show];
@@ -526,12 +534,19 @@
         
         if (index == 0) { // this is option to remove all specials
             [self.filterAreaViewController updatePhotoSpecials:nil];
+            if (selectionData.background == 0) { // need to remove line_pattern
+                [self.filterAreaViewController updateBackgroundPattern:nil patternLine:NO];
+            }
         }else{
             // display HUD
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
             [self performBlock:^{
                 NSDictionary *dataArr = [[BGGlobalData sharedData] getSpecialDataByIndex:index];
                 [self.filterAreaViewController updatePhotoSpecials:dataArr]; // update/display special effects
+                if (selectionData.background==0) {
+                    // need to change to line pattern image
+                    [self.filterAreaViewController updateBackgroundPattern:nil patternLine:YES];
+                }
                 [SVProgressHUD dismiss]; // dismiss HUD
             } afterDelay:0.5f];
         }
@@ -577,9 +592,19 @@
     } else{
         // kMenuBgPattern: for Background Patterns
         selectionData.background = index;
-        UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:index andKeyIndex:selectedMenu];
-        [self.filterAreaViewController updateBackgroundPattern:data];
-
+        
+        if (index==0) {
+            if (selectionData.special == 0) {
+                // if no special selected, then update with nil
+                [self.filterAreaViewController updateBackgroundPattern:nil patternLine:NO];
+            }else{
+                // otherwise, update with line_pattern image
+                [self.filterAreaViewController updateBackgroundPattern:nil patternLine:YES];
+            }
+        }else{
+            UIImage *data = [[BGGlobalData sharedData] getFilterResourceByIndex:index andKeyIndex:selectedMenu];
+            [self.filterAreaViewController updateBackgroundPattern:data patternLine:NO];
+        }
     }
     
 //    [self.carousel reloadData];
@@ -664,6 +689,10 @@
         NSLog(@"selected image type: %@", mediaType);
         
         if ([mediaType isEqualToString:@"public.image"]){
+            // hide
+            self.mainBackPhoto.hidden=YES;
+            self.mainChooseBtn.hidden=YES;
+            
             UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
             
             self.btnChoosePhoto.hidden = YES;

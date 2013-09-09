@@ -33,6 +33,8 @@ typedef struct{
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
+@property (retain, nonatomic) IBOutlet UIImageView *mainBackPhoto;
+@property (retain, nonatomic) IBOutlet UIButton *mainChooseBtn;
 @property (nonatomic, retain) HMSideMenu *sideMenu;
 @property (nonatomic, retain) iCarousel *carousel;
 @property (nonatomic, retain) NSArray *iCarousel_ds;

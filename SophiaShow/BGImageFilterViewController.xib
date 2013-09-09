@@ -10054,6 +10054,22 @@ AAEAAQABA</bytes>
 					<int key="connectionID">21</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mainBackPhoto</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="654932187"/>
+					</object>
+					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mainChooseBtn</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="741552120"/>
+					</object>
+					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">clickChoosePhoto:</string>
 						<reference key="source" ref="741552120"/>
@@ -10157,7 +10173,7 @@ AAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">21</int>
+			<int key="maxID">23</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -10168,7 +10184,9 @@ AAEAAQABA</bytes>
 						<string key="clickCancelAll:">UIButton</string>
 						<string key="clickChoosePhoto:">UIButton</string>
 						<string key="clickReturnButton:">id</string>
+						<string key="saveImageToPhotoAlbum:">id</string>
 						<string key="selectFilterAreaOrientation:">UIButton</string>
+						<string key="showMoreOptionsBar:">UIButton</string>
 						<string key="sliderValueChange:">UISlider</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -10184,8 +10202,16 @@ AAEAAQABA</bytes>
 							<string key="name">clickReturnButton:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="saveImageToPhotoAlbum:">
+							<string key="name">saveImageToPhotoAlbum:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="selectFilterAreaOrientation:">
 							<string key="name">selectFilterAreaOrientation:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="showMoreOptionsBar:">
+							<string key="name">showMoreOptionsBar:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBActionInfo" key="sliderValueChange:">
@@ -10196,6 +10222,8 @@ AAEAAQABA</bytes>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="btnChoosePhoto">UIView</string>
 						<string key="btnRotateFrame">UIButton</string>
+						<string key="mainBackPhoto">UIImageView</string>
+						<string key="mainChooseBtn">UIButton</string>
 						<string key="sliderParameter">UISlider</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -10205,6 +10233,14 @@ AAEAAQABA</bytes>
 						</object>
 						<object class="IBToOneOutletInfo" key="btnRotateFrame">
 							<string key="name">btnRotateFrame</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mainBackPhoto">
+							<string key="name">mainBackPhoto</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mainChooseBtn">
+							<string key="name">mainChooseBtn</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="sliderParameter">

@@ -33,7 +33,7 @@
 - (void) clearContents;
 - (UIImage*) screenshot;
 
-- (void) updateBackgroundPattern: (UIImage*) image;
+- (void) updateBackgroundPattern: (UIImage*) image patternLine:(BOOL)line;
 - (void) updatePhotoFrame: (BGPhotoFrameData) data;
 - (void) updatePhotoFilter: (BGFilterData) data;
 - (void) updateFilterOpacity: (float) value;
