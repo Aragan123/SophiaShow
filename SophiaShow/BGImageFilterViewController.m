@@ -732,6 +732,7 @@
     if (newImage) {
         // from camera
         [self dismissViewControllerAnimated:YES completion:nil];
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     }else{
         // from photo library
         [self.popover dismissPopoverAnimated:YES];
