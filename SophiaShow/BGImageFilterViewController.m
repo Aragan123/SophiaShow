@@ -653,6 +653,10 @@
 // Utility to select image from camera
 - (void) selectImageFromCamera{
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIDevice *currentDevice = [UIDevice currentDevice];
+        while ([currentDevice isGeneratingDeviceOrientationNotifications])
+            [currentDevice endGeneratingDeviceOrientationNotifications];
+
         newImage=YES;
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
@@ -660,6 +664,8 @@
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:imagePicker animated:YES completion:nil];
         [imagePicker release];
+        while ([currentDevice isGeneratingDeviceOrientationNotifications])
+            [currentDevice endGeneratingDeviceOrientationNotifications];
     }else {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"你的设备无法使用摄像头!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
@@ -675,6 +681,8 @@
     if (newImage) {
         // from camera
         [self dismissViewControllerAnimated:YES completion:nil];
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+
     }else{
         // dismiss photo library
         [self.popover dismissPopoverAnimated:YES];
@@ -708,7 +716,7 @@
             [self.view performBlock:^{
                 [self.sideMenu open];
             } afterDelay:0.5f];
-            
+                        
         }else{
             [SVProgressHUD dismiss];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"请选择系统可以识别的图片!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
