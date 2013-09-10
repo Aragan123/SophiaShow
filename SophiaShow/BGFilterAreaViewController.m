@@ -85,7 +85,8 @@
     // default photo scroll views
     self.scrollView = [[[UIScrollView alloc] initWithFrame:[self calculatePhotoViewRect:self.view.frame]] autorelease];
     self.scrollView.center = areaCentre;
-    [self.scrollView setBackgroundColor:[UIColor colorWithRed:255.0/255 green:253.0/255 blue:250.0f/255 alpha:0.5f]];
+//    [self.scrollView setBackgroundColor:[UIColor colorWithRed:255.0/255 green:253.0/255 blue:250.0f/255 alpha:0.5f]];
+    [self.scrollView setBackgroundColor:[UIColor clearColor]];
     [self.scrollView setDelegate:self];
     [self.scrollView setBounces:NO];
     [self.scrollView setShowsHorizontalScrollIndicator:NO];
@@ -221,13 +222,30 @@
             self.cropedImage = [self.scrollView imageByRenderingCurrentVisibleRect]; // get cropped image
             [self.scrollView removeFromSuperview]; // remove scroll view
             
+            CGRect resultFrame = self.scrollView.frame;
+            
+            if (self.scrollView.contentSize.width<self.scrollView.frame.size.width
+                || self.scrollView.contentSize.height < self.scrollView.frame.size.height) {
+                // crop again, because image doesn't fill up scroll view fully
+                CGRect cropFrame = CGRectZero;
+                cropFrame.size.width = self.scrollView.frame.size.width - abs(self.scrollView.contentInset.right) - abs(self.scrollView.contentInset.left);
+                cropFrame.size.height = self.scrollView.frame.size.height - abs(self.scrollView.contentInset.top) - abs(self.scrollView.contentInset.bottom);
+                cropFrame.origin.x = abs(self.scrollView.contentInset.left);
+                cropFrame.origin.y = abs(self.scrollView.contentInset.top);
+                
+                self.cropedImage = [self.cropedImage imageCropByFrame:cropFrame];
+                resultFrame.size = cropFrame.size;
+            }
+            
             if (self.resultFilterView == nil) {
-                UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.scrollView.frame];
+                UIImageView *imageView = [[UIImageView alloc] init];
                 [imageView setBackgroundColor:[UIColor clearColor]];
                 self.resultFilterView.contentMode = UIViewContentModeScaleAspectFill;
                 self.resultFilterView = imageView;
                 [imageView release];
             }
+            self.resultFilterView.frame = resultFrame;
+            self.resultFilterView.center = self.scrollView.center;
             [self.view insertSubview:self.resultFilterView belowSubview:self.frameView];
 
         }
@@ -439,47 +457,52 @@
 	return self.photoView;
 }
 
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView
-{
-    UIView *subView = [scrollView.subviews objectAtIndex:0];
-    
-    CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width)?
-        (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0.0;
-    
-    CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height)?
-        (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
-    
-    subView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
-}
-
-//-(void)scrollViewDidZoom:(UIScrollView *)pScrollView {
-//    UIView *imageView = [pScrollView.subviews objectAtIndex:0];
-//
-//    CGRect innerFrame = imageView.frame;
-//    CGRect scrollerBounds = pScrollView.bounds;
+//- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+//{
+//    UIView *subView = [scrollView.subviews objectAtIndex:0];
 //    
-//    if ( ( innerFrame.size.width < scrollerBounds.size.width ) || ( innerFrame.size.height < scrollerBounds.size.height ) )
-//    {
-//        CGFloat tempx = imageView.center.x - ( scrollerBounds.size.width / 2 );
-//        CGFloat tempy = imageView.center.y - ( scrollerBounds.size.height / 2 );
-//        CGPoint myScrollViewOffset = CGPointMake( tempx, tempy);
-//        
-//        pScrollView.contentOffset = myScrollViewOffset;
-//        
-//    }
+//    CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width)?
+//        (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0.0;
 //    
-//    UIEdgeInsets anEdgeInset = { 0, 0, 0, 0};
-//    if ( scrollerBounds.size.width > innerFrame.size.width )
-//    {
-//        anEdgeInset.left = (scrollerBounds.size.width - innerFrame.size.width) / 2;
-//        anEdgeInset.right = -anEdgeInset.left;  // I don't know why this needs to be negative, but that's what works
-//    }
-//    if ( scrollerBounds.size.height > innerFrame.size.height )
-//    {
-//        anEdgeInset.top = (scrollerBounds.size.height - innerFrame.size.height) / 2;
-//        anEdgeInset.bottom = -anEdgeInset.top;  // I don't know why this needs to be negative, but that's what works
-//    }
-//    pScrollView.contentInset = anEdgeInset;
+//    CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height)?
+//        (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
+//    
+//    subView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
 //}
+
+-(void)scrollViewDidZoom:(UIScrollView *)pScrollView {
+    UIView *imageView = [pScrollView.subviews objectAtIndex:0];
+
+    CGRect innerFrame = imageView.frame;
+    CGRect scrollerBounds = pScrollView.bounds;
+    
+    if ( ( innerFrame.size.width < scrollerBounds.size.width ) || ( innerFrame.size.height < scrollerBounds.size.height ) )
+    {
+        CGFloat tempx = imageView.center.x - ( scrollerBounds.size.width / 2 );
+        CGFloat tempy = imageView.center.y - ( scrollerBounds.size.height / 2 );
+        CGPoint myScrollViewOffset = CGPointMake( tempx, tempy);
+        
+        pScrollView.contentOffset = myScrollViewOffset;
+        
+    }
+    
+    UIEdgeInsets anEdgeInset = { 0, 0, 0, 0};
+    if ( scrollerBounds.size.width > innerFrame.size.width )
+    {
+        anEdgeInset.left = (scrollerBounds.size.width - innerFrame.size.width) / 2;
+        anEdgeInset.right = -anEdgeInset.left;  // I don't know why this needs to be negative, but that's what works
+    }
+    if ( scrollerBounds.size.height > innerFrame.size.height )
+    {
+        anEdgeInset.top = (scrollerBounds.size.height - innerFrame.size.height) / 2;
+        anEdgeInset.bottom = -anEdgeInset.top;  // I don't know why this needs to be negative, but that's what works
+    }
+    pScrollView.contentInset = anEdgeInset;
+    
+    NSLog(@"scrollView contentSize: (%f, %f)", pScrollView.contentSize.width, pScrollView.contentSize.height);
+    NSLog(@"scrollView offsize: (%f, %f)", pScrollView.contentOffset.x, pScrollView.contentOffset.y);
+    NSLog(@"scrollView contentInset: (%f, %f, %f, %f)", pScrollView.contentInset.top, pScrollView.contentInset.bottom, pScrollView.contentInset.left, pScrollView.contentInset.right);
+    NSLog(@"");
+}
 
 @end
