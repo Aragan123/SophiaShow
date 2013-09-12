@@ -60,7 +60,7 @@
         // commit animation
         [self.view.layer addAnimation:animation forKey:@"Switch View Animation"];
         self.splashViewController=nil;
-    } afterDelay:3.0f];
+    } afterDelay:3.5f];
 
 }
 

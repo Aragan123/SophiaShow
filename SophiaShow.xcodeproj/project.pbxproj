@@ -162,8 +162,6 @@
 		6D38AD6A17A00DD3006BA6CC /* UIImage+Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D38AD6917A00DD3006BA6CC /* UIImage+Filter.m */; };
 		6D3BA18E17D8B121007FC6D6 /* about_yee_cn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BA18C17D8B121007FC6D6 /* about_yee_cn.png */; };
 		6D3BA18F17D8B121007FC6D6 /* about_yee_cn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3BA18D17D8B121007FC6D6 /* about_yee_cn@2x.png */; };
-		6D3EE3BB1746874E00A56512 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3EE3BA1746874E00A56512 /* Default-Landscape~ipad.png */; };
-		6D3EE3BD1746878400A56512 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3EE3BC1746878400A56512 /* Default-Landscape@2x~ipad.png */; };
 		6D41CE411737968400E1145C /* BGGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41CE401737968400E1145C /* BGGalleryViewController.m */; };
 		6D41CE4A1737983100E1145C /* BGGalleryScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41CE491737983100E1145C /* BGGalleryScrollViewController.m */; };
 		6D41CE4E1737A57200E1145C /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D41CE4D1737A57200E1145C /* iCarousel.m */; };
@@ -171,6 +169,8 @@
 		6D4B179416FDD64800EE0EE9 /* BGGlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B179316FDD64800EE0EE9 /* BGGlobalData.m */; };
 		6D4FD848177186120022DBCA /* HMSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4FD847177186120022DBCA /* HMSideMenu.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6D4FD87E1771DA570022DBCA /* Filters in Resources */ = {isa = PBXBuildFile; fileRef = 6D4FD87D1771DA570022DBCA /* Filters */; };
+		6D52BDAE17E1FBEE00ED8ECB /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D52BDAD17E1FBEE00ED8ECB /* Default-Landscape~ipad.png */; };
+		6D52BDB017E1FBFD00ED8ECB /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D52BDAF17E1FBFD00ED8ECB /* Default-Landscape@2x~ipad.png */; };
 		6D6E6CF917A8E7CD003E5BA2 /* optionbar_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D6E6CEB17A8E7CD003E5BA2 /* optionbar_close.png */; };
 		6D6E6CFA17A8E7CD003E5BA2 /* optionbar_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D6E6CEC17A8E7CD003E5BA2 /* optionbar_close@2x.png */; };
 		6D6E6CFB17A8E7CD003E5BA2 /* special00.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D6E6CED17A8E7CD003E5BA2 /* special00.png */; };
@@ -378,8 +378,6 @@
 		6D38AD6917A00DD3006BA6CC /* UIImage+Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Filter.m"; sourceTree = "<group>"; };
 		6D3BA18C17D8B121007FC6D6 /* about_yee_cn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_yee_cn.png; sourceTree = "<group>"; };
 		6D3BA18D17D8B121007FC6D6 /* about_yee_cn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_yee_cn@2x.png"; sourceTree = "<group>"; };
-		6D3EE3BA1746874E00A56512 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		6D3EE3BC1746878400A56512 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		6D41CE3F1737968400E1145C /* BGGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryViewController.h; sourceTree = "<group>"; };
 		6D41CE401737968400E1145C /* BGGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGGalleryViewController.m; sourceTree = "<group>"; };
 		6D41CE481737983100E1145C /* BGGalleryScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGGalleryScrollViewController.h; sourceTree = "<group>"; };
@@ -394,6 +392,8 @@
 		6D4FD846177186120022DBCA /* HMSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSideMenu.h; sourceTree = "<group>"; };
 		6D4FD847177186120022DBCA /* HMSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSideMenu.m; sourceTree = "<group>"; };
 		6D4FD87D1771DA570022DBCA /* Filters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Filters; sourceTree = "<group>"; };
+		6D52BDAD17E1FBEE00ED8ECB /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		6D52BDAF17E1FBFD00ED8ECB /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		6D6E6CEB17A8E7CD003E5BA2 /* optionbar_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = optionbar_close.png; sourceTree = "<group>"; };
 		6D6E6CEC17A8E7CD003E5BA2 /* optionbar_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "optionbar_close@2x.png"; sourceTree = "<group>"; };
 		6D6E6CED17A8E7CD003E5BA2 /* special00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = special00.png; sourceTree = "<group>"; };
@@ -601,8 +601,8 @@
 		6D1539E316FB42A2001C0FAC = {
 			isa = PBXGroup;
 			children = (
-				6D3EE3BC1746878400A56512 /* Default-Landscape@2x~ipad.png */,
-				6D3EE3BA1746874E00A56512 /* Default-Landscape~ipad.png */,
+				6D52BDAF17E1FBFD00ED8ECB /* Default-Landscape@2x~ipad.png */,
+				6D52BDAD17E1FBEE00ED8ECB /* Default-Landscape~ipad.png */,
 				6D1539F516FB42A2001C0FAC /* SophiaShow */,
 				6D1539EE16FB42A2001C0FAC /* Frameworks */,
 				6D1539ED16FB42A2001C0FAC /* Products */,
@@ -887,8 +887,6 @@
 				6D02C8CD172BB120006CD573 /* custom-dialog-background@2x.png in Resources */,
 				6D02C8D2172BB120006CD573 /* SVProgressHUD.bundle in Resources */,
 				6DE747F51732156700A06939 /* SettingData.plist in Resources */,
-				6D3EE3BB1746874E00A56512 /* Default-Landscape~ipad.png in Resources */,
-				6D3EE3BD1746878400A56512 /* Default-Landscape@2x~ipad.png in Resources */,
 				6DE49EF2176C46F800509B5F /* BGGalleryViewController.xib in Resources */,
 				6DE49EF7176C575800509B5F /* BGImageFilterViewController.xib in Resources */,
 				6D4FD87E1771DA570022DBCA /* Filters in Resources */,
@@ -1041,6 +1039,8 @@
 				6D1D93B617E1614600701ABD /* splash_logotext.png in Resources */,
 				6D1D93B717E1614600701ABD /* splash_grass@2x.png in Resources */,
 				6D1D93B817E1614600701ABD /* splash_grass.png in Resources */,
+				6D52BDAE17E1FBEE00ED8ECB /* Default-Landscape~ipad.png in Resources */,
+				6D52BDB017E1FBFD00ED8ECB /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
