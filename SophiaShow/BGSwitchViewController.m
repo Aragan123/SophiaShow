@@ -11,26 +11,56 @@
 #import "BGHomeViewController.h"
 #import "BGGalleryViewController.h"
 #import "BGImageFilterViewController.h"
+#import "BGSplashViewController.h"
 #import "SVProgressHUD.h"
+#import "NSObject+Blocks.h"
 
 @interface BGSwitchViewController ()
 
 @end
 
 @implementation BGSwitchViewController
-@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController, galleryPageViewController, reflectionViewController, imageFilterViewController;
+@synthesize homePageViewController, aboutPageViewController, galleryHomePageViewController, galleryPageViewController, reflectionViewController, imageFilterViewController, splashViewController;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    BGHomeViewController *mainview = [[BGHomeViewController alloc] initWithNibName:@"BGHomeViewController" bundle:nil fromScene:kPageMain];
+//    BGHomeViewController *mainview = [[BGHomeViewController alloc] initWithNibName:@"BGHomeViewController" bundle:nil fromScene:kPageMain];
+//    
+//    self.homePageViewController = mainview;
+//    self.homePageViewController.delegate=self;
+//    [mainview release];
     
-    self.homePageViewController = mainview;
-    self.homePageViewController.delegate=self;
-    [mainview release];
-    
-    [self.view insertSubview: self.homePageViewController.view atIndex:0];
+    [self prepareViewController:kPageSplash fromView:kPageMain];
+    [self.view insertSubview: self.splashViewController.view atIndex:0];
+
+    // transite to home page
+    [self prepareViewController:kPageMain fromView:kPageSplash];
+    // animation
+    [self performBlock:^{
+        NSLog(@"Switch to home page");
+        CATransition *animation = [CATransition animation];
+        animation.delegate = self;
+        animation.duration = 0.6f;
+        animation.timingFunction = UIViewAnimationCurveEaseInOut;
+        //            animation.type = @"rippleEffect";
+        animation.type = kCATransitionFade;
+        
+        // show views
+        [self.splashViewController	viewWillDisappear:YES];
+        [self.homePageViewController viewWillAppear:YES];
+        
+        [self.splashViewController.view removeFromSuperview];
+        [self.view insertSubview:self.homePageViewController.view atIndex:0];
+        
+        [self.splashViewController viewDidDisappear:YES];
+        [self.homePageViewController viewDidAppear:YES];
+        
+        // commit animation
+        [self.view.layer addAnimation:animation forKey:@"Switch View Animation"];
+        self.splashViewController=nil;
+    } afterDelay:3.0f];
 
 }
 
@@ -61,6 +91,7 @@
     self.galleryPageViewController=nil;
     self.reflectionViewController=nil;
     self.imageFilterViewController=nil;
+    self.splashViewController=nil;
     
     [super viewDidUnload];
 }
@@ -72,6 +103,7 @@
     [galleryPageViewController release];
     [reflectionViewController release];
     [imageFilterViewController release];
+    [splashViewController release];
     
     [super dealloc];
 }
@@ -158,7 +190,7 @@
         NSLog(@"toPage = MainPage");
         
         if (self.homePageViewController == nil) {
-            BGHomeViewController *controller = [[BGHomeViewController alloc] initWithNibName:@"BGViewController" bundle:nil fromScene:fromePage];
+            BGHomeViewController *controller = [[BGHomeViewController alloc] initWithNibName:@"BGHomeViewController" bundle:nil fromScene:fromePage];
 
             self.homePageViewController = controller;
             [controller release];
@@ -187,6 +219,14 @@
         
         self.imageFilterViewController.delegate = self;
     }
+    else if (toPage == kPageSplash){
+        if (self.splashViewController == nil) {
+            BGSplashViewController *controller = [[BGSplashViewController alloc] initWithNibName:@"BGSplashViewController" bundle:nil];
+            self.splashViewController = controller;
+            [controller release];
+        }
+        self.splashViewController.delegate = self;
+    }
 }
 
 -(UIViewController *) getSwitchViewController: (int) pageNum{
@@ -200,6 +240,9 @@
 			break;            
         case kPageUI:
             return self.imageFilterViewController;
+            break;
+        case kPageSplash:
+            return self.splashViewController;
             break;
 	}
 	return nil;

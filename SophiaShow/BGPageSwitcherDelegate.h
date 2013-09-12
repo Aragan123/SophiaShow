@@ -16,6 +16,7 @@
     #define kPageOnlineGallery 4
     #define kPageAbout 5
     #define kPageUI 6
+    #define kPageSplash 7
 #endif
 
 enum enumPage {
@@ -26,6 +27,7 @@ enum enumPage {
     pageOnlineGallery,
     pageAbout,
     pageUI,
+    pageSplash,
 };
 
 @protocol BGPageSwitcherDelegate <NSObject>
