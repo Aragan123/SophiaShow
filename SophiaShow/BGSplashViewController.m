@@ -75,15 +75,6 @@
                          }];
     }];
     
-
-    
-    
-//    [self performBlock:^{
-//        if (self.delegate) {
-//            NSLog(@"Switch to home page");
-//            [self.delegate switchViewTo:kPageMain fromView:kPageSplash];
-//        }
-//    } afterDelay:4.0f];
 }
 
 - (void)didReceiveMemoryWarning

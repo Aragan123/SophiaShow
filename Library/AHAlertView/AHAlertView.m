@@ -740,7 +740,7 @@ typedef void (^AHAnimationBlock)();
 	self.titleLabel.text = self.title;
 	CGSize titleSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font
 										constrainedToSize:boundingRect.size
-											lineBreakMode:UILineBreakModeWordWrap];
+											lineBreakMode:NSLineBreakByWordWrapping];
 	self.titleLabel.frame = CGRectMake(boundingRect.origin.x, boundingRect.origin.y,
 									   boundingRect.size.width, titleSize.height);
 
@@ -761,7 +761,7 @@ typedef void (^AHAnimationBlock)();
 	self.messageLabel.text = self.message;
 	CGSize messageSize = [self.messageLabel.text sizeWithFont:self.messageLabel.font
 											constrainedToSize:boundingRect.size
-												lineBreakMode:UILineBreakModeWordWrap];
+												lineBreakMode:NSLineBreakByWordWrapping];
 	self.messageLabel.frame = CGRectMake(boundingRect.origin.x, boundingRect.origin.y,
 										 boundingRect.size.width, messageSize.height);
 
@@ -943,7 +943,7 @@ typedef void (^AHAnimationBlock)();
 	// If there are just two buttons, position them side-by-side, cancel button first.
 	if([self shouldUseSingleRowButtonLayout])
 	{
-		allButtons = [NSArray arrayWithObjects:self.cancelButton, [allButtons objectAtIndex:0], nil];
+		allButtons = [NSMutableArray arrayWithObjects:self.cancelButton, [allButtons objectAtIndex:0], nil];
 	}
 
 	return allButtons;

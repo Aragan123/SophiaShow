@@ -26,11 +26,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
 //    BGHomeViewController *mainview = [[BGHomeViewController alloc] initWithNibName:@"BGHomeViewController" bundle:nil fromScene:kPageMain];
 //    
 //    self.homePageViewController = mainview;
 //    self.homePageViewController.delegate=self;
 //    [mainview release];
+    NSLog(@"Frame size = %f, %f", self.view.frame.size.width, self.view.frame.size.height);
+
     
     [self prepareViewController:kPageSplash fromView:kPageMain];
     [self.view insertSubview: self.splashViewController.view atIndex:0];
@@ -246,6 +250,11 @@
             break;
 	}
 	return nil;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 @end
