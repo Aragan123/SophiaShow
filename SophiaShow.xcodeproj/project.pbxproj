@@ -194,6 +194,8 @@
 		6D6E6D0C17A900CB003E5BA2 /* about_text_en.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D6E6D0817A900CA003E5BA2 /* about_text_en.png */; };
 		6D6E6D0D17A900CB003E5BA2 /* about_text_en@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D6E6D0917A900CB003E5BA2 /* about_text_en@2x.png */; };
 		6D6E6D0E17A900CB003E5BA2 /* about_text_cn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D6E6D0A17A900CB003E5BA2 /* about_text_cn@2x.png */; };
+		6D72E0CB17F2D98200F9778E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D72E0CA17F2D98200F9778E /* libz.dylib */; };
+		6D72E0D517F309D900F9778E /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D72E0D317F309D900F9778E /* libMobClickLibrary.a */; };
 		6D763A4717D47A76005C7700 /* about_yee_en.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D763A4517D47A76005C7700 /* about_yee_en.png */; };
 		6DC94617174265C50019FDA4 /* NSObject+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC94616174265C50019FDA4 /* NSObject+Blocks.m */; };
 		6DCF23A9179E67B0001FE0BC /* BGHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DCF23A8179E67B0001FE0BC /* BGHomeViewController.xib */; };
@@ -210,8 +212,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6D01BA31178C4B5C006AF0E8 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
-		6D01BA32178C4B5C006AF0E8 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		6D02C8A5172BB120006CD573 /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
 		6D02C8A6172BB120006CD573 /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
 		6D02C8A7172BB120006CD573 /* custom-button-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-button-normal.png"; sourceTree = "<group>"; };
@@ -422,6 +422,9 @@
 		6D6E6D0817A900CA003E5BA2 /* about_text_en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_text_en.png; sourceTree = "<group>"; };
 		6D6E6D0917A900CB003E5BA2 /* about_text_en@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_text_en@2x.png"; sourceTree = "<group>"; };
 		6D6E6D0A17A900CB003E5BA2 /* about_text_cn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_text_cn@2x.png"; sourceTree = "<group>"; };
+		6D72E0CA17F2D98200F9778E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6D72E0D317F309D900F9778E /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		6D72E0D417F309D900F9778E /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		6D763A4517D47A76005C7700 /* about_yee_en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_yee_en.png; sourceTree = "<group>"; };
 		6DC94615174265C50019FDA4 /* NSObject+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Blocks.h"; sourceTree = "<group>"; };
 		6DC94616174265C50019FDA4 /* NSObject+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Blocks.m"; sourceTree = "<group>"; };
@@ -447,10 +450,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D72E0CB17F2D98200F9778E /* libz.dylib in Frameworks */,
 				6DF84C8017A94CBE00004968 /* CoreGraphics.framework in Frameworks */,
 				6D1539F016FB42A2001C0FAC /* UIKit.framework in Frameworks */,
 				6D1539F216FB42A2001C0FAC /* Foundation.framework in Frameworks */,
 				6D15045417D9D306009DF62F /* Social.framework in Frameworks */,
+				6D72E0D517F309D900F9778E /* libMobClickLibrary.a in Frameworks */,
 				6DE747E91731FE8800A06939 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,19 +463,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6D01BA30178C4B5C006AF0E8 /* UMAnalytics_Sdk_2.2.0.OpenUDID */ = {
-			isa = PBXGroup;
-			children = (
-				6D01BA31178C4B5C006AF0E8 /* libMobClickLibrary.a */,
-				6D01BA32178C4B5C006AF0E8 /* MobClick.h */,
-			);
-			path = UMAnalytics_Sdk_2.2.0.OpenUDID;
-			sourceTree = "<group>";
-		};
 		6D02C88F172BB120006CD573 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				6D01BA30178C4B5C006AF0E8 /* UMAnalytics_Sdk_2.2.0.OpenUDID */,
+				6D72E0D217F309D900F9778E /* UMAnalytics_Sdk */,
 				6D064B77177959A10067479E /* Categories */,
 				6D4FD845177186120022DBCA /* HMSideMenu */,
 				6DC94614174265C50019FDA4 /* NSObjectBlocks */,
@@ -636,6 +632,7 @@
 		6D1539EE16FB42A2001C0FAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D72E0CA17F2D98200F9778E /* libz.dylib */,
 				6D15045317D9D306009DF62F /* Social.framework */,
 				6DE747E81731FE8800A06939 /* QuartzCore.framework */,
 				6D1539EF16FB42A2001C0FAC /* UIKit.framework */,
@@ -827,6 +824,15 @@
 				6D6E6CF817A8E7CD003E5BA2 /* special05@2x.png */,
 			);
 			name = FilterPage;
+			sourceTree = "<group>";
+		};
+		6D72E0D217F309D900F9778E /* UMAnalytics_Sdk */ = {
+			isa = PBXGroup;
+			children = (
+				6D72E0D317F309D900F9778E /* libMobClickLibrary.a */,
+				6D72E0D417F309D900F9778E /* MobClick.h */,
+			);
+			path = UMAnalytics_Sdk;
 			sourceTree = "<group>";
 		};
 		6DC94614174265C50019FDA4 /* NSObjectBlocks */ = {
@@ -1141,7 +1147,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1165,7 +1171,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1177,14 +1183,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Z.H.Falkner Co., Ltd. (38XZX7GVPW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gang Jin (8N639DRN6P)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
 				INFOPLIST_FILE = "SophiaShow/SophiaShow-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Library/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
+					/Users/jeffzhong/MyProjects/SophiaShow/Library/UMAnalytics_Sdk,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6F79BD8A-7BB0-4527-A873-1A1FDC9D4C4C";
@@ -1204,14 +1210,59 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Library/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
+					/Users/jeffzhong/MyProjects/SophiaShow/Library/UMAnalytics_Sdk,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6F79BD8A-7BB0-4527-A873-1A1FDC9D4C4C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6F79BD8A-7BB0-4527-A873-1A1FDC9D4C4C";
+				PROVISIONING_PROFILE = "761B0743-8CED-4440-BCF6-999FFE8BD4A7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "761B0743-8CED-4440-BCF6-999FFE8BD4A7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
+		};
+		6D72E0C817F2CAAC00F9778E /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		6D72E0C917F2CAAC00F9778E /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Z.H.Falkner Co., Ltd. (38XZX7GVPW)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
+				INFOPLIST_FILE = "SophiaShow/SophiaShow-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jeffzhong/MyProjects/SophiaShow/Library/UMAnalytics_Sdk,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "761B0743-8CED-4440-BCF6-999FFE8BD4A7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "761B0743-8CED-4440-BCF6-999FFE8BD4A7";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1221,6 +1272,7 @@
 			buildConfigurations = (
 				6D153A0D16FB42A2001C0FAC /* Debug */,
 				6D153A0E16FB42A2001C0FAC /* Release */,
+				6D72E0C817F2CAAC00F9778E /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1230,6 +1282,7 @@
 			buildConfigurations = (
 				6D153A1016FB42A2001C0FAC /* Debug */,
 				6D153A1116FB42A2001C0FAC /* Release */,
+				6D72E0C917F2CAAC00F9778E /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

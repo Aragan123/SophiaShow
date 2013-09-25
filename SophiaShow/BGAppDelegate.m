@@ -8,6 +8,7 @@
 
 #import "BGAppDelegate.h"
 #import "BGSwitchViewController.h"
+#import "MobClick.h"
 
 @implementation BGAppDelegate
 
@@ -20,6 +21,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // setup Umeng
+//    [MobClick startWithAppkey:@"xxxxxxxxxxxxxxx"];
+    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:(ReportPolicy) BATCH channelId:nil];
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
 //    self.viewController = [[[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil] autorelease];

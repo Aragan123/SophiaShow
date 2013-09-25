@@ -14,6 +14,7 @@
 #import "NSObject+Blocks.h"
 #import "BGGlobalData.h"
 #import <Social/Social.h>
+#import "MobClick.h"
 
 @interface BGImageFilterViewController ()
 
@@ -258,10 +259,12 @@
         [alert setCancelButtonTitle:NSLocalizedString(@"取消", nil) block:nil];
         [alert addButtonWithTitle:NSLocalizedString(@"确定", nil) block:^{
             [alert dismiss]; // dismiss alert view
+            [MobClick endEvent:@"FilterDuration"]; //Umeng end event
             [delegate switchViewTo:kPageMain fromView:kPageUI];
         }];
         [alert show];
     }else if (nil != delegate) {
+        [MobClick endEvent:@"FilterDuration"]; // Umeng end event
         [delegate switchViewTo:kPageMain fromView:kPageUI];
     }
 

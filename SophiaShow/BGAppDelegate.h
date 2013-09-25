@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define UMENG_APPKEY @"51dbb76c56240b8dde03b33b"
+
 @class BGSwitchViewController;
 
 @interface BGAppDelegate : UIResponder <UIApplicationDelegate>

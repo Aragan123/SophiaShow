@@ -11,6 +11,7 @@
 #import "BGGlobalData.h"
 #import "BGUIView.h"
 #import "JMWhenTapped.h"
+#import "MobClick.h"
 
 @interface BGHomeViewController ()
 
@@ -152,6 +153,8 @@
 
 - (void) transitionFromHomeToFilter{
     if (delegate != nil) {
+        // Umeng analysis
+        [MobClick beginEvent:@"FilterDuration"];
 		[delegate switchViewTo:kPageUI fromView:kPageMain];
 	}
 }
