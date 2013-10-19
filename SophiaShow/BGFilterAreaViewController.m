@@ -232,9 +232,15 @@
                 cropFrame.size.height = self.scrollView.frame.size.height - abs(self.scrollView.contentInset.top) - abs(self.scrollView.contentInset.bottom);
                 cropFrame.origin.x = abs(self.scrollView.contentInset.left);
                 cropFrame.origin.y = abs(self.scrollView.contentInset.top);
-                
+
+                resultFrame.size = cropFrame.size; // reset result frame size
+                if ([[UIScreen mainScreen] isRetinaDisplay] ) {
+                    // if retina screen, crop frame size needs to doubled.
+                    cropFrame.size.width *=2;
+                    cropFrame.size.height *=2;
+                }
                 self.cropedImage = [self.cropedImage imageCropByFrame:cropFrame];
-                resultFrame.size = cropFrame.size;
+                
             }
             
             if (self.resultFilterView == nil) {
@@ -251,7 +257,7 @@
         }
         
         // resize filter image and blend it to cropped image
-//        UIImage *resizedImage = [data.image imageScaledToSize:self.cropedImage.size];
+        //UIImage *resizedImage = [data.image imageScaledToSize:self.cropedImage.size];
         UIImage *resizedImage = [data.image resizeImageFromSize:data.image.size toSize:self.cropedImage.size orientation:isPortrait];
         UIImage *filterImage = self.cropedImage;
 
@@ -261,8 +267,6 @@
             UIImage *blueImage = [UIImage imageWithContentsOfFile:blueImagePath];
             UIImage *resizedBlueImage = [blueImage resizeImageFromSize:blueImage.size toSize:self.cropedImage.size orientation:isPortrait];
             filterImage = [filterImage imageBlendedWithImage:resizedBlueImage blendMode:kCGBlendModeDifference alpha:0.22f];
-            
-//            self.resultFilterView.image = resizedBlueImage;
         }
         
         // Finally add blending

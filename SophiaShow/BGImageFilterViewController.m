@@ -259,12 +259,10 @@
         [alert setCancelButtonTitle:NSLocalizedString(@"取消", nil) block:nil];
         [alert addButtonWithTitle:NSLocalizedString(@"确定", nil) block:^{
             [alert dismiss]; // dismiss alert view
-            [MobClick endEvent:@"FilterDuration"]; //Umeng end event
             [delegate switchViewTo:kPageMain fromView:kPageUI];
         }];
         [alert show];
     }else if (nil != delegate) {
-        [MobClick endEvent:@"FilterDuration"]; // Umeng end event
         [delegate switchViewTo:kPageMain fromView:kPageUI];
     }
 
@@ -274,6 +272,8 @@
 - (IBAction)saveImageToPhotoAlbum:(id)sender {
     // show alert before save
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [MobClick event:@"FilterSave"];
+    
     [self performBlock:^{
         UIImage *savedImage = [self.filterAreaViewController screenshot];
         UIImageWriteToSavedPhotosAlbum (savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);

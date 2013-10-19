@@ -154,7 +154,7 @@
 - (void) transitionFromHomeToFilter{
     if (delegate != nil) {
         // Umeng analysis
-        [MobClick beginEvent:@"FilterDuration"];
+        [MobClick event:@"FilterEntry"];
 		[delegate switchViewTo:kPageUI fromView:kPageMain];
 	}
 }
