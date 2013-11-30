@@ -301,10 +301,24 @@
         isEdited=NO;
         AHAlertView *alert = [[[AHAlertView alloc] initWithTitle:@"保存成功" message:@"照片已经保存到你的相册"] autorelease];
         [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
-        [alert addButtonWithTitle:NSLocalizedString(@"分享到新浪微博", nil) block:^{
-            [alert dismiss]; // dismiss alert first
-            [self shareToWeibo:image]; // share to weibo
-        }];
+        
+        // if >=6.0, show Sina weibo
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")){
+            [alert addButtonWithTitle:NSLocalizedString(@"分享到新浪微博", nil) block:^{
+                [alert dismiss]; // dismiss alert first
+                [self shareToWeibo:SLServiceTypeSinaWeibo attachment:image]; // share to weibo
+            }];
+        }
+        
+        // if >= 7.0, show Tencent weibo
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+            [alert addButtonWithTitle:NSLocalizedString(@"分享到腾讯微博", nil) block:^{
+                [alert dismiss]; // dismiss alert first
+                [self shareToWeibo:SLServiceTypeTencentWeibo attachment:image]; // share to weibo
+            }];
+        }
+        
+
         [alert setCancelButtonTitle:NSLocalizedString(@"返  回", nil) block:nil];
         [SVProgressHUD dismiss];
         [alert show];
@@ -424,13 +438,25 @@
 }
 
 // share to Sina Weibo
-- (void)shareToWeibo: (UIImage*) savedImage{
+- (void)shareToWeibo:(NSString*)serviceType attachment:(UIImage*) savedImage{
     [SVProgressHUD show]; // display HUD
+    NSString *weibo = ([serviceType isEqualToString:SLServiceTypeSinaWeibo]) ? @"新浪微博" : @"腾讯微博";
     
     [self performBlock:^{
-        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]){
+//        if (SYSTEM_VERSION_LESS_THAN(@"6.0")){
+//            // < iOS 6: sharing is not available
+//            [SVProgressHUD dismiss];
+//            AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"系统版本过低" message:@"请升级您设备的iOS系统到6.0以上版本。"];
+//            [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
+//            [alert setCancelButtonTitle:NSLocalizedString(@"返  回", nil) block:nil];
+//            [alert show];
+//            [alert release];
+//            return;
+//        }
+        
+        if([SLComposeViewController isAvailableForServiceType:serviceType]){
             // > iOS 6, sharing is available
-            SLComposeViewController *socialVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
+            SLComposeViewController *socialVC = [SLComposeViewController composeViewControllerForServiceType:serviceType];
             // add handler
             SLComposeViewControllerCompletionHandler socialHandler = ^(SLComposeViewControllerResult result) {
                 NSString *output;
@@ -441,7 +467,7 @@
                         cancelled = YES;
                         break;
                     case SLComposeViewControllerResultDone:
-                        output = NSLocalizedString(@"已经成功分享到新浪微博", nil);
+                        output = [NSString stringWithFormat:@"已经成功分享到%@", weibo];
                         break;
                     default:
                         break;
@@ -470,14 +496,18 @@
             [self presentViewController:socialVC animated:YES completion:nil];
         
         }else{
-            // < iOS 6, sharing is not available
+            NSString *msgTitle = @"未设置微博账号";
+            NSString *msgContent = [NSString stringWithFormat:@"您还没有在此设备上设置%@账号，请退出程序并进入【系统设置】登陆相应的微博账号。", weibo];
+            
+            // Weibo account not setup in iOS7+, sharing is not available
             [SVProgressHUD dismiss];
-            AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"无法分享" message:@"请升级您的设备系统到iOS 6.0或以上版本"];
+            AHAlertView *alert = [[AHAlertView alloc] initWithTitle:msgTitle message:msgContent];
             [alert setDismissalStyle:AHAlertViewDismissalStyleFade];
             [alert setCancelButtonTitle:NSLocalizedString(@"返  回", nil) block:nil];
             [alert show];
             [alert release];
         }
+        
     } afterDelay:0.2f];
 
 }
@@ -742,6 +772,13 @@
         [self.popover release];
     }
 }
+
+// disable status bar - fix the issue in iOS 7 after image picker
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
 
 
 @end

@@ -58,8 +58,6 @@
 		6D10067E17A212200084D36A /* particle1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D10066417A212200084D36A /* particle1@2x.png */; };
 		6D10068317A2124D0084D36A /* filterHome_choose.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D10067F17A2124C0084D36A /* filterHome_choose.jpg */; };
 		6D10068417A2124D0084D36A /* filterHome_choose@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D10068017A2124D0084D36A /* filterHome_choose@2x.jpg */; };
-		6D10068517A2124D0084D36A /* filterHome_photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D10068117A2124D0084D36A /* filterHome_photo.jpg */; };
-		6D10068617A2124D0084D36A /* filterHome_photo@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D10068217A2124D0084D36A /* filterHome_photo@2x.jpg */; };
 		6D10069917A213320084D36A /* btn_cancelAll.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D10068717A213310084D36A /* btn_cancelAll.png */; };
 		6D10069A17A213320084D36A /* btn_cancelAll@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D10068817A213310084D36A /* btn_cancelAll@2x.png */; };
 		6D10069B17A213320084D36A /* btn_home.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D10068917A213310084D36A /* btn_home.png */; };
@@ -202,6 +200,8 @@
 		6DD0755017954739006D6D2D /* BGUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0754F17954738006D6D2D /* BGUIView.m */; };
 		6DD0755317954CB5006D6D2D /* BGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0755217954CB4006D6D2D /* BGHomeViewController.m */; };
 		6DD0755617958F0A006D6D2D /* UIScreen+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0755517958F0A006D6D2D /* UIScreen+SSToolkitAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6DE0DBF61849D361006018FD /* filterHome_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE0DBF41849D361006018FD /* filterHome_photo.png */; };
+		6DE0DBF71849D361006018FD /* filterHome_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE0DBF51849D361006018FD /* filterHome_photo@2x.png */; };
 		6DE49EF2176C46F800509B5F /* BGGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE49EF1176C46F800509B5F /* BGGalleryViewController.xib */; };
 		6DE49EF6176C575800509B5F /* BGImageFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE49EF4176C575800509B5F /* BGImageFilterViewController.m */; };
 		6DE49EF7176C575800509B5F /* BGImageFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DE49EF5176C575800509B5F /* BGImageFilterViewController.xib */; };
@@ -272,8 +272,6 @@
 		6D10066417A212200084D36A /* particle1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "particle1@2x.png"; sourceTree = "<group>"; };
 		6D10067F17A2124C0084D36A /* filterHome_choose.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = filterHome_choose.jpg; sourceTree = "<group>"; };
 		6D10068017A2124D0084D36A /* filterHome_choose@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "filterHome_choose@2x.jpg"; sourceTree = "<group>"; };
-		6D10068117A2124D0084D36A /* filterHome_photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = filterHome_photo.jpg; sourceTree = "<group>"; };
-		6D10068217A2124D0084D36A /* filterHome_photo@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "filterHome_photo@2x.jpg"; sourceTree = "<group>"; };
 		6D10068717A213310084D36A /* btn_cancelAll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cancelAll.png; sourceTree = "<group>"; };
 		6D10068817A213310084D36A /* btn_cancelAll@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_cancelAll@2x.png"; sourceTree = "<group>"; };
 		6D10068917A213310084D36A /* btn_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_home.png; sourceTree = "<group>"; };
@@ -435,6 +433,8 @@
 		6DD0755217954CB4006D6D2D /* BGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHomeViewController.m; sourceTree = "<group>"; };
 		6DD0755417958F0A006D6D2D /* UIScreen+SSToolkitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+SSToolkitAdditions.h"; sourceTree = "<group>"; };
 		6DD0755517958F0A006D6D2D /* UIScreen+SSToolkitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+SSToolkitAdditions.m"; sourceTree = "<group>"; };
+		6DE0DBF41849D361006018FD /* filterHome_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filterHome_photo.png; sourceTree = "<group>"; };
+		6DE0DBF51849D361006018FD /* filterHome_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filterHome_photo@2x.png"; sourceTree = "<group>"; };
 		6DE49EF1176C46F800509B5F /* BGGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGGalleryViewController.xib; sourceTree = "<group>"; };
 		6DE49EF3176C575800509B5F /* BGImageFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGImageFilterViewController.h; sourceTree = "<group>"; };
 		6DE49EF4176C575800509B5F /* BGImageFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGImageFilterViewController.m; sourceTree = "<group>"; };
@@ -732,8 +732,8 @@
 			children = (
 				6D10067F17A2124C0084D36A /* filterHome_choose.jpg */,
 				6D10068017A2124D0084D36A /* filterHome_choose@2x.jpg */,
-				6D10068117A2124D0084D36A /* filterHome_photo.jpg */,
-				6D10068217A2124D0084D36A /* filterHome_photo@2x.jpg */,
+				6DE0DBF41849D361006018FD /* filterHome_photo.png */,
+				6DE0DBF51849D361006018FD /* filterHome_photo@2x.png */,
 				6D10068717A213310084D36A /* btn_cancelAll.png */,
 				6D10068817A213310084D36A /* btn_cancelAll@2x.png */,
 				6D10068917A213310084D36A /* btn_home.png */,
@@ -949,8 +949,6 @@
 				6D10067E17A212200084D36A /* particle1@2x.png in Resources */,
 				6D10068317A2124D0084D36A /* filterHome_choose.jpg in Resources */,
 				6D10068417A2124D0084D36A /* filterHome_choose@2x.jpg in Resources */,
-				6D10068517A2124D0084D36A /* filterHome_photo.jpg in Resources */,
-				6D10068617A2124D0084D36A /* filterHome_photo@2x.jpg in Resources */,
 				6D10069917A213320084D36A /* btn_cancelAll.png in Resources */,
 				6D10069A17A213320084D36A /* btn_cancelAll@2x.png in Resources */,
 				6D10069B17A213320084D36A /* btn_home.png in Resources */,
@@ -964,10 +962,12 @@
 				6D1006A317A213320084D36A /* btn_menu4.png in Resources */,
 				6D1006A417A213320084D36A /* btn_menu4@2x.png in Resources */,
 				6D1006A517A213320084D36A /* btn_rotation.png in Resources */,
+				6DE0DBF61849D361006018FD /* filterHome_photo.png in Resources */,
 				6D1006A617A213320084D36A /* btn_rotation@2x.png in Resources */,
 				6D1006A717A213320084D36A /* btn_save.png in Resources */,
 				6D1006A817A213320084D36A /* btn_save@2x.png in Resources */,
 				6D1006A917A213320084D36A /* filter_original.png in Resources */,
+				6DE0DBF71849D361006018FD /* filterHome_photo@2x.png in Resources */,
 				6D1006AA17A213320084D36A /* filter_original@2x.png in Resources */,
 				6D6E6CF917A8E7CD003E5BA2 /* optionbar_close.png in Resources */,
 				6D6E6CFA17A8E7CD003E5BA2 /* optionbar_close@2x.png in Resources */,
@@ -1134,6 +1134,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gang Jin (8N639DRN6P)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1149,6 +1150,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "60C0515B-3D45-491A-9EC3-D200779B8A4F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1165,6 +1167,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gang Jin (8N639DRN6P)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1173,6 +1176,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "60C0515B-3D45-491A-9EC3-D200779B8A4F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -1183,7 +1187,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gang Jin (8N639DRN6P)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
 				INFOPLIST_FILE = "SophiaShow/SophiaShow-Info.plist";
@@ -1193,8 +1197,8 @@
 					/Users/jeffzhong/MyProjects/SophiaShow/Library/UMAnalytics_Sdk,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "60C0515B-3D45-491A-9EC3-D200779B8A4F";
+				PROVISIONING_PROFILE = "60C0515B-3D45-491A-9EC3-D200779B8A4F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1202,7 +1206,7 @@
 		6D153A1116FB42A2001C0FAC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gang Jin (8N639DRN6P)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
@@ -1213,8 +1217,8 @@
 					/Users/jeffzhong/MyProjects/SophiaShow/Library/UMAnalytics_Sdk,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "60C0515B-3D45-491A-9EC3-D200779B8A4F";
+				PROVISIONING_PROFILE = "60C0515B-3D45-491A-9EC3-D200779B8A4F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1230,6 +1234,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Z.H.Falkner Co., Ltd. (38XZX7GVPW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1238,6 +1243,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "60C0515B-3D45-491A-9EC3-D200779B8A4F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -1247,8 +1253,8 @@
 		6D72E0C917F2CAAC00F9778E /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Z.H.Falkner Co., Ltd. (38XZX7GVPW)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Z.H.Falkner Co., Ltd. (38XZX7GVPW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SophiaShow/SophiaShow-Prefix.pch";
 				INFOPLIST_FILE = "SophiaShow/SophiaShow-Info.plist";
@@ -1258,7 +1264,7 @@
 					/Users/jeffzhong/MyProjects/SophiaShow/Library/UMAnalytics_Sdk,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "761B0743-8CED-4440-BCF6-999FFE8BD4A7";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "761B0743-8CED-4440-BCF6-999FFE8BD4A7";
 				WRAPPER_EXTENSION = app;
 			};
