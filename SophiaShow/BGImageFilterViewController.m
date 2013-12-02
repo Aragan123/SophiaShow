@@ -497,7 +497,7 @@
         
         }else{
             NSString *msgTitle = @"未设置微博账号";
-            NSString *msgContent = [NSString stringWithFormat:@"您还没有在此设备上设置%@账号，请退出程序并进入【系统设置】登陆相应的微博账号。", weibo];
+            NSString *msgContent = [NSString stringWithFormat:@"您还没有在此设备上设置%@账号，进入设备【设置】并登陆相应的微博账号。", weibo];
             
             // Weibo account not setup in iOS7+, sharing is not available
             [SVProgressHUD dismiss];
